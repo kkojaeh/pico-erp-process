@@ -1,0 +1,1 @@
+rename table prs_process_difficulty_grade to prs_process_type_difficulty_grade;

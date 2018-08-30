@@ -1,0 +1,556 @@
+data:
+  process-types:
+  - id: printing-offset
+    name: 인쇄(옵셋)
+    base-unit-cost: 100
+    info-type-id: pico.erp.config.process.info.PrintingProcessInfo
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulty-grades:
+    - difficulty: EASY
+      description: 하기 쉬움
+      cost-rate: 0.95
+    - difficulty: NORMAL
+      description: 보통 정도 수준
+      cost-rate: 1
+    - difficulty: HARD
+      description: 이러 저러한 상황이라 어려움
+      cost-rate: 1.1
+    - difficulty: VERY_HARD
+      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+      cost-rate: 1.2
+  - id: printing-uv
+    name: 인쇄(UV)
+    base-unit-cost: 100
+    info-type-id: pico.erp.config.process.info.PrintingProcessInfo
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulty-grades:
+    - difficulty: EASY
+      description: 하기 쉬움
+      cost-rate: 0.95
+    - difficulty: NORMAL
+      description: 보통 정도 수준
+      cost-rate: 1
+    - difficulty: HARD
+      description: 이러 저러한 상황이라 어려움
+      cost-rate: 1.1
+    - difficulty: VERY_HARD
+      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+      cost-rate: 1.2
+  - id: printing-coating-offset
+    name: 인쇄-코팅(옵셋)
+    base-unit-cost: 100
+    info-type-id: pico.erp.config.process.info.PrintCoatingProcessInfo
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulty-grades:
+    - difficulty: EASY
+      description: 하기 쉬움
+      cost-rate: 0.95
+    - difficulty: NORMAL
+      description: 보통 정도 수준
+      cost-rate: 1
+    - difficulty: HARD
+      description: 이러 저러한 상황이라 어려움
+      cost-rate: 1.1
+    - difficulty: VERY_HARD
+      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+      cost-rate: 1.2
+  - id: printing-coating-uv
+    name: 인쇄-코팅(UV)
+    base-unit-cost: 100
+    info-type-id: pico.erp.config.process.info.PrintCoatingProcessInfo
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulty-grades:
+    - difficulty: EASY
+      description: 하기 쉬움
+      cost-rate: 0.95
+    - difficulty: NORMAL
+      description: 보통 정도 수준
+      cost-rate: 1
+    - difficulty: HARD
+      description: 이러 저러한 상황이라 어려움
+      cost-rate: 1.1
+    - difficulty: VERY_HARD
+      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+      cost-rate: 1.2
+  - id: printing-coating-etching
+    name: 인쇄-코팅(엣칭)
+    base-unit-cost: 100
+    info-type-id: pico.erp.config.process.info.PrintCoatingProcessInfo
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulty-grades:
+    - difficulty: EASY
+      description: 하기 쉬움
+      cost-rate: 0.95
+    - difficulty: NORMAL
+      description: 보통 정도 수준
+      cost-rate: 1
+    - difficulty: HARD
+      description: 이러 저러한 상황이라 어려움
+      cost-rate: 1.1
+    - difficulty: VERY_HARD
+      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+      cost-rate: 1.2
+  - id: coating-lamination-gloss
+    name: 코팅(라이네이팅/유광)
+    base-unit-cost: 100
+    info-type-id: pico.erp.config.process.info.CoatingProcessInfo
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulty-grades:
+    - difficulty: EASY
+      description: 하기 쉬움
+      cost-rate: 0.95
+    - difficulty: NORMAL
+      description: 보통 정도 수준
+      cost-rate: 1
+    - difficulty: HARD
+      description: 이러 저러한 상황이라 어려움
+      cost-rate: 1.1
+    - difficulty: VERY_HARD
+      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+      cost-rate: 1.2
+  - id: coating-lamination-matt
+    name: 코팅(라이네이팅/무광)
+    base-unit-cost: 100
+    info-type-id: pico.erp.config.process.info.CoatingProcessInfo
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulty-grades:
+    - difficulty: EASY
+      description: 하기 쉬움
+      cost-rate: 0.95
+    - difficulty: NORMAL
+      description: 보통 정도 수준
+      cost-rate: 1
+    - difficulty: HARD
+      description: 이러 저러한 상황이라 어려움
+      cost-rate: 1.1
+    - difficulty: VERY_HARD
+      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+      cost-rate: 1.2
+  - id: coating-lamination-window
+    name: 코팅(라이네이팅/창문)
+    base-unit-cost: 100
+    info-type-id: pico.erp.config.process.info.CoatingProcessInfo
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulty-grades:
+    - difficulty: EASY
+      description: 하기 쉬움
+      cost-rate: 0.95
+    - difficulty: NORMAL
+      description: 보통 정도 수준
+      cost-rate: 1
+    - difficulty: HARD
+      description: 이러 저러한 상황이라 어려움
+      cost-rate: 1.1
+    - difficulty: VERY_HARD
+      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+      cost-rate: 1.2
+  - id: coating-bonding
+    name: 코팅(접착)
+    base-unit-cost: 100
+    info-type-id: pico.erp.config.process.info.CoatingProcessInfo
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulty-grades:
+    - difficulty: EASY
+      description: 하기 쉬움
+      cost-rate: 0.95
+    - difficulty: NORMAL
+      description: 보통 정도 수준
+      cost-rate: 1
+    - difficulty: HARD
+      description: 이러 저러한 상황이라 어려움
+      cost-rate: 1.1
+    - difficulty: VERY_HARD
+      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+      cost-rate: 1.2
+  - id: coating-cr-gloss
+    name: 코팅(CR/유광)
+    base-unit-cost: 100
+    info-type-id: pico.erp.config.process.info.CoatingProcessInfo
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulty-grades:
+    - difficulty: EASY
+      description: 하기 쉬움
+      cost-rate: 0.95
+    - difficulty: NORMAL
+      description: 보통 정도 수준
+      cost-rate: 1
+    - difficulty: HARD
+      description: 이러 저러한 상황이라 어려움
+      cost-rate: 1.1
+    - difficulty: VERY_HARD
+      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+      cost-rate: 1.2
+  - id: coating-cr-matt
+    name: 코팅(CR/무광)
+    base-unit-cost: 100
+    info-type-id: pico.erp.config.process.info.CoatingProcessInfo
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulty-grades:
+    - difficulty: EASY
+      description: 하기 쉬움
+      cost-rate: 0.95
+    - difficulty: NORMAL
+      description: 보통 정도 수준
+      cost-rate: 1
+    - difficulty: HARD
+      description: 이러 저러한 상황이라 어려움
+      cost-rate: 1.1
+    - difficulty: VERY_HARD
+      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+      cost-rate: 1.2
+  - id: coating-uv
+    name: 코팅(UV)
+    base-unit-cost: 100
+    info-type-id: pico.erp.config.process.info.CoatingProcessInfo
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulty-grades:
+    - difficulty: EASY
+      description: 하기 쉬움
+      cost-rate: 0.95
+    - difficulty: NORMAL
+      description: 보통 정도 수준
+      cost-rate: 1
+    - difficulty: HARD
+      description: 이러 저러한 상황이라 어려움
+      cost-rate: 1.1
+    - difficulty: VERY_HARD
+      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+      cost-rate: 1.2
+  - id: embossing-intaglio
+    name: 형압(음각)
+    base-unit-cost: 100
+    info-type-id: pico.erp.config.process.info.EmbossingProcessInfo
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulty-grades:
+    - difficulty: EASY
+      description: 하기 쉬움
+      cost-rate: 0.95
+    - difficulty: NORMAL
+      description: 보통 정도 수준
+      cost-rate: 1
+    - difficulty: HARD
+      description: 이러 저러한 상황이라 어려움
+      cost-rate: 1.1
+    - difficulty: VERY_HARD
+      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+      cost-rate: 1.2
+  - id: embossing-cameo
+    name: 형압(양각)
+    base-unit-cost: 100
+    info-type-id: pico.erp.config.process.info.EmbossingProcessInfo
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulty-grades:
+    - difficulty: EASY
+      description: 하기 쉬움
+      cost-rate: 0.95
+    - difficulty: NORMAL
+      description: 보통 정도 수준
+      cost-rate: 1
+    - difficulty: HARD
+      description: 이러 저러한 상황이라 어려움
+      cost-rate: 1.1
+    - difficulty: VERY_HARD
+      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+      cost-rate: 1.2
+  - id: foiling-gold
+    name: 박(금박)
+    base-unit-cost: 100
+    info-type-id: pico.erp.config.process.info.FoilingProcessInfo
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulty-grades:
+    - difficulty: EASY
+      description: 하기 쉬움
+      cost-rate: 0.95
+    - difficulty: NORMAL
+      description: 보통 정도 수준
+      cost-rate: 1
+    - difficulty: HARD
+      description: 이러 저러한 상황이라 어려움
+      cost-rate: 1.1
+    - difficulty: VERY_HARD
+      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+      cost-rate: 1.2
+  - id: foiling-silver
+    name: 박(은박)
+    base-unit-cost: 100
+    info-type-id: pico.erp.config.process.info.FoilingProcessInfo
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulty-grades:
+    - difficulty: EASY
+      description: 하기 쉬움
+      cost-rate: 0.95
+    - difficulty: NORMAL
+      description: 보통 정도 수준
+      cost-rate: 1
+    - difficulty: HARD
+      description: 이러 저러한 상황이라 어려움
+      cost-rate: 1.1
+    - difficulty: VERY_HARD
+      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+      cost-rate: 1.2
+  - id: foiling-hologram
+    name: 박(홀로그램박)
+    base-unit-cost: 100
+    info-type-id: pico.erp.config.process.info.FoilingProcessInfo
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulty-grades:
+    - difficulty: EASY
+      description: 하기 쉬움
+      cost-rate: 0.95
+    - difficulty: NORMAL
+      description: 보통 정도 수준
+      cost-rate: 1
+    - difficulty: HARD
+      description: 이러 저러한 상황이라 어려움
+      cost-rate: 1.1
+    - difficulty: VERY_HARD
+      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+      cost-rate: 1.2
+  - id: thomson
+    name: 톰슨
+    base-unit-cost: 100
+    info-type-id: pico.erp.config.process.info.ThomsonProcessInfo
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulty-grades:
+    - difficulty: EASY
+      description: 하기 쉬움
+      cost-rate: 0.95
+    - difficulty: NORMAL
+      description: 보통 정도 수준
+      cost-rate: 1
+    - difficulty: HARD
+      description: 이러 저러한 상황이라 어려움
+      cost-rate: 1.1
+    - difficulty: VERY_HARD
+      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+      cost-rate: 1.2
+  - id: thomson-embossing
+    name: 톰슨(형압)
+    base-unit-cost: 100
+    info-type-id: pico.erp.config.process.info.ThomsonProcessInfo
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulty-grades:
+    - difficulty: EASY
+      description: 하기 쉬움
+      cost-rate: 0.95
+    - difficulty: NORMAL
+      description: 보통 정도 수준
+      cost-rate: 1
+    - difficulty: HARD
+      description: 이러 저러한 상황이라 어려움
+      cost-rate: 1.1
+    - difficulty: VERY_HARD
+      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+      cost-rate: 1.2
+  - id: bonding-oneside
+    name: 접착(단면)
+    base-unit-cost: 100
+    info-type-id: pico.erp.config.process.info.BondingProcessInfo
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulty-grades:
+    - difficulty: EASY
+      description: 하기 쉬움
+      cost-rate: 0.95
+    - difficulty: NORMAL
+      description: 보통 정도 수준
+      cost-rate: 1
+    - difficulty: HARD
+      description: 이러 저러한 상황이라 어려움
+      cost-rate: 1.1
+    - difficulty: VERY_HARD
+      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+      cost-rate: 1.2
+  - id: bonding-bothsides
+    name: 접착(양면)
+    base-unit-cost: 100
+    info-type-id: pico.erp.config.process.info.BondingProcessInfo
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulty-grades:
+    - difficulty: EASY
+      description: 하기 쉬움
+      cost-rate: 0.95
+    - difficulty: NORMAL
+      description: 보통 정도 수준
+      cost-rate: 1
+    - difficulty: HARD
+      description: 이러 저러한 상황이라 어려움
+      cost-rate: 1.1
+    - difficulty: VERY_HARD
+      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+      cost-rate: 1.2
+  - id: bonding-foursides
+    name: 접착(4면)
+    base-unit-cost: 100
+    info-type-id: pico.erp.config.process.info.BondingProcessInfo
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulty-grades:
+    - difficulty: EASY
+      description: 하기 쉬움
+      cost-rate: 0.95
+    - difficulty: NORMAL
+      description: 보통 정도 수준
+      cost-rate: 1
+    - difficulty: HARD
+      description: 이러 저러한 상황이라 어려움
+      cost-rate: 1.1
+    - difficulty: VERY_HARD
+      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+      cost-rate: 1.2
+  - id: bonding-manually
+    name: 접착(수작업)
+    base-unit-cost: 100
+    info-type-id: pico.erp.config.process.info.BondingProcessInfo
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulty-grades:
+    - difficulty: EASY
+      description: 하기 쉬움
+      cost-rate: 0.95
+    - difficulty: NORMAL
+      description: 보통 정도 수준
+      cost-rate: 1
+    - difficulty: HARD
+      description: 이러 저러한 상황이라 어려움
+      cost-rate: 1.1
+    - difficulty: VERY_HARD
+      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+      cost-rate: 1.2
+  - id: output-ctp
+    name: 출력(CTP)
+    base-unit-cost: 100
+    info-type-id: pico.erp.config.process.info.OutputProcessInfo
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulty-grades:
+    - difficulty: EASY
+      description: 하기 쉬움
+      cost-rate: 0.95
+    - difficulty: NORMAL
+      description: 보통 정도 수준
+      cost-rate: 1
+    - difficulty: HARD
+      description: 이러 저러한 상황이라 어려움
+      cost-rate: 1.1
+    - difficulty: VERY_HARD
+      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+      cost-rate: 1.2
+  preprocess-types:
+  - id: wooden-pattern
+    name: 목형
+    base-cost: 100000
+    info-type-id: pico.erp.config.process.info.DesigningProcessInfo
+  - id: metallic-pattern
+    name: 금형
+    base-cost: 100000
+    info-type-id: pico.erp.config.process.info.DesigningProcessInfo
+  - id: print-design
+    name: 인쇄디자인
+    base-cost: 100000
+    info-type-id: pico.erp.config.process.info.DesigningProcessInfo
+  process-type-preprocess-types:
+  - id: printing-coating-uv
+    preprocess-type-id: print-design
+  processes:
+  - id: item-2-process-1
+    item-id: item-2
+    name: 아이템 2 공정
+    difficulty: NORMAL
+    type-id: foiling-silver
+    adjust-cost: 0
+
+  plan-completed-processes:
+  - id: item-2-process-1

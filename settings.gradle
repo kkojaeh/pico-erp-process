@@ -1,0 +1,5 @@
+rootProject.name = 'pico-erp-process'
+include 'process-api'
+include 'process-impl'
+include 'process-test-cfg'
+
