@@ -7,8 +7,10 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 import pico.erp.attachment.data.AttachmentId;
-import pico.erp.comment.data.CommentSubjectId;
+import pico.erp.comment.subject.data.CommentSubjectId;
 import pico.erp.item.data.ItemId;
+import pico.erp.process.info.ProcessInfo;
+import pico.erp.process.type.data.ProcessTypeId;
 import pico.erp.user.data.UserId;
 
 @Data

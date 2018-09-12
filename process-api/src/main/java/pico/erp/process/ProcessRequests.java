@@ -12,7 +12,7 @@ import pico.erp.attachment.data.AttachmentId;
 import pico.erp.item.data.ItemId;
 import pico.erp.process.data.ProcessDifficultyKind;
 import pico.erp.process.data.ProcessId;
-import pico.erp.process.data.ProcessTypeId;
+import pico.erp.process.type.data.ProcessTypeId;
 import pico.erp.shared.TypeDefinitions;
 import pico.erp.user.data.UserId;
 

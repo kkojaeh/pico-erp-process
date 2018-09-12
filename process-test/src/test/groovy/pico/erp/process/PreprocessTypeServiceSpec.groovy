@@ -6,8 +6,11 @@ import org.springframework.test.annotation.Rollback
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.transaction.annotation.Transactional
 import pico.erp.config.process.info.PrintingProcessInfo
-import pico.erp.process.data.PreprocessTypeId
-import pico.erp.process.impl.ClassBasedProcessInfoType
+import pico.erp.process.preprocess.type.data.PreprocessTypeId
+import pico.erp.process.info.type.ClassBasedProcessInfoType
+import pico.erp.process.preprocess.type.PreprocessTypeExceptions
+import pico.erp.process.preprocess.type.PreprocessTypeRequests
+import pico.erp.process.preprocess.type.PreprocessTypeService
 import pico.erp.shared.IntegrationConfiguration
 import spock.lang.Specification
 

@@ -9,8 +9,11 @@ import pico.erp.config.process.info.PrintingProcessInfo
 import pico.erp.process.data.ProcessCostRatesData
 import pico.erp.process.data.ProcessDifficultyGradeData
 import pico.erp.process.data.ProcessDifficultyKind
-import pico.erp.process.data.ProcessTypeId
-import pico.erp.process.impl.ClassBasedProcessInfoType
+import pico.erp.process.type.data.ProcessTypeId
+import pico.erp.process.info.type.ClassBasedProcessInfoType
+import pico.erp.process.type.ProcessTypeExceptions
+import pico.erp.process.type.ProcessTypeRequests
+import pico.erp.process.type.ProcessTypeService
 import pico.erp.shared.IntegrationConfiguration
 import spock.lang.Specification
 

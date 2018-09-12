@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pico.erp.item.data.ItemId;
+import pico.erp.process.type.data.ProcessTypeId;
 import pico.erp.shared.data.Auditor;
 import pico.erp.user.data.UserId;
 

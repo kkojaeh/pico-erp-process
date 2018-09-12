@@ -8,7 +8,15 @@ import org.springframework.transaction.annotation.Transactional
 import pico.erp.config.process.info.PrintingProcessInfo
 import pico.erp.item.data.ItemId
 import pico.erp.process.data.*
-import pico.erp.process.impl.ClassBasedProcessInfoType
+import pico.erp.process.info.type.ClassBasedProcessInfoType
+import pico.erp.process.preprocess.PreprocessExceptions
+import pico.erp.process.preprocess.PreprocessRequests
+import pico.erp.process.preprocess.PreprocessService
+import pico.erp.process.preprocess.data.PreprocessId
+import pico.erp.process.preprocess.type.PreprocessTypeRequests
+import pico.erp.process.preprocess.type.PreprocessTypeService
+import pico.erp.process.preprocess.type.data.PreprocessTypeId
+import pico.erp.process.type.data.ProcessTypeId
 import pico.erp.shared.IntegrationConfiguration
 import pico.erp.user.data.UserId
 import spock.lang.Specification

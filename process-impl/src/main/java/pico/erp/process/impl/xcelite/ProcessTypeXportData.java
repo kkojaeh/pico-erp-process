@@ -8,8 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pico.erp.process.data.ProcessInfoTypeId;
-import pico.erp.process.data.ProcessTypeId;
+import pico.erp.process.info.type.data.ProcessInfoTypeId;
+import pico.erp.process.type.data.ProcessTypeId;
 
 @Data
 @NoArgsConstructor

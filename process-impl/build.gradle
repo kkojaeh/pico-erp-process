@@ -10,6 +10,8 @@ dependencies {
 
   compile project(':process-api')
 
+  compile("com.github.reinert:jjschema:${jjschemaVersion}")
+
   compile("com.github.kkojaeh.pico-erp-shared:shared-impl:${sharedVersion}")
 
 }

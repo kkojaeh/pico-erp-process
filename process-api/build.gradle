@@ -23,7 +23,5 @@ dependencies {
 
   compile("com.github.kkojaeh.pico-erp-work-day:work-day-api:${workDayVersion}")
 
-  compile("com.github.reinert:jjschema:${jjschemaVersion}")
-
 }
 

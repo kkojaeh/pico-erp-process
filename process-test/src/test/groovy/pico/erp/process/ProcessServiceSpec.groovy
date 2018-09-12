@@ -10,7 +10,10 @@ import org.springframework.transaction.annotation.Transactional
 import pico.erp.config.process.info.PrintingProcessInfo
 import pico.erp.item.data.ItemId
 import pico.erp.process.data.*
-import pico.erp.process.impl.ClassBasedProcessInfoType
+import pico.erp.process.info.type.ClassBasedProcessInfoType
+import pico.erp.process.type.ProcessTypeRequests
+import pico.erp.process.type.ProcessTypeService
+import pico.erp.process.type.data.ProcessTypeId
 import pico.erp.shared.IntegrationConfiguration
 import spock.lang.Specification
 

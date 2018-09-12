@@ -6,9 +6,9 @@ import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
-import pico.erp.process.core.ProcessInfoTypeRepository;
-import pico.erp.process.data.ProcessInfoType;
-import pico.erp.process.data.ProcessInfoTypeId;
+import pico.erp.process.info.type.ProcessInfoTypeRepository;
+import pico.erp.process.info.type.data.ProcessInfoType;
+import pico.erp.process.info.type.data.ProcessInfoTypeId;
 
 @Repository
 public class ProcessInfoTypeRepositoryImpl implements ProcessInfoTypeRepository {

@@ -9,6 +9,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Profile;
 import org.springframework.transaction.annotation.Transactional;
+import pico.erp.process.preprocess.type.PreprocessTypeRequests;
+import pico.erp.process.preprocess.type.PreprocessTypeService;
+import pico.erp.process.type.ProcessTypeRequests;
+import pico.erp.process.type.ProcessTypeService;
 import pico.erp.shared.ApplicationInitializer;
 
 @Transactional
