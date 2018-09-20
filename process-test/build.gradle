@@ -19,6 +19,6 @@ dependencies {
 
   testRuntimeOnly("com.github.kkojaeh.pico-erp-item:item-test:${itemVersion}")
 
-  testRuntimeOnly("com.github.kkojaeh.pico-erp-work-day:work-day-test:${workDayVersion}")
+  testRuntimeOnly("com.github.kkojaeh.pico-erp-work-schedule:work-schedule-test:${workScheduleVersion}")
 
 }

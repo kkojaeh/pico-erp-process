@@ -21,7 +21,5 @@ dependencies {
 
   compile("com.github.kkojaeh.pico-erp-item:item-api:${itemVersion}")
 
-  compile("com.github.kkojaeh.pico-erp-work-day:work-day-api:${workDayVersion}")
-
 }
 
