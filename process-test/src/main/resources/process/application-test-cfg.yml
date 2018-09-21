@@ -551,6 +551,12 @@ data:
     difficulty: NORMAL
     type-id: foiling-silver
     adjust-cost: 0
+  - id: item-3-process-1
+    item-id: item-3
+    name: 아이템 3 공정
+    difficulty: NORMAL
+    type-id: printing-offset
+    adjust-cost: 0
 
   plan-completed-processes:
   - id: item-2-process-1
