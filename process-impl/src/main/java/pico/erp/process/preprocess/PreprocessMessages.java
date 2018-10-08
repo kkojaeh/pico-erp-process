@@ -7,13 +7,12 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Data;
 import lombok.Value;
-import pico.erp.attachment.data.AttachmentId;
-import pico.erp.process.preprocess.type.PreprocessType;
+import pico.erp.attachment.AttachmentId;
 import pico.erp.process.Process;
-import pico.erp.process.preprocess.data.PreprocessId;
+import pico.erp.process.preprocess.type.PreprocessType;
 import pico.erp.shared.TypeDefinitions;
 import pico.erp.shared.event.Event;
-import pico.erp.user.data.UserData;
+import pico.erp.user.UserData;
 
 public interface PreprocessMessages {
 
@@ -39,7 +38,7 @@ public interface PreprocessMessages {
     @Size(max = TypeDefinitions.CLOB_LENGTH)
     String description;
 
-    UserData managerData;
+    UserData manager;
 
     @Valid
     AttachmentId attachmentId;
@@ -56,7 +55,7 @@ public interface PreprocessMessages {
     @Size(max = TypeDefinitions.CLOB_LENGTH)
     String description;
 
-    UserData managerData;
+    UserData manager;
 
     BigDecimal chargeCost;
 

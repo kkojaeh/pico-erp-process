@@ -2,9 +2,7 @@ package pico.erp.process;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import pico.erp.item.data.ItemId;
-import pico.erp.process.data.ProcessData;
-import pico.erp.process.data.ProcessId;
+import pico.erp.item.ItemId;
 
 public interface ProcessService {
 

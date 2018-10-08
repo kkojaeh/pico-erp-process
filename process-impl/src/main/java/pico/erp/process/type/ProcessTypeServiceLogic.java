@@ -13,8 +13,6 @@ import pico.erp.process.type.ProcessTypeRequests.CreateRequest;
 import pico.erp.process.type.ProcessTypeRequests.DeleteRequest;
 import pico.erp.process.type.ProcessTypeRequests.RemovePreprocessTypeRequest;
 import pico.erp.process.type.ProcessTypeRequests.UpdateRequest;
-import pico.erp.process.type.data.ProcessTypeData;
-import pico.erp.process.type.data.ProcessTypeId;
 import pico.erp.shared.Public;
 import pico.erp.shared.event.EventPublisher;
 

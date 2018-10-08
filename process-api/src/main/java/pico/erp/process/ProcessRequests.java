@@ -8,13 +8,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pico.erp.attachment.data.AttachmentId;
-import pico.erp.item.data.ItemId;
-import pico.erp.process.data.ProcessDifficultyKind;
-import pico.erp.process.data.ProcessId;
-import pico.erp.process.type.data.ProcessTypeId;
+import pico.erp.attachment.AttachmentId;
+import pico.erp.item.ItemId;
+import pico.erp.process.difficulty.grade.ProcessDifficultyKind;
+import pico.erp.process.type.ProcessTypeId;
 import pico.erp.shared.TypeDefinitions;
-import pico.erp.user.data.UserId;
+import pico.erp.user.UserId;
 
 public interface ProcessRequests {
 

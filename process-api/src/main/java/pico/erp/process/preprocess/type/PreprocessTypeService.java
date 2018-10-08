@@ -2,8 +2,6 @@ package pico.erp.process.preprocess.type;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import pico.erp.process.preprocess.type.data.PreprocessTypeData;
-import pico.erp.process.preprocess.type.data.PreprocessTypeId;
 
 public interface PreprocessTypeService {
 

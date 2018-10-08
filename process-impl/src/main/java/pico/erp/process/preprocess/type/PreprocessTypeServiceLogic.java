@@ -7,12 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import pico.erp.audit.AuditService;
-import pico.erp.process.ProcessMapper;
 import pico.erp.process.preprocess.type.PreprocessTypeRequests.CreateRequest;
 import pico.erp.process.preprocess.type.PreprocessTypeRequests.DeleteRequest;
 import pico.erp.process.preprocess.type.PreprocessTypeRequests.UpdateRequest;
-import pico.erp.process.preprocess.type.data.PreprocessTypeData;
-import pico.erp.process.preprocess.type.data.PreprocessTypeId;
 import pico.erp.shared.Public;
 import pico.erp.shared.event.EventPublisher;
 
@@ -30,7 +27,7 @@ public class PreprocessTypeServiceLogic implements PreprocessTypeService {
   private EventPublisher eventPublisher;
 
   @Autowired
-  private ProcessMapper mapper;
+  private PreprocessTypeMapper mapper;
 
   @Lazy
   @Autowired

@@ -7,14 +7,13 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Data;
 import lombok.Value;
-import pico.erp.attachment.data.AttachmentId;
-import pico.erp.item.data.ItemData;
-import pico.erp.process.data.ProcessDifficultyKind;
-import pico.erp.process.data.ProcessId;
+import pico.erp.attachment.AttachmentId;
+import pico.erp.item.ItemData;
+import pico.erp.process.difficulty.grade.ProcessDifficultyKind;
 import pico.erp.process.type.ProcessType;
 import pico.erp.shared.TypeDefinitions;
 import pico.erp.shared.event.Event;
-import pico.erp.user.data.UserData;
+import pico.erp.user.UserData;
 
 public interface ProcessMessages {
 
@@ -41,7 +40,7 @@ public interface ProcessMessages {
     @Size(max = TypeDefinitions.CLOB_LENGTH)
     String description;
 
-    UserData managerData;
+    UserData manager;
 
     @Valid
     AttachmentId attachmentId;
@@ -70,7 +69,7 @@ public interface ProcessMessages {
     @Size(max = TypeDefinitions.CLOB_LENGTH)
     String description;
 
-    UserData managerData;
+    UserData manager;
 
     @Valid
     AttachmentId attachmentId;

@@ -8,12 +8,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pico.erp.attachment.data.AttachmentId;
-import pico.erp.process.preprocess.data.PreprocessId;
-import pico.erp.process.preprocess.type.data.PreprocessTypeId;
-import pico.erp.process.data.ProcessId;
+import pico.erp.attachment.AttachmentId;
+import pico.erp.process.ProcessId;
+import pico.erp.process.preprocess.type.PreprocessTypeId;
 import pico.erp.shared.TypeDefinitions;
-import pico.erp.user.data.UserId;
+import pico.erp.user.UserId;
 
 public interface PreprocessRequests {
 

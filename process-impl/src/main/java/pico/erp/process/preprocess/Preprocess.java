@@ -14,17 +14,15 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
-import pico.erp.attachment.data.AttachmentId;
+import pico.erp.attachment.AttachmentId;
 import pico.erp.audit.annotation.Audit;
-import pico.erp.comment.subject.data.CommentSubjectId;
-import pico.erp.process.ProcessExceptions.CannotModifyException;
+import pico.erp.comment.subject.CommentSubjectId;
 import pico.erp.process.Process;
+import pico.erp.process.ProcessExceptions.CannotModifyException;
 import pico.erp.process.info.ProcessInfo;
-import pico.erp.process.preprocess.data.PreprocessId;
-import pico.erp.process.preprocess.data.PreprocessStatusKind;
 import pico.erp.process.preprocess.type.PreprocessType;
 import pico.erp.shared.event.Event;
-import pico.erp.user.data.UserData;
+import pico.erp.user.UserData;
 
 /**
  * 공정은 하나의 품목에 국한 될수 없다 지게차 이동 및 재고 조사 등의 작업은 도출되는 결과가 품목이 아닐 수 없다 작업과 공정의 차이가 혼동 될 수 있지만 투입과 결과라는
@@ -56,7 +54,7 @@ public class Preprocess implements Serializable {
 
   String description;
 
-  UserData managerData;
+  UserData manager;
 
   CommentSubjectId commentSubjectId;
 
@@ -79,7 +77,7 @@ public class Preprocess implements Serializable {
     this.type = request.getType();
     this.status = PreprocessStatusKind.DRAFT;
     this.description = request.getDescription();
-    this.managerData = request.getManagerData();
+    this.manager = request.getManager();
     this.commentSubjectId = CommentSubjectId.from(this.id.getValue());
     this.attachmentId = request.getAttachmentId();
     this.chargeCost = request.getChargeCost();
@@ -97,7 +95,7 @@ public class Preprocess implements Serializable {
     ;
     this.name = request.getName();
     this.description = request.getDescription();
-    this.managerData = request.getManagerData();
+    this.manager = request.getManager();
     this.attachmentId = request.getAttachmentId();
 
     Collection<Event> events = new LinkedList<>();

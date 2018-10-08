@@ -3,9 +3,7 @@ package pico.erp.process.preprocess;
 import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import pico.erp.process.preprocess.data.PreprocessData;
-import pico.erp.process.preprocess.data.PreprocessId;
-import pico.erp.process.data.ProcessId;
+import pico.erp.process.ProcessId;
 
 public interface PreprocessService {
 

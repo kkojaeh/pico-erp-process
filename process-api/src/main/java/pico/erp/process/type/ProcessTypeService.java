@@ -2,8 +2,6 @@ package pico.erp.process.type;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import pico.erp.process.type.data.ProcessTypeData;
-import pico.erp.process.type.data.ProcessTypeId;
 
 public interface ProcessTypeService {
 

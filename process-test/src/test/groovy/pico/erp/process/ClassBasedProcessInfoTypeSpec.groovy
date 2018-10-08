@@ -2,9 +2,9 @@ package pico.erp.process
 
 import pico.erp.config.process.info.OutputProcessInfo
 import pico.erp.config.process.info.PrintingProcessInfo
-import pico.erp.process.info.type.data.ProcessInfoType
-import pico.erp.process.info.type.data.ProcessInfoTypeId
 import pico.erp.process.info.type.ClassBasedProcessInfoType
+import pico.erp.process.info.type.ProcessInfoType
+import pico.erp.process.info.type.ProcessInfoTypeId
 import spock.lang.Specification
 
 class ClassBasedProcessInfoTypeSpec extends Specification {

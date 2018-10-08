@@ -1,57 +1,54 @@
 package pico.erp.process;
 
 import java.util.Optional;
+import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import pico.erp.item.ItemData;
+import pico.erp.item.ItemId;
 import pico.erp.item.ItemService;
-import pico.erp.item.data.ItemData;
-import pico.erp.item.data.ItemId;
-import pico.erp.process.info.type.ProcessInfoTypExceptions;
-import pico.erp.process.info.type.ProcessInfoTypeRepository;
-import pico.erp.process.preprocess.PreprocessRequests;
-import pico.erp.process.preprocess.type.PreprocessTypeRepository;
-import pico.erp.process.preprocess.type.PreprocessTypeRequests;
+import pico.erp.process.cost.ProcessCostMapper;
+import pico.erp.process.cost.ProcessCostRates;
+import pico.erp.process.cost.ProcessCostRatesData;
+import pico.erp.process.difficulty.grade.ProcessDifficultyGrade;
+import pico.erp.process.difficulty.grade.ProcessDifficultyGradeData;
+import pico.erp.process.difficulty.grade.ProcessDifficultyGradeMapper;
+import pico.erp.process.info.ProcessInfo;
+import pico.erp.process.info.ProcessInfoMapper;
+import pico.erp.process.info.type.ProcessInfoType;
+import pico.erp.process.info.type.ProcessInfoTypeData;
+import pico.erp.process.info.type.ProcessInfoTypeId;
+import pico.erp.process.info.type.ProcessInfoTypeMapper;
+import pico.erp.process.preprocess.type.PreprocessType;
+import pico.erp.process.preprocess.type.PreprocessTypeData;
+import pico.erp.process.preprocess.type.PreprocessTypeEntity;
+import pico.erp.process.preprocess.type.PreprocessTypeId;
+import pico.erp.process.preprocess.type.PreprocessTypeMapper;
+import pico.erp.process.type.ProcessType;
+import pico.erp.process.type.ProcessTypeData;
+import pico.erp.process.type.ProcessTypeEntity;
 import pico.erp.process.type.ProcessTypeExceptions.NotFoundException;
+import pico.erp.process.type.ProcessTypeId;
+import pico.erp.process.type.ProcessTypeMapper;
+import pico.erp.process.type.ProcessTypeMessages;
 import pico.erp.process.type.ProcessTypeRepository;
 import pico.erp.process.type.ProcessTypeRequests;
-import pico.erp.process.preprocess.data.PreprocessData;
-import pico.erp.process.preprocess.type.data.PreprocessTypeData;
-import pico.erp.process.preprocess.type.data.PreprocessTypeId;
-import pico.erp.process.data.ProcessCostData;
-import pico.erp.process.data.ProcessCostRatesData;
-import pico.erp.process.data.ProcessData;
-import pico.erp.process.data.ProcessDifficultyGradeData;
-import pico.erp.process.data.ProcessId;
-import pico.erp.process.info.type.data.ProcessInfoType;
-import pico.erp.process.info.type.data.ProcessInfoTypeData;
-import pico.erp.process.info.type.data.ProcessInfoTypeId;
-import pico.erp.process.type.data.ProcessTypeData;
-import pico.erp.process.type.data.ProcessTypeId;
-import pico.erp.process.preprocess.Preprocess;
-import pico.erp.process.preprocess.PreprocessMessages;
-import pico.erp.process.preprocess.type.PreprocessType;
-import pico.erp.process.preprocess.type.PreprocessTypeMessages;
-import pico.erp.process.type.ProcessType;
-import pico.erp.process.type.ProcessTypeMessages;
 import pico.erp.shared.event.EventPublisher;
+import pico.erp.user.UserData;
+import pico.erp.user.UserId;
 import pico.erp.user.UserService;
-import pico.erp.user.data.UserData;
-import pico.erp.user.data.UserId;
 
 @Mapper
 public abstract class ProcessMapper {
 
-  @Autowired
-  private ProcessInfoTypeRepository processInfoTypeRepository;
 
   @Autowired
   private ProcessTypeRepository processTypeRepository;
 
-  @Autowired
-  private PreprocessTypeRepository preprocessTypeRepository;
 
   @Autowired
   private ProcessRepository processRepository;
@@ -67,13 +64,30 @@ public abstract class ProcessMapper {
   @Autowired
   private UserService userService;
 
-  protected ProcessInfoType map(ProcessInfoTypeId infoTypeId) {
-    return Optional.ofNullable(infoTypeId)
-      .map(id -> processInfoTypeRepository.findBy(id)
-        .orElseThrow(ProcessInfoTypExceptions.NotFoundException::new)
-      )
-      .orElse(null);
-  }
+  @Lazy
+  @Autowired
+  protected ProcessInfoMapper processInfoMapper;
+
+  @Lazy
+  @Autowired
+  protected ProcessDifficultyGradeMapper processDifficultyGradeMapper;
+
+  @Lazy
+  @Autowired
+  protected ProcessTypeMapper processTypeMapper;
+
+  @Lazy
+  @Autowired
+  private ProcessCostMapper processCostMapper;
+
+  @Lazy
+  @Autowired
+  private PreprocessTypeMapper preprocessTypeMapper;
+
+  @Lazy
+  @Autowired
+  private ProcessInfoTypeMapper processInfoTypeMapper;
+
 
   protected ProcessType map(ProcessTypeId typeId) {
     return Optional.ofNullable(typeId)
@@ -82,18 +96,9 @@ public abstract class ProcessMapper {
       .orElse(null);
   }
 
-  protected PreprocessType map(PreprocessTypeId typeId) {
-    return Optional.ofNullable(typeId)
-      .map(id -> preprocessTypeRepository.findBy(id)
-        .orElseThrow(NotFoundException::new))
-      .orElse(null);
-  }
-
-  protected Process map(ProcessId processId) {
-    return Optional.ofNullable(processId)
-      .map(id -> processRepository.findBy(id)
-        .orElseThrow(NotFoundException::new))
-      .orElse(null);
+  @AfterMapping
+  protected void afterMapping(ProcessEntity from, @MappingTarget ProcessEntity to) {
+    to.setType(from.getType());
   }
 
   protected ItemData map(ItemId itemId) {
@@ -125,32 +130,28 @@ public abstract class ProcessMapper {
   public abstract ProcessTypeMessages.RemovePreprocessTypeRequest map(
     ProcessTypeRequests.RemovePreprocessTypeRequest request);
 
-  @Mappings({
-    @Mapping(target = "process", source = "processId"),
-    @Mapping(target = "type", source = "typeId"),
-    @Mapping(target = "managerData", source = "managerId")
-  })
-  public abstract PreprocessMessages.CreateRequest map(PreprocessRequests.CreateRequest request);
+  public Process domain(ProcessEntity entity) {
+    ProcessType type = map(entity.getType().getId());
 
-  @Mappings({
-    @Mapping(target = "managerData", source = "managerId")
-  })
-  public abstract PreprocessMessages.UpdateRequest map(PreprocessRequests.UpdateRequest request);
-
-  public abstract PreprocessMessages.DeleteRequest map(PreprocessRequests.DeleteRequest request);
-
-  @Mappings({
-    @Mapping(target = "infoType", source = "infoTypeId")
-  })
-  public abstract PreprocessTypeMessages.CreateRequest map(
-    PreprocessTypeRequests.CreateRequest request);
-
-  @Mappings({
-    @Mapping(target = "itemData", source = "itemId"),
-    @Mapping(target = "type", source = "typeId"),
-    @Mapping(target = "managerData", source = "managerId")
-  })
-  public abstract ProcessMessages.CreateRequest map(ProcessRequests.CreateRequest request);
+    return Process.builder()
+      .id(entity.getId())
+      .name(entity.getName())
+      .itemData(map(entity.getItemId()))
+      .type(type)
+      .status(entity.getStatus())
+      .difficulty(entity.getDifficulty())
+      .description(entity.getDescription())
+      .manager(map(entity.getManagerId()))
+      .commentSubjectId(entity.getCommentSubjectId())
+      .info(processInfoMapper.map(entity.getInfo(), type.getInfoType().getType()))
+      .estimatedCost(processCostMapper.domain(entity.getEstimatedCost()))
+      .attachmentId(entity.getAttachmentId())
+      .deleted(entity.isDeleted())
+      .deletedDate(entity.getDeletedDate())
+      .adjustCost(entity.getAdjustCost())
+      .adjustCostReason(entity.getAdjustCostReason())
+      .build();
+  }
 
   @Mappings({
     @Mapping(target = "infoType", source = "infoTypeId")
@@ -158,74 +159,96 @@ public abstract class ProcessMapper {
   public abstract ProcessTypeMessages.UpdateRequest map(ProcessTypeRequests.UpdateRequest request);
 
   @Mappings({
-    @Mapping(target = "infoType", source = "infoTypeId")
+    @Mapping(target = "itemId", source = "itemData.id"),
+    @Mapping(target = "type", source = "type.id"),
+    @Mapping(target = "managerId", source = "manager.id"),
+    @Mapping(target = "managerName", source = "manager.name"),
+    @Mapping(target = "createdBy", ignore = true),
+    @Mapping(target = "createdDate", ignore = true),
+    @Mapping(target = "lastModifiedBy", ignore = true),
+    @Mapping(target = "lastModifiedDate", ignore = true)
   })
-  public abstract PreprocessTypeMessages.UpdateRequest map(
-    PreprocessTypeRequests.UpdateRequest request);
-
-  @Mappings({
-    @Mapping(target = "type", source = "typeId"),
-    @Mapping(target = "managerData", source = "managerId")
-  })
-  public abstract ProcessMessages.UpdateRequest map(ProcessRequests.UpdateRequest request);
+  public abstract ProcessEntity entity(Process process);
 
   public abstract ProcessMessages.CompletePlanRequest map(
     ProcessRequests.CompletePlanRequest request);
 
   public abstract ProcessTypeMessages.DeleteRequest map(ProcessTypeRequests.DeleteRequest request);
 
-  public abstract PreprocessTypeMessages.DeleteRequest map(
-    PreprocessTypeRequests.DeleteRequest request);
 
   public abstract ProcessMessages.DeleteRequest map(ProcessRequests.DeleteRequest request);
 
-  @Mappings({
-    @Mapping(target = "itemId", source = "itemData.id"),
-    @Mapping(target = "typeId", source = "type.id"),
-    @Mapping(target = "managerId", source = "managerData.id")
-  })
-  public abstract ProcessData map(Process process);
+  protected PreprocessTypeEntity entity(PreprocessTypeId preprocessTypeId) {
+    return preprocessTypeMapper.entity(preprocessTypeId);
+  }
 
-  @Mappings({
-    @Mapping(target = "processId", source = "process.id"),
-    @Mapping(target = "typeId", source = "type.id"),
-    @Mapping(target = "managerId", source = "managerData.id")
-  })
-  public abstract PreprocessData map(Preprocess preprocess);
 
   @Mappings({
     @Mapping(target = "infoTypeId", source = "infoType.id")
   })
   public abstract ProcessTypeData map(ProcessType processType);
 
-  @Mappings({
-    @Mapping(target = "infoTypeId", source = "infoType.id")
-  })
-  public abstract PreprocessTypeData map(PreprocessType processType);
 
   public abstract ProcessInfoTypeData map(ProcessInfoType type);
 
-  public abstract ProcessDifficultyGradeData map(ProcessDifficultyGrade difficultyGrade);
-
-  public abstract ProcessCostRatesData map(ProcessCostRates data);
-
-  public abstract ProcessCostData map(ProcessCost cost);
-
-  public ProcessDifficultyGrade map(ProcessDifficultyGradeData data) {
-    return ProcessDifficultyGrade.builder()
-      .difficulty(data.getDifficulty())
-      .costRate(data.getCostRate())
-      .description(data.getDescription())
-      .build();
+  protected ProcessTypeEntity entity(ProcessTypeId typeId) {
+    return processTypeMapper.entity(typeId);
   }
 
-  public ProcessCostRates map(ProcessCostRatesData data) {
-    return ProcessCostRates.builder()
-      .directLabor(data.getDirectLabor())
-      .indirectLabor(data.getIndirectLabor())
-      .indirectMaterial(data.getIndirectMaterial())
-      .indirectExpenses(data.getIndirectExpenses())
-      .build();
+  public Process map(ProcessId processId) {
+    return Optional.ofNullable(processId)
+      .map(id -> processRepository.findBy(id)
+        .orElseThrow(NotFoundException::new))
+      .orElse(null);
   }
+
+  @Mappings({
+    @Mapping(target = "itemData", source = "itemId"),
+    @Mapping(target = "type", source = "typeId"),
+    @Mapping(target = "manager", source = "managerId")
+  })
+  public abstract ProcessMessages.CreateRequest map(ProcessRequests.CreateRequest request);
+
+  @Mappings({
+    @Mapping(target = "type", source = "typeId"),
+    @Mapping(target = "manager", source = "managerId")
+  })
+  public abstract ProcessMessages.UpdateRequest map(ProcessRequests.UpdateRequest request);
+
+  @Mappings({
+    @Mapping(target = "itemId", source = "itemData.id"),
+    @Mapping(target = "typeId", source = "type.id"),
+    @Mapping(target = "managerId", source = "manager.id")
+  })
+  public abstract ProcessData map(Process process);
+
+  protected ProcessDifficultyGrade map(ProcessDifficultyGradeData data) {
+    return processDifficultyGradeMapper.map(data);
+  }
+
+  protected ProcessCostRates map(ProcessCostRatesData data) {
+    return processCostMapper.map(data);
+  }
+
+  protected PreprocessType map(PreprocessTypeId typeId) {
+    return preprocessTypeMapper.map(typeId);
+  }
+
+  protected PreprocessTypeData map(PreprocessType type) {
+    return preprocessTypeMapper.map(type);
+  }
+
+  protected ProcessInfoType map(ProcessInfoTypeId infoTypeId) {
+    return processInfoTypeMapper.map(infoTypeId);
+  }
+
+  protected String map(ProcessInfo info) {
+    return processInfoMapper.map(info);
+  }
+
+  @Mappings({
+    @Mapping(target = "type", ignore = true)
+  })
+  public abstract void pass(ProcessEntity from, @MappingTarget ProcessEntity to);
 
 }

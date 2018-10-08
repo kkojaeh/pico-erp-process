@@ -4,7 +4,6 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import pico.erp.process.preprocess.type.data.PreprocessTypeView;
 import pico.erp.shared.data.LabeledValuable;
 
 public interface PreprocessTypeQuery {

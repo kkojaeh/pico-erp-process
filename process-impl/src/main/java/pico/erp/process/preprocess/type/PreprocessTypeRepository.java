@@ -4,7 +4,6 @@ import java.util.Optional;
 import java.util.stream.Stream;
 import javax.validation.constraints.NotNull;
 import org.springframework.stereotype.Repository;
-import pico.erp.process.preprocess.type.data.PreprocessTypeId;
 
 @Repository
 public interface PreprocessTypeRepository {

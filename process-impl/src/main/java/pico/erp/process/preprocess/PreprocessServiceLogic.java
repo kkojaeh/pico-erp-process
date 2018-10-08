@@ -9,10 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import pico.erp.audit.AuditService;
-import pico.erp.process.ProcessMapper;
-import pico.erp.process.preprocess.data.PreprocessData;
-import pico.erp.process.preprocess.data.PreprocessId;
-import pico.erp.process.data.ProcessId;
+import pico.erp.process.ProcessId;
 import pico.erp.shared.Public;
 import pico.erp.shared.event.EventPublisher;
 
@@ -30,7 +27,7 @@ public class PreprocessServiceLogic implements PreprocessService {
   private EventPublisher eventPublisher;
 
   @Autowired
-  private ProcessMapper mapper;
+  private PreprocessMapper mapper;
 
   @Lazy
   @Autowired

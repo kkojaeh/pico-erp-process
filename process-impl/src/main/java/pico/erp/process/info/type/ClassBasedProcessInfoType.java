@@ -9,8 +9,6 @@ import java.util.Optional;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import pico.erp.process.info.ProcessInfo;
-import pico.erp.process.info.type.data.ProcessInfoType;
-import pico.erp.process.info.type.data.ProcessInfoTypeId;
 
 public class ClassBasedProcessInfoType implements ProcessInfoType {
 

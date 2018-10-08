@@ -3,7 +3,6 @@ package pico.erp.process.preprocess;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pico.erp.process.preprocess.data.PreprocessId;
 import pico.erp.shared.event.Event;
 
 public interface PreprocessEvents {

@@ -8,8 +8,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Data;
 import lombok.Value;
-import pico.erp.process.preprocess.type.data.PreprocessTypeId;
-import pico.erp.process.info.type.data.ProcessInfoType;
+import pico.erp.process.info.type.ProcessInfoType;
 import pico.erp.shared.TypeDefinitions;
 import pico.erp.shared.event.Event;
 

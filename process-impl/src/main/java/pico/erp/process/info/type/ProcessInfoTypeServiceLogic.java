@@ -8,8 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import pico.erp.process.ProcessMapper;
 import pico.erp.process.info.type.ProcessInfoTypExceptions.NotFoundException;
-import pico.erp.process.info.type.data.ProcessInfoTypeData;
-import pico.erp.process.info.type.data.ProcessInfoTypeId;
 import pico.erp.shared.Public;
 
 @Service

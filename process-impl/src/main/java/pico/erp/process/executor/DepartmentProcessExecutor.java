@@ -6,8 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import pico.erp.process.data.ProcessExecutorId;
-import pico.erp.user.data.DepartmentId;
+import pico.erp.user.department.DepartmentId;
 
 @AllArgsConstructor
 @NoArgsConstructor

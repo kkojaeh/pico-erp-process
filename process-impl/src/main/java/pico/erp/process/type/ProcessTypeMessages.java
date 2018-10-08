@@ -9,11 +9,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Data;
 import lombok.Value;
-import pico.erp.process.ProcessCostRates;
-import pico.erp.process.ProcessDifficultyGrade;
-import pico.erp.process.info.type.data.ProcessInfoType;
+import pico.erp.process.cost.ProcessCostRates;
+import pico.erp.process.difficulty.grade.ProcessDifficultyGrade;
+import pico.erp.process.info.type.ProcessInfoType;
 import pico.erp.process.preprocess.type.PreprocessType;
-import pico.erp.process.type.data.ProcessTypeId;
 import pico.erp.shared.TypeDefinitions;
 import pico.erp.shared.event.Event;
 

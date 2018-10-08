@@ -16,9 +16,8 @@ import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 import pico.erp.audit.annotation.Audit;
-import pico.erp.process.preprocess.type.data.PreprocessTypeId;
 import pico.erp.process.info.ProcessInfo;
-import pico.erp.process.info.type.data.ProcessInfoType;
+import pico.erp.process.info.type.ProcessInfoType;
 import pico.erp.shared.event.Event;
 
 /**

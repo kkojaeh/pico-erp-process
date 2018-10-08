@@ -8,12 +8,14 @@ import org.springframework.test.annotation.Rollback
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.transaction.annotation.Transactional
 import pico.erp.config.process.info.PrintingProcessInfo
-import pico.erp.item.data.ItemId
-import pico.erp.process.data.*
+import pico.erp.item.ItemId
+import pico.erp.process.cost.ProcessCostRatesData
+import pico.erp.process.difficulty.grade.ProcessDifficultyGradeData
+import pico.erp.process.difficulty.grade.ProcessDifficultyKind
 import pico.erp.process.info.type.ClassBasedProcessInfoType
+import pico.erp.process.type.ProcessTypeId
 import pico.erp.process.type.ProcessTypeRequests
 import pico.erp.process.type.ProcessTypeService
-import pico.erp.process.type.data.ProcessTypeId
 import pico.erp.shared.IntegrationConfiguration
 import spock.lang.Specification
 

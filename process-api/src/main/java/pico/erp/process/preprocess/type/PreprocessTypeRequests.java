@@ -9,8 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pico.erp.process.preprocess.type.data.PreprocessTypeId;
-import pico.erp.process.info.type.data.ProcessInfoTypeId;
+import pico.erp.process.info.type.ProcessInfoTypeId;
 import pico.erp.shared.TypeDefinitions;
 
 public interface PreprocessTypeRequests {

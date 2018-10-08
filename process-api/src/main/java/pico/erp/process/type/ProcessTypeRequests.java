@@ -11,11 +11,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pico.erp.process.preprocess.type.data.PreprocessTypeId;
-import pico.erp.process.data.ProcessCostRatesData;
-import pico.erp.process.data.ProcessDifficultyGradeData;
-import pico.erp.process.info.type.data.ProcessInfoTypeId;
-import pico.erp.process.type.data.ProcessTypeId;
+import pico.erp.process.cost.ProcessCostRatesData;
+import pico.erp.process.difficulty.grade.ProcessDifficultyGradeData;
+import pico.erp.process.info.type.ProcessInfoTypeId;
+import pico.erp.process.preprocess.type.PreprocessTypeId;
 import pico.erp.shared.TypeDefinitions;
 
 public interface ProcessTypeRequests {

@@ -19,19 +19,18 @@ import lombok.experimental.FieldDefaults;
 import lombok.val;
 import pico.erp.audit.annotation.Audit;
 import pico.erp.process.Process;
-import pico.erp.process.ProcessCost;
-import pico.erp.process.ProcessCostRates;
-import pico.erp.process.ProcessDifficultyGrade;
+import pico.erp.process.cost.ProcessCost;
+import pico.erp.process.cost.ProcessCostRates;
+import pico.erp.process.difficulty.grade.ProcessDifficultyGrade;
+import pico.erp.process.difficulty.grade.ProcessDifficultyKind;
+import pico.erp.process.info.ProcessInfo;
+import pico.erp.process.info.type.ProcessInfoType;
 import pico.erp.process.preprocess.PreprocessExceptions;
 import pico.erp.process.preprocess.type.PreprocessType;
 import pico.erp.process.type.ProcessTypeEvents.CostChangedEvent;
 import pico.erp.process.type.ProcessTypeEvents.CreatedEvent;
 import pico.erp.process.type.ProcessTypeEvents.DeletedEvent;
 import pico.erp.process.type.ProcessTypeEvents.UpdatedEvent;
-import pico.erp.process.data.ProcessDifficultyKind;
-import pico.erp.process.info.ProcessInfo;
-import pico.erp.process.info.type.data.ProcessInfoType;
-import pico.erp.process.type.data.ProcessTypeId;
 import pico.erp.shared.event.Event;
 
 /**
