@@ -90,7 +90,6 @@ class PreprocessServiceSpec extends Specification {
     def process = preprocessService.get(PreprocessId.from("PP1"))
 
     then:
-    process.id.value == "PP1"
     process.name == "A - 목형"
   }
 

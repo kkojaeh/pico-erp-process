@@ -78,7 +78,7 @@ public class Preprocess implements Serializable {
     this.status = PreprocessStatusKind.DRAFT;
     this.description = request.getDescription();
     this.manager = request.getManager();
-    this.commentSubjectId = CommentSubjectId.from(this.id.getValue());
+    this.commentSubjectId = CommentSubjectId.from(this.id.getValue().toString());
     this.attachmentId = request.getAttachmentId();
     this.chargeCost = request.getChargeCost();
     this.info = this.type.createInfo();

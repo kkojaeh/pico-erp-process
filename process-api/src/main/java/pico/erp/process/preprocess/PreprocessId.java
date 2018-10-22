@@ -13,6 +13,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.ToString;
+import pico.erp.process.ProcessId;
 
 @Embeddable
 @Getter
@@ -25,16 +26,23 @@ public class PreprocessId implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @Getter(onMethod = @__({@JsonValue}))
-  @Size(min = 2, max = 50)
   @NotNull
-  private String value;
+  private UUID value;
 
   public static PreprocessId from(@NonNull String value) {
+    try {
+      return from(UUID.fromString(value));
+    } catch (IllegalArgumentException e) {
+      return from(UUID.nameUUIDFromBytes(value.getBytes()));
+    }
+  }
+
+  public static PreprocessId from(@NonNull UUID value) {
     return new PreprocessId(value);
   }
 
   public static PreprocessId generate() {
-    return from(UUID.randomUUID().toString());
+    return from(UUID.randomUUID());
   }
 
 }

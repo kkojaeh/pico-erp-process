@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.ToString;
+import pico.erp.shared.TypeDefinitions;
 
 @Embeddable
 @Getter
@@ -24,7 +25,7 @@ public class ProcessInfoTypeId implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @Getter(onMethod = @__({@JsonValue}))
-  @Size(min = 2, max = 200)
+  @Size(min = 2, max = TypeDefinitions.CLASS_NAME_LENGTH)
   @NotNull
   private String value;
 

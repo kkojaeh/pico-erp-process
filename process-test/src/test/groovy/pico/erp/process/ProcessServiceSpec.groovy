@@ -92,7 +92,6 @@ class ProcessServiceSpec extends Specification {
     def process = processService.get(ProcessId.from("process-1"))
 
     then:
-    process.id.value == "process-1"
     process.typeId.value == "P1"
     process.estimatedCost.directLabor == 40
     process.estimatedCost.indirectLabor == 10

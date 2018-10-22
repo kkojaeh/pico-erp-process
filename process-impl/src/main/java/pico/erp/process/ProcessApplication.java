@@ -82,7 +82,7 @@ public class ProcessApplication implements ApplicationStarter {
       info -> new UriTemplate(template).expand(new HashMap<String, String>() {
         {
           put("subjectId", info.getSubjectId().getValue());
-          put("commentId", info.getId().getValue());
+          put("commentId", info.getId().getValue().toString());
         }
       })
     );
@@ -109,7 +109,7 @@ public class ProcessApplication implements ApplicationStarter {
       info -> new UriTemplate(template).expand(new HashMap<String, String>() {
         {
           put("subjectId", info.getSubjectId().getValue());
-          put("commentId", info.getId().getValue());
+          put("commentId", info.getId().getValue().toString());
         }
       })
     );

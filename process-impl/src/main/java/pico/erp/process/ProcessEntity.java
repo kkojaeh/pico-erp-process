@@ -60,7 +60,7 @@ public class ProcessEntity implements Serializable {
 
   @EmbeddedId
   @AttributeOverrides({
-    @AttributeOverride(name = "value", column = @Column(name = "ID", length = TypeDefinitions.ID_LENGTH))
+    @AttributeOverride(name = "value", column = @Column(name = "ID", length = TypeDefinitions.UUID_BINARY_LENGTH))
   })
   ProcessId id;
 
@@ -68,7 +68,7 @@ public class ProcessEntity implements Serializable {
   String name;
 
   @AttributeOverrides({
-    @AttributeOverride(name = "value", column = @Column(name = "ITEM_ID", length = TypeDefinitions.ID_LENGTH))
+    @AttributeOverride(name = "value", column = @Column(name = "ITEM_ID", length = TypeDefinitions.UUID_BINARY_LENGTH))
   })
   ItemId itemId;
 
@@ -115,7 +115,7 @@ public class ProcessEntity implements Serializable {
   ProcessCostEmbeddable estimatedCost;
 
   @AttributeOverrides({
-    @AttributeOverride(name = "value", column = @Column(name = "ATTACHMENT_ID", length = TypeDefinitions.ID_LENGTH))
+    @AttributeOverride(name = "value", column = @Column(name = "ATTACHMENT_ID", length = TypeDefinitions.UUID_BINARY_LENGTH))
   })
   AttachmentId attachmentId;
 

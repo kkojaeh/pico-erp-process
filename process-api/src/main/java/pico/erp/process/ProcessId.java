@@ -25,16 +25,23 @@ public class ProcessId implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @Getter(onMethod = @__({@JsonValue}))
-  @Size(min = 2, max = 50)
   @NotNull
-  private String value;
+  private UUID value;
 
   public static ProcessId from(@NonNull String value) {
+    try {
+      return from(UUID.fromString(value));
+    } catch (IllegalArgumentException e) {
+      return from(UUID.nameUUIDFromBytes(value.getBytes()));
+    }
+  }
+
+  public static ProcessId from(@NonNull UUID value) {
     return new ProcessId(value);
   }
 
   public static ProcessId generate() {
-    return from(UUID.randomUUID().toString());
+    return from(UUID.randomUUID());
   }
 
 }

@@ -92,7 +92,7 @@ public class Process implements Serializable {
     this.description = request.getDescription();
     this.itemData = request.getItemData();
     this.manager = request.getManager();
-    this.commentSubjectId = CommentSubjectId.from(this.id.getValue());
+    this.commentSubjectId = CommentSubjectId.from(this.id.getValue().toString());
     this.attachmentId = request.getAttachmentId();
     this.info = this.type.createInfo();
     this.adjustCost = request.getAdjustCost();
