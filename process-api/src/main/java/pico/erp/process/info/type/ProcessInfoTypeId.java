@@ -1,5 +1,6 @@
 package pico.erp.process.info.type;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.io.Serializable;
 import javax.persistence.Embeddable;
@@ -29,6 +30,7 @@ public class ProcessInfoTypeId implements Serializable {
   @NotNull
   private String value;
 
+  @JsonCreator
   public static ProcessInfoTypeId from(@NonNull String value) {
     return new ProcessInfoTypeId(value);
   }

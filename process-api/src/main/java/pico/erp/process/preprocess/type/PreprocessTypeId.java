@@ -1,5 +1,6 @@
 package pico.erp.process.preprocess.type;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import java.io.Serializable;
 import javax.persistence.Embeddable;
@@ -28,6 +29,7 @@ public class PreprocessTypeId implements Serializable {
   @NotNull
   private String value;
 
+  @JsonCreator
   public static PreprocessTypeId from(@NonNull String value) {
     return new PreprocessTypeId(value);
   }
