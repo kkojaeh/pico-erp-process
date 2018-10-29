@@ -15,7 +15,7 @@ import pico.erp.process.type.ProcessTypeRequests;
 import pico.erp.process.type.ProcessTypeService;
 import pico.erp.shared.ApplicationInitializer;
 
-@Transactional
+@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @Configuration
 @Profile({"!development", "!production"})
 public class TestDataInitializer implements ApplicationInitializer {
