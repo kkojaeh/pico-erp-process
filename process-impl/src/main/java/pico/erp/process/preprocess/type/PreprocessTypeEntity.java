@@ -86,9 +86,4 @@ public class PreprocessTypeEntity implements Serializable {
   @Column(length = TypeDefinitions.NAME_LENGTH)
   String infoTypeName;
 
-
-  public PreprocessTypeEntity(PreprocessTypeId id) {
-    this.id = id;
-  }
-
 }

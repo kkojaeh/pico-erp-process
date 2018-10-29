@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
+import pico.erp.process.type.QProcessTypeEntity;
 import pico.erp.shared.Public;
 import pico.erp.shared.jpa.QueryDslJpaSupport;
 
@@ -24,6 +25,8 @@ import pico.erp.shared.jpa.QueryDslJpaSupport;
 public class ProcessQueryJpa implements ProcessQuery {
 
   private final QProcessEntity process = QProcessEntity.processEntity;
+
+  private final QProcessTypeEntity processType = QProcessTypeEntity.processTypeEntity;
 
   @PersistenceContext
   private EntityManager entityManager;
@@ -38,8 +41,8 @@ public class ProcessQueryJpa implements ProcessQuery {
       process.id,
       process.name,
       process.itemId,
-      process.type.id.as("typeId"),
-      process.type.name.as("typeName"),
+      processType.id.as("typeId"),
+      processType.name.as("typeName"),
       process.status,
       process.difficulty,
       process.managerId,
@@ -51,6 +54,8 @@ public class ProcessQueryJpa implements ProcessQuery {
     );
     query.select(select);
     query.from(process);
+    query.leftJoin(processType)
+      .on(process.typeId.eq(processType.id));
 
     val builder = new BooleanBuilder();
 
@@ -66,7 +71,7 @@ public class ProcessQueryJpa implements ProcessQuery {
     }
 
     if (filter.getProcessTypeId() != null) {
-      builder.and(process.type.id.eq(filter.getProcessTypeId()));
+      builder.and(process.typeId.eq(filter.getProcessTypeId()));
     }
 
     query.where(builder);

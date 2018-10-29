@@ -14,7 +14,7 @@ import pico.erp.process.difficulty.grade.ProcessDifficultyGradeEmbeddable;
 import pico.erp.process.difficulty.grade.ProcessDifficultyGradeMapper;
 import pico.erp.process.info.type.ProcessInfoTypeMapper;
 import pico.erp.process.preprocess.type.PreprocessType;
-import pico.erp.process.preprocess.type.PreprocessTypeEntity;
+import pico.erp.process.preprocess.type.PreprocessTypeId;
 import pico.erp.process.preprocess.type.PreprocessTypeMapper;
 
 @Mapper
@@ -39,7 +39,7 @@ public abstract class ProcessTypeMapper {
   @Autowired
   private ProcessTypeEntityRepository processTypeEntityRepository;
 
-  public ProcessType domain(ProcessTypeEntity entity) {
+  public ProcessType jpa(ProcessTypeEntity entity) {
     return ProcessType.builder()
       .id(entity.getId())
       .name(entity.getName())
@@ -55,7 +55,7 @@ public abstract class ProcessTypeMapper {
       )
       .preprocessTypes(
         entity.getPreprocessTypes().stream()
-          .map(preprocessTypeMapper::domain)
+          .map(preprocessTypeMapper::map)
           .collect(Collectors.toList())
       )
       .build();
@@ -69,19 +69,15 @@ public abstract class ProcessTypeMapper {
     @Mapping(target = "lastModifiedBy", ignore = true),
     @Mapping(target = "lastModifiedDate", ignore = true)
   })
-  public abstract ProcessTypeEntity entity(ProcessType processType);
+  public abstract ProcessTypeEntity jpa(ProcessType processType);
 
-  protected PreprocessTypeEntity entity(PreprocessType preprocessType) {
-    return preprocessTypeMapper.entity(preprocessType);
-  }
-
-  protected ProcessDifficultyGradeEmbeddable entity(ProcessDifficultyGrade grade) {
+  protected ProcessDifficultyGradeEmbeddable jpa(ProcessDifficultyGrade grade) {
     return processDifficultyGradeMapper.entity(grade);
   }
 
-  public ProcessTypeEntity entity(ProcessTypeId typeId) {
-    return Optional.ofNullable(typeId)
-      .map(processTypeEntityRepository::findOne)
+  protected PreprocessTypeId map(PreprocessType preprocessType) {
+    return Optional.ofNullable(preprocessType)
+      .map(PreprocessType::getId)
       .orElse(null);
   }
 

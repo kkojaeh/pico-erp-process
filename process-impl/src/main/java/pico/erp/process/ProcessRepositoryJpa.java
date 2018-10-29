@@ -19,7 +19,7 @@ interface ProcessEntityRepository extends
   @Query("SELECT CASE WHEN COUNT(p) > 0 THEN true ELSE false END FROM Process p WHERE p.itemId = :itemId AND p.deleted = false")
   boolean exists(@Param("itemId") ItemId itemId);
 
-  @Query("SELECT p FROM Process p WHERE p.type.id = :processTypeId")
+  @Query("SELECT p FROM Process p WHERE p.typeId = :processTypeId")
   Stream<ProcessEntity> findAllBy(@Param("processTypeId") ProcessTypeId processTypeId);
 
   @Query("SELECT p FROM Process p WHERE p.itemId = :itemId AND p.deleted = false")
@@ -39,9 +39,9 @@ public class ProcessRepositoryJpa implements ProcessRepository {
 
   @Override
   public Process create(Process process) {
-    val entity = mapper.entity(process);
+    val entity = mapper.jpa(process);
     val created = repository.save(entity);
-    return mapper.domain(created);
+    return mapper.jpa(created);
   }
 
   @Override
@@ -62,25 +62,25 @@ public class ProcessRepositoryJpa implements ProcessRepository {
   @Override
   public Stream<Process> findAllBy(ProcessTypeId id) {
     return repository.findAllBy(id)
-      .map(mapper::domain);
+      .map(mapper::jpa);
   }
 
   @Override
   public Optional<Process> findBy(ProcessId id) {
     return Optional.ofNullable(repository.findOne(id))
-      .map(mapper::domain);
+      .map(mapper::jpa);
   }
 
   @Override
   public Optional<Process> findBy(ItemId itemId) {
     return Optional.ofNullable(repository.findBy(itemId))
-      .map(mapper::domain);
+      .map(mapper::jpa);
   }
 
   @Override
   public void update(Process process) {
     ProcessEntity entity = repository.findOne(process.getId());
-    mapper.pass(mapper.entity(process), entity);
+    mapper.pass(mapper.jpa(process), entity);
     repository.save(entity);
   }
 }

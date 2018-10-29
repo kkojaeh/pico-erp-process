@@ -14,9 +14,7 @@ import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Index;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -36,14 +34,14 @@ import pico.erp.comment.subject.CommentSubjectId;
 import pico.erp.item.ItemId;
 import pico.erp.process.cost.ProcessCostEmbeddable;
 import pico.erp.process.difficulty.grade.ProcessDifficultyKind;
-import pico.erp.process.type.ProcessTypeEntity;
+import pico.erp.process.type.ProcessTypeId;
 import pico.erp.shared.TypeDefinitions;
 import pico.erp.shared.data.Auditor;
 import pico.erp.user.UserId;
 
 @Entity(name = "Process")
 @Table(name = "PRS_PROCESS", indexes = {
-  @Index(name = "PRS_PROCESS_ITEM_ID_IDX", columnList = "ITEM_ID")
+  @Index(columnList = "ITEM_ID")
 })
 @Data
 @EqualsAndHashCode(of = "id")
@@ -72,9 +70,10 @@ public class ProcessEntity implements Serializable {
   })
   ItemId itemId;
 
-  @ManyToOne
-  @JoinColumn(name = "TYPE_ID")
-  ProcessTypeEntity type;
+  @AttributeOverrides({
+    @AttributeOverride(name = "value", column = @Column(name = "TYPE_ID", length = TypeDefinitions.ID_LENGTH))
+  })
+  ProcessTypeId typeId;
 
   @AttributeOverrides({
     @AttributeOverride(name = "value", column = @Column(name = "MANAGER_ID", length = TypeDefinitions.ID_LENGTH))

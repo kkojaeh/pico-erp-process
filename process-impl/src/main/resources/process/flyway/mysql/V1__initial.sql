@@ -1,5 +1,5 @@
 create table prs_preprocess (
-	id binary(50) not null,
+	id binary(16) not null,
 	attachment_id binary(16),
 	charge_cost decimal(19,2),
 	comment_subject_id varchar(50),
@@ -16,8 +16,8 @@ create table prs_preprocess (
 	manager_id varchar(50),
 	manager_name varchar(50),
 	name varchar(150),
-	status varchar(20),
 	process_id binary(16),
+	status varchar(20),
 	type_id varchar(50),
 	primary key (id)
 ) engine=InnoDB;
@@ -87,13 +87,13 @@ create table prs_process_type (
 ) engine=InnoDB;
 
 create table prs_process_type_difficulty_grade (
-	process_id varchar(50) not null,
+	process_type_id varchar(50) not null,
 	cost_rate decimal(7,5),
 	description varchar(200),
 	difficulty varchar(20),
 	ordinal integer not null,
 	difficulty_grades_order integer not null,
-	primary key (process_id,difficulty_grades_order)
+	primary key (process_type_id,difficulty_grades_order)
 ) engine=InnoDB;
 
 create table prs_process_type_preprocess_type (
@@ -101,28 +101,18 @@ create table prs_process_type_preprocess_type (
 	preprocess_type_id varchar(50) not null
 ) engine=InnoDB;
 
-create index PRS_PROCESS_ITEM_ID_IDX
+create index IDXctkhfmd190khp0bn16hmknul3
+	on prs_preprocess (process_id);
+
+create index IDXe1vcflsrij5u2mrbpbp9wrayg
 	on prs_process (item_id);
 
-alter table prs_preprocess
-	add constraint FKqqy4m5x7cbnb6eviixn7ykqbi foreign key (process_id)
-	references prs_process (id);
-
-alter table prs_preprocess
-	add constraint FK1brceyb9r6eym0j675evnst5h foreign key (type_id)
-	references prs_preprocess_type (id);
-
-alter table prs_process
-	add constraint FKeyh980m5fuyvxnpv8mixnxocf foreign key (type_id)
-	references prs_process_type (id);
+alter table prs_process_type_preprocess_type
+	add constraint UK21l4x1s5lye9iubmwmteglxvq unique (process_type_id,preprocess_type_id);
 
 alter table prs_process_type_difficulty_grade
-	add constraint FKh8ryg5hgad6rw8juh6j27al9j foreign key (process_id)
+	add constraint FK5tkdbfefall1pwy6sisw5e3ib foreign key (process_type_id)
 	references prs_process_type (id);
-
-alter table prs_process_type_preprocess_type
-	add constraint FKga4877kxhk3rix07n9aah4va4 foreign key (preprocess_type_id)
-	references prs_preprocess_type (id);
 
 alter table prs_process_type_preprocess_type
 	add constraint FKp9nhldiq911cfom3lmmrpe48a foreign key (process_type_id)

@@ -1,7 +1,6 @@
 package pico.erp.process;
 
 import java.util.Optional;
-import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -25,12 +24,10 @@ import pico.erp.process.info.type.ProcessInfoTypeId;
 import pico.erp.process.info.type.ProcessInfoTypeMapper;
 import pico.erp.process.preprocess.type.PreprocessType;
 import pico.erp.process.preprocess.type.PreprocessTypeData;
-import pico.erp.process.preprocess.type.PreprocessTypeEntity;
 import pico.erp.process.preprocess.type.PreprocessTypeId;
 import pico.erp.process.preprocess.type.PreprocessTypeMapper;
 import pico.erp.process.type.ProcessType;
 import pico.erp.process.type.ProcessTypeData;
-import pico.erp.process.type.ProcessTypeEntity;
 import pico.erp.process.type.ProcessTypeExceptions.NotFoundException;
 import pico.erp.process.type.ProcessTypeId;
 import pico.erp.process.type.ProcessTypeMapper;
@@ -96,11 +93,6 @@ public abstract class ProcessMapper {
       .orElse(null);
   }
 
-  @AfterMapping
-  protected void afterMapping(ProcessEntity from, @MappingTarget ProcessEntity to) {
-    to.setType(from.getType());
-  }
-
   protected ItemData map(ItemId itemId) {
     return Optional.ofNullable(itemId)
       .map(itemService::get)
@@ -130,8 +122,8 @@ public abstract class ProcessMapper {
   public abstract ProcessTypeMessages.RemovePreprocessTypeRequest map(
     ProcessTypeRequests.RemovePreprocessTypeRequest request);
 
-  public Process domain(ProcessEntity entity) {
-    ProcessType type = map(entity.getType().getId());
+  public Process jpa(ProcessEntity entity) {
+    ProcessType type = map(entity.getTypeId());
 
     return Process.builder()
       .id(entity.getId())
@@ -160,7 +152,7 @@ public abstract class ProcessMapper {
 
   @Mappings({
     @Mapping(target = "itemId", source = "itemData.id"),
-    @Mapping(target = "type", source = "type.id"),
+    @Mapping(target = "typeId", source = "type.id"),
     @Mapping(target = "managerId", source = "manager.id"),
     @Mapping(target = "managerName", source = "manager.name"),
     @Mapping(target = "createdBy", ignore = true),
@@ -168,7 +160,7 @@ public abstract class ProcessMapper {
     @Mapping(target = "lastModifiedBy", ignore = true),
     @Mapping(target = "lastModifiedDate", ignore = true)
   })
-  public abstract ProcessEntity entity(Process process);
+  public abstract ProcessEntity jpa(Process process);
 
   public abstract ProcessMessages.CompletePlanRequest map(
     ProcessRequests.CompletePlanRequest request);
@@ -178,11 +170,6 @@ public abstract class ProcessMapper {
 
   public abstract ProcessMessages.DeleteRequest map(ProcessRequests.DeleteRequest request);
 
-  protected PreprocessTypeEntity entity(PreprocessTypeId preprocessTypeId) {
-    return preprocessTypeMapper.entity(preprocessTypeId);
-  }
-
-
   @Mappings({
     @Mapping(target = "infoTypeId", source = "infoType.id")
   })
@@ -190,10 +177,6 @@ public abstract class ProcessMapper {
 
 
   public abstract ProcessInfoTypeData map(ProcessInfoType type);
-
-  protected ProcessTypeEntity entity(ProcessTypeId typeId) {
-    return processTypeMapper.entity(typeId);
-  }
 
   public Process map(ProcessId processId) {
     return Optional.ofNullable(processId)
@@ -246,9 +229,6 @@ public abstract class ProcessMapper {
     return processInfoMapper.map(info);
   }
 
-  @Mappings({
-    @Mapping(target = "type", ignore = true)
-  })
   public abstract void pass(ProcessEntity from, @MappingTarget ProcessEntity to);
 
 }

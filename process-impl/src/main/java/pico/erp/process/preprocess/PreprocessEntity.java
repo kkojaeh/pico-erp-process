@@ -13,9 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.JoinColumn;
+import javax.persistence.Index;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -32,14 +31,16 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import pico.erp.attachment.AttachmentId;
 import pico.erp.comment.subject.CommentSubjectId;
-import pico.erp.process.ProcessEntity;
-import pico.erp.process.preprocess.type.PreprocessTypeEntity;
+import pico.erp.process.ProcessId;
+import pico.erp.process.preprocess.type.PreprocessTypeId;
 import pico.erp.shared.TypeDefinitions;
 import pico.erp.shared.data.Auditor;
 import pico.erp.user.UserId;
 
 @Entity(name = "Preprocess")
-@Table(name = "PRS_PREPROCESS")
+@Table(name = "PRS_PREPROCESS", indexes = {
+  @Index(columnList = "PROCESS_ID")
+})
 @Data
 @EqualsAndHashCode(of = "id")
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -55,20 +56,22 @@ public class PreprocessEntity implements Serializable {
 
   @EmbeddedId
   @AttributeOverrides({
-    @AttributeOverride(name = "value", column = @Column(name = "ID", length = TypeDefinitions.ID_LENGTH))
+    @AttributeOverride(name = "value", column = @Column(name = "ID", length = TypeDefinitions.UUID_BINARY_LENGTH))
   })
   PreprocessId id;
 
   @Column(length = TypeDefinitions.NAME_X3_LENGTH)
   String name;
 
-  @ManyToOne
-  @JoinColumn(name = "PROCESS_ID")
-  ProcessEntity process;
+  @AttributeOverrides({
+    @AttributeOverride(name = "value", column = @Column(name = "PROCESS_ID", length = TypeDefinitions.UUID_BINARY_LENGTH))
+  })
+  ProcessId processId;
 
-  @ManyToOne
-  @JoinColumn(name = "TYPE_ID")
-  PreprocessTypeEntity type;
+  @AttributeOverrides({
+    @AttributeOverride(name = "value", column = @Column(name = "TYPE_ID", length = TypeDefinitions.ID_LENGTH))
+  })
+  PreprocessTypeId typeId;
 
   @AttributeOverrides({
     @AttributeOverride(name = "value", column = @Column(name = "MANAGER_ID", length = TypeDefinitions.ID_LENGTH))

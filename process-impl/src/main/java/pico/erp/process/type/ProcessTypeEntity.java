@@ -4,7 +4,6 @@ package pico.erp.process.type;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
-import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -17,11 +16,10 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.OrderColumn;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,7 +36,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import pico.erp.process.cost.ProcessCostRatesEmbeddable;
 import pico.erp.process.difficulty.grade.ProcessDifficultyGradeEmbeddable;
 import pico.erp.process.info.type.ProcessInfoTypeId;
-import pico.erp.process.preprocess.type.PreprocessTypeEntity;
+import pico.erp.process.preprocess.type.PreprocessTypeId;
 import pico.erp.shared.TypeDefinitions;
 import pico.erp.shared.data.Auditor;
 
@@ -102,22 +100,27 @@ public class ProcessTypeEntity implements Serializable {
   @Embedded
   ProcessCostRatesEmbeddable costRates;
 
-  @Builder.Default
   @ElementCollection(fetch = FetchType.LAZY)
   @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-  @CollectionTable(name = "PRS_PROCESS_TYPE_DIFFICULTY_GRADE", joinColumns = @JoinColumn(name = "PROCESS_ID"))
+  @CollectionTable(name = "PRS_PROCESS_TYPE_DIFFICULTY_GRADE", joinColumns = @JoinColumn(name = "PROCESS_TYPE_ID"))
   @OrderColumn
   @OrderBy("ordinal")
-  List<ProcessDifficultyGradeEmbeddable> difficultyGrades = new LinkedList<>();
+  List<ProcessDifficultyGradeEmbeddable> difficultyGrades;
 
-  @ManyToMany
+/*  @ManyToMany
   @JoinTable(name = "PRS_PROCESS_TYPE_PREPROCESS_TYPE",
     joinColumns = @JoinColumn(name = "PROCESS_TYPE_ID"),
     inverseJoinColumns = @JoinColumn(name = "PREPROCESS_TYPE_ID"))
-  private List<PreprocessTypeEntity> preprocessTypes;
+  private List<PreprocessTypeEntity> preprocessTypes;*/
 
-  public ProcessTypeEntity(ProcessTypeId id) {
-    this.id = id;
-  }
+  @ElementCollection(fetch = FetchType.LAZY)
+  @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+  @AttributeOverrides({
+    @AttributeOverride(name = "value", column = @Column(name = "PREPROCESS_TYPE_ID", length = TypeDefinitions.ID_LENGTH, nullable = false))
+  })
+  @CollectionTable(name = "PRS_PROCESS_TYPE_PREPROCESS_TYPE", joinColumns = @JoinColumn(name = "PROCESS_TYPE_ID"), uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"PROCESS_TYPE_ID", "PREPROCESS_TYPE_ID"})
+  })
+  private List<PreprocessTypeId> preprocessTypes;
 
 }

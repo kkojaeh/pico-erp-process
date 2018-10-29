@@ -1,7 +1,6 @@
 package pico.erp.process.preprocess;
 
 import java.util.Optional;
-import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -9,13 +8,11 @@ import org.mapstruct.Mappings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import pico.erp.process.Process;
-import pico.erp.process.ProcessEntity;
 import pico.erp.process.ProcessId;
 import pico.erp.process.ProcessMapper;
 import pico.erp.process.info.ProcessInfo;
 import pico.erp.process.info.ProcessInfoMapper;
 import pico.erp.process.preprocess.type.PreprocessType;
-import pico.erp.process.preprocess.type.PreprocessTypeEntity;
 import pico.erp.process.preprocess.type.PreprocessTypeId;
 import pico.erp.process.preprocess.type.PreprocessTypeMapper;
 import pico.erp.user.UserData;
@@ -42,17 +39,12 @@ public abstract class PreprocessMapper {
   @Autowired
   private UserService userService;
 
-  @AfterMapping
-  protected void afterMapping(PreprocessEntity from, @MappingTarget PreprocessEntity to) {
-    to.setType(from.getType());
-  }
-
-  public Preprocess domain(PreprocessEntity entity) {
-    PreprocessType type = map(entity.getType().getId());
+  public Preprocess jpa(PreprocessEntity entity) {
+    PreprocessType type = map(entity.getTypeId());
     return Preprocess.builder()
       .id(entity.getId())
       .name(entity.getName())
-      .process(processMapper.domain(entity.getProcess()))
+      .process(map(entity.getProcessId()))
       .type(type)
       .status(entity.getStatus())
       .description(entity.getDescription())
@@ -67,8 +59,8 @@ public abstract class PreprocessMapper {
   }
 
   @Mappings({
-    @Mapping(target = "process", source = "process"),
-    @Mapping(target = "type", source = "type.id"),
+    @Mapping(target = "processId", source = "process.id"),
+    @Mapping(target = "typeId", source = "type.id"),
     @Mapping(target = "managerId", source = "manager.id"),
     @Mapping(target = "managerName", source = "manager.name"),
     @Mapping(target = "createdBy", ignore = true),
@@ -76,15 +68,7 @@ public abstract class PreprocessMapper {
     @Mapping(target = "lastModifiedBy", ignore = true),
     @Mapping(target = "lastModifiedDate", ignore = true)
   })
-  public abstract PreprocessEntity entity(Preprocess preprocess);
-
-  protected ProcessEntity entity(Process process) {
-    return processMapper.entity(process);
-  }
-
-  protected PreprocessTypeEntity entity(PreprocessTypeId preprocessTypeId) {
-    return preprocessTypeMapper.entity(preprocessTypeId);
-  }
+  public abstract PreprocessEntity jpa(Preprocess preprocess);
 
   @Mappings({
     @Mapping(target = "process", source = "processId"),
@@ -126,7 +110,6 @@ public abstract class PreprocessMapper {
   }
 
   @Mappings({
-    @Mapping(target = "type", ignore = true)
   })
   public abstract void pass(PreprocessEntity from, @MappingTarget PreprocessEntity to);
 

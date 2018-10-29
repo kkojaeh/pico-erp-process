@@ -15,7 +15,7 @@ import pico.erp.process.ProcessId;
 interface PreprocessEntityRepository extends
   CrudRepository<PreprocessEntity, PreprocessId> {
 
-  @Query("SELECT pp FROM Preprocess pp WHERE pp.process.id = :processId")
+  @Query("SELECT pp FROM Preprocess pp WHERE pp.processId = :processId")
   Stream<PreprocessEntity> findAllBy(@Param("processId") ProcessId processId);
 }
 
@@ -31,9 +31,9 @@ public class PreprocessRepositoryJpa implements PreprocessRepository {
 
   @Override
   public Preprocess create(Preprocess preprocess) {
-    val entity = mapper.entity(preprocess);
+    val entity = mapper.jpa(preprocess);
     val created = repository.save(entity);
-    return mapper.domain(created);
+    return mapper.jpa(created);
   }
 
   @Override
@@ -49,19 +49,19 @@ public class PreprocessRepositoryJpa implements PreprocessRepository {
   @Override
   public Stream<Preprocess> findAllBy(ProcessId processId) {
     return repository.findAllBy(processId)
-      .map(mapper::domain);
+      .map(mapper::jpa);
   }
 
   @Override
   public Optional<Preprocess> findBy(PreprocessId id) {
     return Optional.ofNullable(repository.findOne(id))
-      .map(mapper::domain);
+      .map(mapper::jpa);
   }
 
   @Override
   public void update(Preprocess preprocess) {
     val entity = repository.findOne(preprocess.getId());
-    mapper.pass(mapper.entity(preprocess), entity);
+    mapper.pass(mapper.jpa(preprocess), entity);
     repository.save(entity);
   }
 }

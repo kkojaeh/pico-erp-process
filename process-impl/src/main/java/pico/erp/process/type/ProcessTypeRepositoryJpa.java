@@ -27,9 +27,9 @@ public class ProcessTypeRepositoryJpa implements ProcessTypeRepository {
 
   @Override
   public ProcessType create(ProcessType processType) {
-    val entity = mapper.entity(processType);
+    val entity = mapper.jpa(processType);
     val created = repository.save(entity);
-    return mapper.domain(created);
+    return mapper.jpa(created);
   }
 
   @Override
@@ -45,20 +45,20 @@ public class ProcessTypeRepositoryJpa implements ProcessTypeRepository {
   @Override
   public Optional<ProcessType> findBy(ProcessTypeId id) {
     return Optional.ofNullable(repository.findOne(id))
-      .map(mapper::domain);
+      .map(mapper::jpa);
   }
 
   @Override
   public Stream<ProcessType> getAll() {
     return StreamSupport.stream(
       repository.findAll().spliterator(), false
-    ).map(mapper::domain);
+    ).map(mapper::jpa);
   }
 
   @Override
   public void update(ProcessType processType) {
     val entity = repository.findOne(processType.getId());
-    mapper.pass(mapper.entity(processType), entity);
+    mapper.pass(mapper.jpa(processType), entity);
     repository.save(entity);
   }
 }
