@@ -26,6 +26,7 @@ class ProcessTypeQuerySpec extends Specification {
     processTypeService.create(
       new ProcessTypeRequests.CreateRequest(id: ProcessTypeId.from("P1"), name: "인쇄 - UV", infoTypeId: infoType.id,
         baseUnitCost: 100,
+        lossRate: 0.01,
         difficultyGrades: [
           new ProcessDifficultyGradeData(difficulty: ProcessDifficultyKind.EASY, costRate: 0.9),
           new ProcessDifficultyGradeData(difficulty: ProcessDifficultyKind.NORMAL, costRate: 1),
@@ -38,6 +39,7 @@ class ProcessTypeQuerySpec extends Specification {
     processTypeService.create(
       new ProcessTypeRequests.CreateRequest(id: ProcessTypeId.from("P2"), name: "인쇄 - Offset", infoTypeId: infoType.id,
         baseUnitCost: 100,
+        lossRate: 0.01,
         difficultyGrades: [
           new ProcessDifficultyGradeData(difficulty: ProcessDifficultyKind.EASY, costRate: 0.9),
           new ProcessDifficultyGradeData(difficulty: ProcessDifficultyKind.NORMAL, costRate: 1),

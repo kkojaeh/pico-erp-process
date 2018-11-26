@@ -63,6 +63,8 @@ public class ProcessType implements Serializable {
   @Transient
   ProcessInfoType infoType;
 
+  BigDecimal lossRate;
+
   ProcessCostRates costRates;
 
   List<ProcessDifficultyGrade> difficultyGrades;
@@ -77,6 +79,7 @@ public class ProcessType implements Serializable {
     this.id = request.getId();
     this.name = request.getName();
     this.baseUnitCost = request.getBaseUnitCost();
+    this.lossRate = request.getLossRate();
     this.costRates = request.getCostRates();
     this.infoType = request.getInfoType();
     this.difficultyGrades = request.getDifficultyGrades();
@@ -90,6 +93,7 @@ public class ProcessType implements Serializable {
     val events = new LinkedList<Event>();
     this.name = request.getName();
     this.baseUnitCost = request.getBaseUnitCost();
+    this.lossRate = request.getLossRate();
     this.costRates = request.getCostRates();
     this.infoType = request.getInfoType();
     this.difficultyGrades = request.getDifficultyGrades();

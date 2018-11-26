@@ -37,6 +37,10 @@ public interface ProcessTypeRequests {
     @NotNull
     BigDecimal baseUnitCost;
 
+    @NotNull
+    @Min(0)
+    BigDecimal lossRate;
+
     @Valid
     @NotNull
     ProcessInfoTypeId infoTypeId;
@@ -69,6 +73,10 @@ public interface ProcessTypeRequests {
     @NotNull
     @Min(0)
     BigDecimal baseUnitCost;
+
+    @NotNull
+    @Min(0)
+    BigDecimal lossRate;
 
     @Valid
     @NotNull

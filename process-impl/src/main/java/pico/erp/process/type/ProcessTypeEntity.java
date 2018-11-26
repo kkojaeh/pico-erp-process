@@ -97,6 +97,10 @@ public class ProcessTypeEntity implements Serializable {
   @Column(length = TypeDefinitions.NAME_LENGTH)
   String infoTypeName;
 
+
+  @Column(name = "LOSS_RATE", precision = 7, scale = 5)
+  BigDecimal lossRate;
+
   @Embedded
   ProcessCostRatesEmbeddable costRates;
 

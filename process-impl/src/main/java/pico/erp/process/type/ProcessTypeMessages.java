@@ -33,6 +33,10 @@ public interface ProcessTypeMessages {
     @Min(0)
     BigDecimal baseUnitCost;
 
+    @NotNull
+    @Min(0)
+    BigDecimal lossRate;
+
     @Valid
     @NotNull
     ProcessInfoType infoType;
@@ -53,7 +57,13 @@ public interface ProcessTypeMessages {
     @NotNull
     String name;
 
+    @NotNull
+    @Min(0)
     BigDecimal baseUnitCost;
+
+    @NotNull
+    @Min(0)
+    BigDecimal lossRate;
 
     @Valid
     @NotNull

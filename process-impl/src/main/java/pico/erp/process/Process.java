@@ -61,6 +61,8 @@ public class Process implements Serializable {
 
   UserData manager;
 
+  BigDecimal lossRate;
+
   CommentSubjectId commentSubjectId;
 
   AttachmentId attachmentId;
@@ -95,6 +97,7 @@ public class Process implements Serializable {
     this.commentSubjectId = CommentSubjectId.from(this.id.getValue().toString());
     this.attachmentId = request.getAttachmentId();
     this.info = this.type.createInfo();
+    this.lossRate = request.getLossRate();
     this.adjustCost = request.getAdjustCost();
     this.adjustCostReason = request.getAdjustCostReason();
     this.estimatedCost = this.type.createEstimatedCost(this);
@@ -114,6 +117,7 @@ public class Process implements Serializable {
     this.description = request.getDescription();
     this.manager = request.getManager();
     this.attachmentId = request.getAttachmentId();
+    this.lossRate = request.getLossRate();
     this.adjustCost = request.getAdjustCost();
     this.adjustCostReason = request.getAdjustCostReason();
 

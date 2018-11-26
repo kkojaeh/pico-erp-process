@@ -37,6 +37,8 @@ public class ProcessData implements Serializable {
 
   UserId managerId;
 
+  BigDecimal lossRate;
+
   CommentSubjectId commentSubjectId;
 
   ProcessCostData estimatedCost;

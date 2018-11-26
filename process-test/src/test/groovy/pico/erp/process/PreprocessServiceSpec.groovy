@@ -44,6 +44,7 @@ class PreprocessServiceSpec extends Specification {
         itemId: ItemId.from("item-1"),
         name: "품목 명과 공정명 합침",
         typeId: ProcessTypeId.from("printing-offset"),
+        lossRate: 0.01,
         adjustCost: 0,
         difficulty: ProcessDifficultyKind.NORMAL,
         description: "좋은 보통 작업"

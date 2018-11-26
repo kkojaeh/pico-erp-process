@@ -3,6 +3,7 @@ package pico.erp.process;
 import java.math.BigDecimal;
 import java.util.Collection;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Data;
@@ -42,6 +43,10 @@ public interface ProcessMessages {
 
     UserData manager;
 
+    @NotNull
+    @Min(0)
+    BigDecimal lossRate;
+
     @Valid
     AttachmentId attachmentId;
 
@@ -70,6 +75,10 @@ public interface ProcessMessages {
     String description;
 
     UserData manager;
+
+    @NotNull
+    @Min(0)
+    BigDecimal lossRate;
 
     @Valid
     AttachmentId attachmentId;

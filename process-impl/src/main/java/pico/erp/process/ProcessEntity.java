@@ -80,6 +80,9 @@ public class ProcessEntity implements Serializable {
   })
   UserId managerId;
 
+  @Column(name = "LOSS_RATE", precision = 7, scale = 5)
+  BigDecimal lossRate;
+
   @Column(length = TypeDefinitions.NAME_LENGTH)
   String managerName;
 

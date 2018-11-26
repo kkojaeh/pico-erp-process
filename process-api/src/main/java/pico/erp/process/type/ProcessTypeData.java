@@ -27,6 +27,8 @@ public class ProcessTypeData implements Serializable {
 
   BigDecimal baseUnitCost;
 
+  BigDecimal lossRate;
+
   ProcessCostRatesData costRates;
 
   List<ProcessDifficultyGradeData> difficultyGrades;
