@@ -42,11 +42,11 @@ import pico.erp.user.UserService;
 @Mapper
 public abstract class ProcessMapper {
 
-
+  @Lazy
   @Autowired
   private ProcessTypeRepository processTypeRepository;
 
-
+  @Lazy
   @Autowired
   private ProcessRepository processRepository;
 
