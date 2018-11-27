@@ -77,6 +77,7 @@ class ProcessTypeServiceSpec extends Specification {
     then:
     process.id.value == "P1"
     process.name == "인쇄 - UV"
+    process.lossRate == 0.01
   }
 
   def "아이디로 존재하지 않는 공정 유형를 조회"() {

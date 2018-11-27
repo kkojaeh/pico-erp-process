@@ -43,6 +43,7 @@ public abstract class ProcessTypeMapper {
     return ProcessType.builder()
       .id(entity.getId())
       .name(entity.getName())
+      .lossRate(entity.getLossRate())
       .baseUnitCost(entity.getBaseUnitCost())
       .infoType(processInfoTypeMapper.map(entity.getInfoTypeId()))
       .difficultyGrades(

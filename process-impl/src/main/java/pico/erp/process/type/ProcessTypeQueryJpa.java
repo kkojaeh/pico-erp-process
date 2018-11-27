@@ -60,6 +60,7 @@ public class ProcessTypeQueryJpa implements ProcessTypeQuery {
       processType.id,
       processType.name,
       processType.baseUnitCost,
+      processType.lossRate,
       processType.createdBy,
       processType.createdDate,
       processType.lastModifiedBy,

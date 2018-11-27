@@ -142,6 +142,7 @@ public abstract class ProcessMapper {
       .deletedDate(entity.getDeletedDate())
       .adjustCost(entity.getAdjustCost())
       .adjustCostReason(entity.getAdjustCostReason())
+      .lossRate(entity.getLossRate())
       .build();
   }
 

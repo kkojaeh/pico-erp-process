@@ -21,6 +21,8 @@ public class ProcessTypeView {
 
   BigDecimal baseUnitCost;
 
+  BigDecimal lossRate;
+
   ProcessInfoTypeId infoTypeId;
 
   String infoTypeName;

@@ -47,6 +47,7 @@ public class ProcessQueryJpa implements ProcessQuery {
       process.difficulty,
       process.managerId,
       process.managerName,
+      process.lossRate,
       process.createdBy,
       process.createdDate,
       process.lastModifiedBy,

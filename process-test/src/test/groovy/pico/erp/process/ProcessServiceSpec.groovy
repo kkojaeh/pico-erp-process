@@ -100,6 +100,7 @@ class ProcessServiceSpec extends Specification {
     process.estimatedCost.indirectLabor == 10
     process.estimatedCost.indirectMaterial == 25
     process.estimatedCost.indirectExpenses == 25
+    process.lossRate == 0.01
     println process
   }
 

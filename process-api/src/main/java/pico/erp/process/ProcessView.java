@@ -1,5 +1,6 @@
 package pico.erp.process;
 
+import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,6 +35,8 @@ public class ProcessView {
   UserId managerId;
 
   String managerName;
+
+  BigDecimal lossRate;
 
   Auditor createdBy;
 
