@@ -2,6 +2,10 @@ package pico.erp.process.preprocess;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -10,6 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import pico.erp.audit.AuditService;
 import pico.erp.process.ProcessId;
+import pico.erp.process.ProcessService;
+import pico.erp.process.type.ProcessTypeService;
 import pico.erp.shared.Public;
 import pico.erp.shared.event.EventPublisher;
 
@@ -32,6 +38,15 @@ public class PreprocessServiceLogic implements PreprocessService {
   @Lazy
   @Autowired
   private AuditService auditService;
+
+  @Lazy
+  @Autowired
+  private ProcessService processService;
+
+  @Lazy
+  @Autowired
+  private ProcessTypeService processTypeService;
+
 
   @Override
   public PreprocessData create(PreprocessRequests.CreateRequest request) {
@@ -83,6 +98,32 @@ public class PreprocessServiceLogic implements PreprocessService {
     preprocessRepository.update(preprocessType);
     auditService.commit(preprocessType);
     eventPublisher.publishEvents(response.getEvents());
+  }
+
+  public void generate(GenerateRequest request) {
+    val process = processService.get(request.getProcessId());
+    val processType = processTypeService.get(process.getTypeId());
+
+    processType.getPreprocessTypes().forEach(preprocessType -> {
+      create(
+        PreprocessRequests.CreateRequest.builder()
+          .id(PreprocessId.generate())
+          .processId(process.getId())
+          .typeId(preprocessType.getId())
+          .chargeCost(preprocessType.getBaseCost())
+          .build()
+      );
+    });
+  }
+
+  @Getter
+  @Builder
+  public static class GenerateRequest {
+
+    @Valid
+    @NotNull
+    ProcessId processId;
+
   }
 
 }

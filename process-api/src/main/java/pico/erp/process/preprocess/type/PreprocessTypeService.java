@@ -1,18 +1,14 @@
 package pico.erp.process.preprocess.type;
 
-import javax.validation.Valid;
+import java.util.List;
 import javax.validation.constraints.NotNull;
 
 public interface PreprocessTypeService {
 
-  PreprocessTypeData create(@Valid PreprocessTypeRequests.CreateRequest request);
-
-  void delete(@Valid PreprocessTypeRequests.DeleteRequest request);
+  PreprocessTypeData get(@NotNull PreprocessTypeId id);
 
   boolean exists(@NotNull PreprocessTypeId id);
 
-  PreprocessTypeData get(@NotNull PreprocessTypeId id);
-
-  void update(@Valid PreprocessTypeRequests.UpdateRequest request);
+  List<PreprocessTypeData> getAll();
 
 }

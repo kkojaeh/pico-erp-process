@@ -1,6 +1,7 @@
 package pico.erp.process;
 
 import java.util.Optional;
+import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -16,8 +17,7 @@ import pico.erp.process.cost.ProcessCostRatesData;
 import pico.erp.process.difficulty.grade.ProcessDifficultyGrade;
 import pico.erp.process.difficulty.grade.ProcessDifficultyGradeData;
 import pico.erp.process.difficulty.grade.ProcessDifficultyGradeMapper;
-import pico.erp.process.info.ProcessInfo;
-import pico.erp.process.info.ProcessInfoMapper;
+import pico.erp.process.info.ProcessInfoLifecycler;
 import pico.erp.process.info.type.ProcessInfoType;
 import pico.erp.process.info.type.ProcessInfoTypeData;
 import pico.erp.process.info.type.ProcessInfoTypeId;
@@ -63,7 +63,7 @@ public abstract class ProcessMapper {
 
   @Lazy
   @Autowired
-  protected ProcessInfoMapper processInfoMapper;
+  protected ProcessInfoLifecycler processInfoLifecycler;
 
   @Lazy
   @Autowired
@@ -106,7 +106,6 @@ public abstract class ProcessMapper {
   }
 
   @Mappings({
-    @Mapping(target = "infoType", source = "infoTypeId")
   })
   public abstract ProcessTypeMessages.CreateRequest map(ProcessTypeRequests.CreateRequest request);
 
@@ -122,40 +121,23 @@ public abstract class ProcessMapper {
   public abstract ProcessTypeMessages.RemovePreprocessTypeRequest map(
     ProcessTypeRequests.RemovePreprocessTypeRequest request);
 
-  public Process jpa(ProcessEntity entity) {
-    ProcessType type = map(entity.getTypeId());
-
-    return Process.builder()
-      .id(entity.getId())
-      .name(entity.getName())
-      .itemData(map(entity.getItemId()))
-      .type(type)
-      .status(entity.getStatus())
-      .difficulty(entity.getDifficulty())
-      .description(entity.getDescription())
-      .manager(map(entity.getManagerId()))
-      .commentSubjectId(entity.getCommentSubjectId())
-      .info(processInfoMapper.map(entity.getInfo(), type.getInfoType().getType()))
-      .estimatedCost(processCostMapper.domain(entity.getEstimatedCost()))
-      .attachmentId(entity.getAttachmentId())
-      .deleted(entity.isDeleted())
-      .deletedDate(entity.getDeletedDate())
-      .adjustCost(entity.getAdjustCost())
-      .adjustCostReason(entity.getAdjustCostReason())
-      .lossRate(entity.getLossRate())
-      .build();
+  @AfterMapping
+  protected void afterMapping(Process domain, @MappingTarget ProcessEntity entity) {
+    entity.setInfo(
+      processInfoLifecycler.stringify(domain.getType().getInfoTypeId(), domain.getInfo())
+    );
   }
 
   @Mappings({
-    @Mapping(target = "infoType", source = "infoTypeId")
   })
   public abstract ProcessTypeMessages.UpdateRequest map(ProcessTypeRequests.UpdateRequest request);
 
   @Mappings({
-    @Mapping(target = "itemId", source = "itemData.id"),
+    @Mapping(target = "itemId", source = "item.id"),
     @Mapping(target = "typeId", source = "type.id"),
     @Mapping(target = "managerId", source = "manager.id"),
     @Mapping(target = "managerName", source = "manager.name"),
+    @Mapping(target = "info", ignore = true),
     @Mapping(target = "createdBy", ignore = true),
     @Mapping(target = "createdDate", ignore = true),
     @Mapping(target = "lastModifiedBy", ignore = true),
@@ -172,7 +154,6 @@ public abstract class ProcessMapper {
   public abstract ProcessMessages.DeleteRequest map(ProcessRequests.DeleteRequest request);
 
   @Mappings({
-    @Mapping(target = "infoTypeId", source = "infoType.id")
   })
   public abstract ProcessTypeData map(ProcessType processType);
 
@@ -186,21 +167,39 @@ public abstract class ProcessMapper {
       .orElse(null);
   }
 
-  @Mappings({
-    @Mapping(target = "itemData", source = "itemId"),
-    @Mapping(target = "type", source = "typeId"),
-    @Mapping(target = "manager", source = "managerId")
-  })
-  public abstract ProcessMessages.CreateRequest map(ProcessRequests.CreateRequest request);
+  public Process jpa(ProcessEntity entity) {
+    ProcessType type = map(entity.getTypeId());
+
+    return Process.builder()
+      .id(entity.getId())
+      .name(entity.getName())
+      .item(map(entity.getItemId()))
+      .type(type)
+      .status(entity.getStatus())
+      .difficulty(entity.getDifficulty())
+      .description(entity.getDescription())
+      .manager(map(entity.getManagerId()))
+      .commentSubjectId(entity.getCommentSubjectId())
+      .info(processInfoLifecycler.parse(type.getInfoTypeId(), entity.getInfo()))
+      .estimatedCost(processCostMapper.domain(entity.getEstimatedCost()))
+      .attachmentId(entity.getAttachmentId())
+      .deleted(entity.isDeleted())
+      .deletedDate(entity.getDeletedDate())
+      .adjustCost(entity.getAdjustCost())
+      .adjustCostReason(entity.getAdjustCostReason())
+      .lossRate(entity.getLossRate())
+      .build();
+  }
 
   @Mappings({
     @Mapping(target = "type", source = "typeId"),
-    @Mapping(target = "manager", source = "managerId")
+    @Mapping(target = "manager", source = "managerId"),
+    @Mapping(target = "processInfoLifecycler", expression = "java(processInfoLifecycler)")
   })
   public abstract ProcessMessages.UpdateRequest map(ProcessRequests.UpdateRequest request);
 
   @Mappings({
-    @Mapping(target = "itemId", source = "itemData.id"),
+    @Mapping(target = "itemId", source = "item.id"),
     @Mapping(target = "typeId", source = "type.id"),
     @Mapping(target = "managerId", source = "manager.id")
   })
@@ -226,9 +225,13 @@ public abstract class ProcessMapper {
     return processInfoTypeMapper.map(infoTypeId);
   }
 
-  protected String map(ProcessInfo info) {
-    return processInfoMapper.map(info);
-  }
+  @Mappings({
+    @Mapping(target = "item", source = "itemId"),
+    @Mapping(target = "type", source = "typeId"),
+    @Mapping(target = "manager", source = "managerId"),
+    @Mapping(target = "processInfoLifecycler", expression = "java(processInfoLifecycler)")
+  })
+  public abstract ProcessMessages.CreateRequest map(ProcessRequests.CreateRequest request);
 
   public abstract void pass(ProcessEntity from, @MappingTarget ProcessEntity to);
 

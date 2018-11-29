@@ -32,9 +32,6 @@ public interface ProcessRequests {
     @NotNull
     ItemId itemId;
 
-    @Size(min = 3, max = TypeDefinitions.NAME_X2_LENGTH)
-    @NotNull
-    String name;
 
     ProcessDifficultyKind difficulty;
 
@@ -71,10 +68,6 @@ public interface ProcessRequests {
     @Valid
     @NotNull
     ProcessId id;
-
-    @Size(min = 3, max = TypeDefinitions.NAME_X2_LENGTH)
-    @NotNull
-    String name;
 
     ProcessDifficultyKind difficulty;
 

@@ -11,6 +11,7 @@ import lombok.Value;
 import pico.erp.attachment.AttachmentId;
 import pico.erp.item.ItemData;
 import pico.erp.process.difficulty.grade.ProcessDifficultyKind;
+import pico.erp.process.info.ProcessInfoLifecycler;
 import pico.erp.process.type.ProcessType;
 import pico.erp.shared.TypeDefinitions;
 import pico.erp.shared.event.Event;
@@ -26,11 +27,7 @@ public interface ProcessMessages {
     ProcessId id;
 
     @NotNull
-    ItemData itemData;
-
-    @Size(min = 3, max = TypeDefinitions.NAME_X2_LENGTH)
-    @NotNull
-    String name;
+    ItemData item;
 
     @NotNull
     ProcessType type;
@@ -55,16 +52,15 @@ public interface ProcessMessages {
 
     @Size(max = TypeDefinitions.DESCRIPTION_LENGTH)
     String adjustCostReason;
+
+    @NotNull
+    ProcessInfoLifecycler processInfoLifecycler;
 
   }
 
   @Data
   class UpdateRequest {
 
-    @Size(min = 3, max = TypeDefinitions.NAME_X2_LENGTH)
-    @NotNull
-    String name;
-
     @NotNull
     ProcessType type;
 
@@ -88,6 +84,9 @@ public interface ProcessMessages {
 
     @Size(max = TypeDefinitions.DESCRIPTION_LENGTH)
     String adjustCostReason;
+
+    @NotNull
+    ProcessInfoLifecycler processInfoLifecycler;
 
   }
 
@@ -141,15 +140,4 @@ public interface ProcessMessages {
 
   }
 
-  @Data
-  class RenameRequest {
-
-  }
-
-  @Value
-  class RenameResponse {
-
-    Collection<Event> events;
-
-  }
 }

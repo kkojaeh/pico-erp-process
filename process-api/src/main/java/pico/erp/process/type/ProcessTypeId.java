@@ -25,7 +25,7 @@ public class ProcessTypeId implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @Getter(onMethod = @__({@JsonValue}))
-  @Size(min = 2, max = 50)
+  @Size(min = 1, max = 5)
   @NotNull
   private String value;
 

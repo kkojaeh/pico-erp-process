@@ -11,4 +11,6 @@ public interface ProcessInfoTypeRepository {
 
   Optional<ProcessInfoType> findBy(ProcessInfoTypeId id);
 
+  boolean exists(ProcessInfoTypeId id);
+
 }

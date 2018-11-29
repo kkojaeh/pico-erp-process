@@ -11,7 +11,7 @@ import lombok.Data;
 import lombok.Value;
 import pico.erp.process.cost.ProcessCostRates;
 import pico.erp.process.difficulty.grade.ProcessDifficultyGrade;
-import pico.erp.process.info.type.ProcessInfoType;
+import pico.erp.process.info.type.ProcessInfoTypeId;
 import pico.erp.process.preprocess.type.PreprocessType;
 import pico.erp.shared.TypeDefinitions;
 import pico.erp.shared.event.Event;
@@ -39,7 +39,7 @@ public interface ProcessTypeMessages {
 
     @Valid
     @NotNull
-    ProcessInfoType infoType;
+    ProcessInfoTypeId infoTypeId;
 
     @Valid
     ProcessCostRates costRates;
@@ -67,7 +67,7 @@ public interface ProcessTypeMessages {
 
     @Valid
     @NotNull
-    ProcessInfoType infoType;
+    ProcessInfoTypeId infoTypeId;
 
     @Valid
     ProcessCostRates costRates;

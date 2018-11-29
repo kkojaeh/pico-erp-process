@@ -8,4 +8,6 @@ public interface ProcessInfoTypeService {
 
   List<ProcessInfoTypeData> getAll();
 
+  boolean exists(ProcessInfoTypeId id);
+
 }

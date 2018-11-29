@@ -30,10 +30,6 @@ public interface PreprocessRequests {
     @NotNull
     ProcessId processId;
 
-    @Size(min = 3, max = TypeDefinitions.NAME_X3_LENGTH)
-    @NotNull
-    String name;
-
     @Valid
     @NotNull
     PreprocessTypeId typeId;
@@ -59,10 +55,6 @@ public interface PreprocessRequests {
     @Valid
     @NotNull
     PreprocessId id;
-
-    @Size(min = 3, max = TypeDefinitions.NAME_X2_LENGTH)
-    @NotNull
-    String name;
 
     @Size(max = TypeDefinitions.CLOB_LENGTH)
     String description;

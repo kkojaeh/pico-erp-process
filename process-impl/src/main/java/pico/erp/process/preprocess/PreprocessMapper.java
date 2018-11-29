@@ -1,6 +1,8 @@
 package pico.erp.process.preprocess;
 
 import java.util.Optional;
+import lombok.val;
+import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -10,8 +12,10 @@ import org.springframework.context.annotation.Lazy;
 import pico.erp.process.Process;
 import pico.erp.process.ProcessId;
 import pico.erp.process.ProcessMapper;
-import pico.erp.process.info.ProcessInfo;
-import pico.erp.process.info.ProcessInfoMapper;
+import pico.erp.process.info.ProcessInfoLifecycler;
+import pico.erp.process.info.type.ProcessInfoType;
+import pico.erp.process.info.type.ProcessInfoTypeId;
+import pico.erp.process.info.type.ProcessInfoTypeMapper;
 import pico.erp.process.preprocess.type.PreprocessType;
 import pico.erp.process.preprocess.type.PreprocessTypeId;
 import pico.erp.process.preprocess.type.PreprocessTypeMapper;
@@ -28,19 +32,42 @@ public abstract class PreprocessMapper {
   protected ProcessMapper processMapper;
 
   @Lazy
+  protected ProcessInfoTypeMapper processInfoTypeMapper;
+
+  @Lazy
   @Autowired
   protected PreprocessTypeMapper preprocessTypeMapper;
 
   @Lazy
   @Autowired
-  protected ProcessInfoMapper processInfoMapper;
+  protected ProcessInfoLifecycler processInfoLifecycler;
 
   @Lazy
   @Autowired
   private UserService userService;
 
+  @AfterMapping
+  protected void afterMapping(Preprocess domain, @MappingTarget PreprocessEntity entity) {
+    entity.setInfo(
+      processInfoLifecycler.stringify(domain.getType().getInfoTypeId(), domain.getInfo())
+    );
+  }
+
+  @Mappings({
+    @Mapping(target = "processId", source = "process.id"),
+    @Mapping(target = "typeId", source = "type.id"),
+    @Mapping(target = "managerId", source = "manager.id"),
+    @Mapping(target = "managerName", source = "manager.name"),
+    @Mapping(target = "info", ignore = true),
+    @Mapping(target = "createdBy", ignore = true),
+    @Mapping(target = "createdDate", ignore = true),
+    @Mapping(target = "lastModifiedBy", ignore = true),
+    @Mapping(target = "lastModifiedDate", ignore = true)
+  })
+  public abstract PreprocessEntity jpa(Preprocess preprocess);
+
   public Preprocess jpa(PreprocessEntity entity) {
-    PreprocessType type = map(entity.getTypeId());
+    val type = map(entity.getTypeId());
     return Preprocess.builder()
       .id(entity.getId())
       .name(entity.getName())
@@ -51,7 +78,7 @@ public abstract class PreprocessMapper {
       .manager(map(entity.getManagerId()))
       .commentSubjectId(entity.getCommentSubjectId())
       .chargeCost(entity.getChargeCost())
-      .info(processInfoMapper.map(entity.getInfo(), type.getInfoType().getType()))
+      .info(processInfoLifecycler.parse(type.getInfoTypeId(), entity.getInfo()))
       .attachmentId(entity.getAttachmentId())
       .deleted(entity.isDeleted())
       .deletedDate(entity.getDeletedDate())
@@ -59,26 +86,8 @@ public abstract class PreprocessMapper {
   }
 
   @Mappings({
-    @Mapping(target = "processId", source = "process.id"),
-    @Mapping(target = "typeId", source = "type.id"),
-    @Mapping(target = "managerId", source = "manager.id"),
-    @Mapping(target = "managerName", source = "manager.name"),
-    @Mapping(target = "createdBy", ignore = true),
-    @Mapping(target = "createdDate", ignore = true),
-    @Mapping(target = "lastModifiedBy", ignore = true),
-    @Mapping(target = "lastModifiedDate", ignore = true)
-  })
-  public abstract PreprocessEntity jpa(Preprocess preprocess);
-
-  @Mappings({
-    @Mapping(target = "process", source = "processId"),
-    @Mapping(target = "type", source = "typeId"),
-    @Mapping(target = "manager", source = "managerId")
-  })
-  public abstract PreprocessMessages.CreateRequest map(PreprocessRequests.CreateRequest request);
-
-  @Mappings({
-    @Mapping(target = "manager", source = "managerId")
+    @Mapping(target = "manager", source = "managerId"),
+    @Mapping(target = "processInfoLifecycler", expression = "java(processInfoLifecycler)")
   })
   public abstract PreprocessMessages.UpdateRequest map(PreprocessRequests.UpdateRequest request);
 
@@ -105,9 +114,18 @@ public abstract class PreprocessMapper {
     return preprocessTypeMapper.map(preprocessTypeId);
   }
 
-  protected String map(ProcessInfo info) {
-    return processInfoMapper.map(info);
+  @Mappings({
+    @Mapping(target = "process", source = "processId"),
+    @Mapping(target = "type", source = "typeId"),
+    @Mapping(target = "manager", source = "managerId"),
+    @Mapping(target = "processInfoLifecycler", expression = "java(processInfoLifecycler)")
+  })
+  public abstract PreprocessMessages.CreateRequest map(PreprocessRequests.CreateRequest request);
+
+  protected ProcessInfoType map(ProcessInfoTypeId preprocessTypeId) {
+    return processInfoTypeMapper.map(preprocessTypeId);
   }
+
 
   @Mappings({
   })

@@ -1,9 +1,9 @@
 data:
   process-types:
-  - id: printing-offset
+  - id: PO
     name: 인쇄(옵셋)
     base-unit-cost: 100
-    info-type-id: pico.erp.config.process.info.PrintingProcessInfo
+    info-type-id: printing
     loss-rate: 0.01
     cost-rates:
       direct-labor: 0.4
@@ -23,10 +23,10 @@ data:
     - difficulty: VERY_HARD
       description: 이러 저러한 상황에 특이 사항이라 매우 어려움
       cost-rate: 1.2
-  - id: printing-uv
+  - id: PU
     name: 인쇄(UV)
     base-unit-cost: 100
-    info-type-id: pico.erp.config.process.info.PrintingProcessInfo
+    info-type-id: printing
     loss-rate: 0.01
     cost-rates:
       direct-labor: 0.4
@@ -46,10 +46,10 @@ data:
     - difficulty: VERY_HARD
       description: 이러 저러한 상황에 특이 사항이라 매우 어려움
       cost-rate: 1.2
-  - id: printing-coating-offset
+  - id: PCO
     name: 인쇄-코팅(옵셋)
     base-unit-cost: 100
-    info-type-id: pico.erp.config.process.info.PrintCoatingProcessInfo
+    info-type-id: print-coating
     loss-rate: 0.01
     cost-rates:
       direct-labor: 0.4
@@ -69,10 +69,10 @@ data:
     - difficulty: VERY_HARD
       description: 이러 저러한 상황에 특이 사항이라 매우 어려움
       cost-rate: 1.2
-  - id: printing-coating-uv
+  - id: PCU
     name: 인쇄-코팅(UV)
     base-unit-cost: 100
-    info-type-id: pico.erp.config.process.info.PrintCoatingProcessInfo
+    info-type-id: print-coating
     loss-rate: 0.01
     cost-rates:
       direct-labor: 0.4
@@ -92,10 +92,10 @@ data:
     - difficulty: VERY_HARD
       description: 이러 저러한 상황에 특이 사항이라 매우 어려움
       cost-rate: 1.2
-  - id: printing-coating-etching
+  - id: PCE
     name: 인쇄-코팅(엣칭)
     base-unit-cost: 100
-    info-type-id: pico.erp.config.process.info.PrintCoatingProcessInfo
+    info-type-id: print-coating
     loss-rate: 0.01
     cost-rates:
       direct-labor: 0.4
@@ -115,10 +115,10 @@ data:
     - difficulty: VERY_HARD
       description: 이러 저러한 상황에 특이 사항이라 매우 어려움
       cost-rate: 1.2
-  - id: coating-lamination-gloss
+  - id: CLG
     name: 코팅(라이네이팅/유광)
     base-unit-cost: 100
-    info-type-id: pico.erp.config.process.info.CoatingProcessInfo
+    info-type-id: coating
     loss-rate: 0.01
     cost-rates:
       direct-labor: 0.4
@@ -138,10 +138,10 @@ data:
     - difficulty: VERY_HARD
       description: 이러 저러한 상황에 특이 사항이라 매우 어려움
       cost-rate: 1.2
-  - id: coating-lamination-matt
+  - id: CLM
     name: 코팅(라이네이팅/무광)
     base-unit-cost: 100
-    info-type-id: pico.erp.config.process.info.CoatingProcessInfo
+    info-type-id: coating
     loss-rate: 0.01
     cost-rates:
       direct-labor: 0.4
@@ -161,10 +161,10 @@ data:
     - difficulty: VERY_HARD
       description: 이러 저러한 상황에 특이 사항이라 매우 어려움
       cost-rate: 1.2
-  - id: coating-lamination-window
+  - id: CLW
     name: 코팅(라이네이팅/창문)
     base-unit-cost: 100
-    info-type-id: pico.erp.config.process.info.CoatingProcessInfo
+    info-type-id: coating
     loss-rate: 0.01
     cost-rates:
       direct-labor: 0.4
@@ -184,10 +184,10 @@ data:
     - difficulty: VERY_HARD
       description: 이러 저러한 상황에 특이 사항이라 매우 어려움
       cost-rate: 1.2
-  - id: coating-bonding
+  - id: CB
     name: 코팅(접착)
     base-unit-cost: 100
-    info-type-id: pico.erp.config.process.info.CoatingProcessInfo
+    info-type-id: coating
     loss-rate: 0.01
     cost-rates:
       direct-labor: 0.4
@@ -207,10 +207,10 @@ data:
     - difficulty: VERY_HARD
       description: 이러 저러한 상황에 특이 사항이라 매우 어려움
       cost-rate: 1.2
-  - id: coating-cr-gloss
+  - id: CCG
     name: 코팅(CR/유광)
     base-unit-cost: 100
-    info-type-id: pico.erp.config.process.info.CoatingProcessInfo
+    info-type-id: coating
     loss-rate: 0.01
     cost-rates:
       direct-labor: 0.4
@@ -230,10 +230,10 @@ data:
     - difficulty: VERY_HARD
       description: 이러 저러한 상황에 특이 사항이라 매우 어려움
       cost-rate: 1.2
-  - id: coating-cr-matt
+  - id: CCM
     name: 코팅(CR/무광)
     base-unit-cost: 100
-    info-type-id: pico.erp.config.process.info.CoatingProcessInfo
+    info-type-id: coating
     loss-rate: 0.01
     cost-rates:
       direct-labor: 0.4
@@ -253,10 +253,10 @@ data:
     - difficulty: VERY_HARD
       description: 이러 저러한 상황에 특이 사항이라 매우 어려움
       cost-rate: 1.2
-  - id: coating-uv
+  - id: CU
     name: 코팅(UV)
     base-unit-cost: 100
-    info-type-id: pico.erp.config.process.info.CoatingProcessInfo
+    info-type-id: coating
     loss-rate: 0.01
     cost-rates:
       direct-labor: 0.4
@@ -276,10 +276,10 @@ data:
     - difficulty: VERY_HARD
       description: 이러 저러한 상황에 특이 사항이라 매우 어려움
       cost-rate: 1.2
-  - id: embossing-intaglio
+  - id: EI
     name: 형압(음각)
     base-unit-cost: 100
-    info-type-id: pico.erp.config.process.info.EmbossingProcessInfo
+    info-type-id: embossing
     loss-rate: 0.01
     cost-rates:
       direct-labor: 0.4
@@ -299,10 +299,10 @@ data:
     - difficulty: VERY_HARD
       description: 이러 저러한 상황에 특이 사항이라 매우 어려움
       cost-rate: 1.2
-  - id: embossing-cameo
+  - id: EC
     name: 형압(양각)
     base-unit-cost: 100
-    info-type-id: pico.erp.config.process.info.EmbossingProcessInfo
+    info-type-id: embossing
     loss-rate: 0.01
     cost-rates:
       direct-labor: 0.4
@@ -322,10 +322,10 @@ data:
     - difficulty: VERY_HARD
       description: 이러 저러한 상황에 특이 사항이라 매우 어려움
       cost-rate: 1.2
-  - id: foiling-gold
+  - id: FG
     name: 박(금박)
     base-unit-cost: 100
-    info-type-id: pico.erp.config.process.info.FoilingProcessInfo
+    info-type-id: foiling
     loss-rate: 0.01
     cost-rates:
       direct-labor: 0.4
@@ -345,10 +345,10 @@ data:
     - difficulty: VERY_HARD
       description: 이러 저러한 상황에 특이 사항이라 매우 어려움
       cost-rate: 1.2
-  - id: foiling-silver
+  - id: FS
     name: 박(은박)
     base-unit-cost: 100
-    info-type-id: pico.erp.config.process.info.FoilingProcessInfo
+    info-type-id: foiling
     loss-rate: 0.01
     cost-rates:
       direct-labor: 0.4
@@ -368,10 +368,10 @@ data:
     - difficulty: VERY_HARD
       description: 이러 저러한 상황에 특이 사항이라 매우 어려움
       cost-rate: 1.2
-  - id: foiling-hologram
+  - id: FH
     name: 박(홀로그램박)
     base-unit-cost: 100
-    info-type-id: pico.erp.config.process.info.FoilingProcessInfo
+    info-type-id: foiling
     loss-rate: 0.01
     cost-rates:
       direct-labor: 0.4
@@ -391,10 +391,10 @@ data:
     - difficulty: VERY_HARD
       description: 이러 저러한 상황에 특이 사항이라 매우 어려움
       cost-rate: 1.2
-  - id: thomson
+  - id: T
     name: 톰슨
     base-unit-cost: 100
-    info-type-id: pico.erp.config.process.info.ThomsonProcessInfo
+    info-type-id: thomson
     loss-rate: 0.01
     cost-rates:
       direct-labor: 0.4
@@ -414,10 +414,10 @@ data:
     - difficulty: VERY_HARD
       description: 이러 저러한 상황에 특이 사항이라 매우 어려움
       cost-rate: 1.2
-  - id: thomson-embossing
+  - id: TE
     name: 톰슨(형압)
     base-unit-cost: 100
-    info-type-id: pico.erp.config.process.info.ThomsonProcessInfo
+    info-type-id: thomson
     loss-rate: 0.01
     cost-rates:
       direct-labor: 0.4
@@ -437,10 +437,10 @@ data:
     - difficulty: VERY_HARD
       description: 이러 저러한 상황에 특이 사항이라 매우 어려움
       cost-rate: 1.2
-  - id: bonding-oneside
+  - id: BO
     name: 접착(단면)
     base-unit-cost: 100
-    info-type-id: pico.erp.config.process.info.BondingProcessInfo
+    info-type-id: bonding
     loss-rate: 0.01
     cost-rates:
       direct-labor: 0.4
@@ -460,10 +460,10 @@ data:
     - difficulty: VERY_HARD
       description: 이러 저러한 상황에 특이 사항이라 매우 어려움
       cost-rate: 1.2
-  - id: bonding-bothsides
+  - id: BB
     name: 접착(양면)
     base-unit-cost: 100
-    info-type-id: pico.erp.config.process.info.BondingProcessInfo
+    info-type-id: bonding
     loss-rate: 0.01
     cost-rates:
       direct-labor: 0.4
@@ -483,10 +483,10 @@ data:
     - difficulty: VERY_HARD
       description: 이러 저러한 상황에 특이 사항이라 매우 어려움
       cost-rate: 1.2
-  - id: bonding-foursides
+  - id: BF
     name: 접착(4면)
     base-unit-cost: 100
-    info-type-id: pico.erp.config.process.info.BondingProcessInfo
+    info-type-id: bonding
     loss-rate: 0.01
     cost-rates:
       direct-labor: 0.4
@@ -506,10 +506,10 @@ data:
     - difficulty: VERY_HARD
       description: 이러 저러한 상황에 특이 사항이라 매우 어려움
       cost-rate: 1.2
-  - id: bonding-manually
+  - id: BM
     name: 접착(수작업)
     base-unit-cost: 100
-    info-type-id: pico.erp.config.process.info.BondingProcessInfo
+    info-type-id: bonding
     loss-rate: 0.01
     cost-rates:
       direct-labor: 0.4
@@ -529,10 +529,10 @@ data:
     - difficulty: VERY_HARD
       description: 이러 저러한 상황에 특이 사항이라 매우 어려움
       cost-rate: 1.2
-  - id: output-ctp
+  - id: OC
     name: 출력(CTP)
     base-unit-cost: 100
-    info-type-id: pico.erp.config.process.info.OutputProcessInfo
+    info-type-id: output
     loss-rate: 0.01
     cost-rates:
       direct-labor: 0.4
@@ -552,35 +552,20 @@ data:
     - difficulty: VERY_HARD
       description: 이러 저러한 상황에 특이 사항이라 매우 어려움
       cost-rate: 1.2
-  preprocess-types:
-  - id: wooden-pattern
-    name: 목형
-    base-cost: 100000
-    info-type-id: pico.erp.config.process.info.DesigningProcessInfo
-  - id: metallic-pattern
-    name: 금형
-    base-cost: 100000
-    info-type-id: pico.erp.config.process.info.DesigningProcessInfo
-  - id: print-design
-    name: 인쇄디자인
-    base-cost: 100000
-    info-type-id: pico.erp.config.process.info.DesigningProcessInfo
   process-type-preprocess-types:
-  - id: printing-coating-uv
-    preprocess-type-id: print-design
+  - id: PCU
+    preprocess-type-id: PD
   processes:
   - id: item-2-process-1
     item-id: item-2
-    name: 아이템 2 공정
     difficulty: NORMAL
-    type-id: foiling-silver
+    type-id: FS
     loss-rate: 0.01
     adjust-cost: 0
   - id: item-3-process-1
     item-id: item-3
-    name: 아이템 3 공정
     difficulty: NORMAL
-    type-id: printing-offset
+    type-id: PO
     loss-rate: 0.01
     adjust-cost: 0
 

@@ -25,8 +25,6 @@ public class ProcessTypeView {
 
   ProcessInfoTypeId infoTypeId;
 
-  String infoTypeName;
-
   Auditor createdBy;
 
   OffsetDateTime createdDate;
@@ -43,7 +41,7 @@ public class ProcessTypeView {
 
     String name;
 
-    ProcessInfoTypeId processInfoTypeId;
+    ProcessInfoTypeId infoTypeId;
 
   }
 

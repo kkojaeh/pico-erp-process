@@ -1,13 +1,13 @@
 package pico.erp.process;
 
-import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.event.EventListener;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-import pico.erp.item.ItemEvents.UpdatedEvent;
-import pico.erp.shared.event.EventPublisher;
+import pico.erp.process.type.ProcessTypeEvents;
+import pico.erp.process.type.ProcessTypeEvents.CostChangedEvent;
 
 @SuppressWarnings("unused")
 @Component
@@ -16,26 +16,19 @@ public class ProcessEventListener {
 
   private static final String LISTENER_NAME = "listener.process-event-listener";
 
+  @Lazy
   @Autowired
-  private ProcessRepository processRepository;
-
-  @Autowired
-  private EventPublisher eventPublisher;
-
-  @Autowired
-  private ProcessMapper processMapper;
+  private ProcessServiceLogic processService;
 
   @EventListener
-  @JmsListener(destination = LISTENER_NAME + "." + UpdatedEvent.CHANNEL)
-  public void onItemUpdated(UpdatedEvent event) {
-    if (event.isNameChanged()) {
-      processRepository.findBy(event.getItemId())
-        .ifPresent(process -> {
-          val response = process.apply(new ProcessMessages.CompletePlanRequest());
-          processRepository.update(process);
-          eventPublisher.publishEvents(response.getEvents());
-        });
-    }
+  @JmsListener(destination = LISTENER_NAME + "."
+    + CostChangedEvent.CHANNEL)
+  public void onProcessTypeCostChanged(ProcessTypeEvents.CostChangedEvent event) {
+    processService.recalculateCostByType(
+      ProcessServiceLogic.RecalculateCostByTypeRequest.builder()
+        .processTypeId(event.getProcessTypeId())
+        .build()
+    );
   }
 
 }

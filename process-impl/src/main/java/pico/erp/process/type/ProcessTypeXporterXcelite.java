@@ -152,7 +152,7 @@ public class ProcessTypeXporterXcelite implements ProcessTypeXporter {
       .id(processType.getId())
       .name(processType.getName())
       .baseUnitCost(processType.getBaseUnitCost())
-      .infoTypeId(processType.getInfoType().getId())
+      .infoTypeId(processType.getInfoTypeId())
       .costRates(objectMapper.writeValueAsString(processType.getCostRates()))
       .difficultyGrades(objectMapper.writeValueAsString(processType.getDifficultyGrades()))
       .build();

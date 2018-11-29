@@ -73,7 +73,6 @@ public class Preprocess implements Serializable {
   public PreprocessMessages.CreateResponse apply(PreprocessMessages.CreateRequest request) {
     this.id = request.getId();
     this.process = request.getProcess();
-    this.name = request.getName();
     this.type = request.getType();
     this.status = PreprocessStatusKind.DRAFT;
     this.description = request.getDescription();
@@ -81,7 +80,8 @@ public class Preprocess implements Serializable {
     this.commentSubjectId = CommentSubjectId.from(this.id.getValue().toString());
     this.attachmentId = request.getAttachmentId();
     this.chargeCost = request.getChargeCost();
-    this.info = this.type.createInfo();
+    this.info = request.getProcessInfoLifecycler().initialize(this.getType().getInfoTypeId());
+    this.name = String.format("%s (%s)", type.getName(), this.process.getItem().getCode());
     return new PreprocessMessages.CreateResponse(
       Arrays.asList(new PreprocessEvents.CreatedEvent(this.id))
     );
@@ -92,15 +92,14 @@ public class Preprocess implements Serializable {
       throw new CannotModifyException();
     }
     Preprocess old = toBuilder().build();
-    ;
-    this.name = request.getName();
     this.description = request.getDescription();
     this.manager = request.getManager();
     this.attachmentId = request.getAttachmentId();
 
     Collection<Event> events = new LinkedList<>();
     if (!this.type.equals(old.type)) {
-      ProcessInfo info = this.type.createInfo();
+      ProcessInfo info = request.getProcessInfoLifecycler()
+        .initialize(this.getType().getInfoTypeId());
       if (!info.getClass().equals(old.info.getClass())) {
         this.info = info;
       }

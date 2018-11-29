@@ -62,7 +62,7 @@ public class ProcessEntity implements Serializable {
   })
   ProcessId id;
 
-  @Column(length = TypeDefinitions.NAME_X2_LENGTH)
+  @Column(length = TypeDefinitions.NAME_LENGTH)
   String name;
 
   @AttributeOverrides({

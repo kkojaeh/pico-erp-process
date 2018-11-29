@@ -60,7 +60,7 @@ public class PreprocessEntity implements Serializable {
   })
   PreprocessId id;
 
-  @Column(length = TypeDefinitions.NAME_X3_LENGTH)
+  @Column(length = TypeDefinitions.NAME_LENGTH)
   String name;
 
   @AttributeOverrides({

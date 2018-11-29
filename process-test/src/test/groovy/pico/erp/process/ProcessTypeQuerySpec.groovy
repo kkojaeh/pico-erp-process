@@ -6,12 +6,8 @@ import org.springframework.data.domain.PageRequest
 import org.springframework.test.annotation.Rollback
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.transaction.annotation.Transactional
-import pico.erp.config.process.info.PrintingProcessInfo
-import pico.erp.process.cost.ProcessCostRatesData
-import pico.erp.process.difficulty.grade.ProcessDifficultyGradeData
-import pico.erp.process.difficulty.grade.ProcessDifficultyKind
-import pico.erp.process.info.type.ClassBasedProcessInfoType
-import pico.erp.process.type.*
+import pico.erp.process.type.ProcessTypeQuery
+import pico.erp.process.type.ProcessTypeView
 import pico.erp.shared.IntegrationConfiguration
 import spock.lang.Specification
 
@@ -21,40 +17,9 @@ import spock.lang.Specification
 @ActiveProfiles("test")
 class ProcessTypeQuerySpec extends Specification {
 
-  def setup() {
-    def infoType = new ClassBasedProcessInfoType(PrintingProcessInfo)
-    processTypeService.create(
-      new ProcessTypeRequests.CreateRequest(id: ProcessTypeId.from("P1"), name: "인쇄 - UV", infoTypeId: infoType.id,
-        baseUnitCost: 100,
-        lossRate: 0.01,
-        difficultyGrades: [
-          new ProcessDifficultyGradeData(difficulty: ProcessDifficultyKind.EASY, costRate: 0.9),
-          new ProcessDifficultyGradeData(difficulty: ProcessDifficultyKind.NORMAL, costRate: 1),
-          new ProcessDifficultyGradeData(difficulty: ProcessDifficultyKind.HARD, costRate: 1.1),
-          new ProcessDifficultyGradeData(difficulty: ProcessDifficultyKind.VERY_HARD, costRate: 1.2)
-        ],
-        costRates: new ProcessCostRatesData(directLabor: 0.4, indirectLabor: 0.1, indirectMaterial: 0.25, indirectExpenses: 0.25)
-      )
-    )
-    processTypeService.create(
-      new ProcessTypeRequests.CreateRequest(id: ProcessTypeId.from("P2"), name: "인쇄 - Offset", infoTypeId: infoType.id,
-        baseUnitCost: 100,
-        lossRate: 0.01,
-        difficultyGrades: [
-          new ProcessDifficultyGradeData(difficulty: ProcessDifficultyKind.EASY, costRate: 0.9),
-          new ProcessDifficultyGradeData(difficulty: ProcessDifficultyKind.NORMAL, costRate: 1),
-          new ProcessDifficultyGradeData(difficulty: ProcessDifficultyKind.HARD, costRate: 1.1),
-          new ProcessDifficultyGradeData(difficulty: ProcessDifficultyKind.VERY_HARD, costRate: 1.2)
-        ], costRates: new ProcessCostRatesData(directLabor: 0.4, indirectLabor: 0.1, indirectMaterial: 0.25, indirectExpenses: 0.25)
-      )
-    )
-  }
-
   @Autowired
   ProcessTypeQuery processQuery
 
-  @Autowired
-  ProcessTypeService processTypeService
 
   def "조회 조건에 맞게 조회"() {
     expect:
@@ -64,8 +29,8 @@ class ProcessTypeQuerySpec extends Specification {
 
     where:
     condition                              | pageable               || totalElements
-    new ProcessTypeView.Filter(name: "인쇄") | new PageRequest(0, 10) || 7
-    new ProcessTypeView.Filter(name: "UV") | new PageRequest(0, 10) || 4
+    new ProcessTypeView.Filter(name: "인쇄") | new PageRequest(0, 10) || 5
+    new ProcessTypeView.Filter(name: "UV") | new PageRequest(0, 10) || 3
   }
 
 }

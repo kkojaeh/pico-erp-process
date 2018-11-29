@@ -14,7 +14,7 @@ public enum ProcessStatusKind implements LocalizedNameable {
   DETERMINED(false, true);
 
   @Getter
-  private final boolean modifiable;
+  private final boolean updatable;
 
   @Getter
   private final boolean typeFixed;

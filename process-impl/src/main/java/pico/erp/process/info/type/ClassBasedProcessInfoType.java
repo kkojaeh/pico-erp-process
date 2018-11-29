@@ -32,8 +32,8 @@ public class ClassBasedProcessInfoType implements ProcessInfoType {
   @Getter
   private final Serializable metadata;
 
-  public ClassBasedProcessInfoType(Class<? extends ProcessInfo> type) {
-    this.id = ProcessInfoTypeId.from(type.getName());
+  public ClassBasedProcessInfoType(String id, Class<? extends ProcessInfo> type) {
+    this.id = ProcessInfoTypeId.from(id);
     this.type = type;
     JsonNode schema = schemaFactory.createSchema(type);
     TextNode titleNode = (TextNode) schema.get("title");

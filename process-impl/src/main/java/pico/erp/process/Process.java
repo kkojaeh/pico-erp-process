@@ -49,7 +49,7 @@ public class Process implements Serializable {
 
   String name;
 
-  ItemData itemData;
+  ItemData item;
 
   ProcessType type;
 
@@ -87,19 +87,19 @@ public class Process implements Serializable {
 
   public ProcessMessages.CreateResponse apply(ProcessMessages.CreateRequest request) {
     this.id = request.getId();
-    this.name = request.getName();
     this.type = request.getType();
     this.status = ProcessStatusKind.DRAFT;
     this.difficulty = request.getDifficulty();
     this.description = request.getDescription();
-    this.itemData = request.getItemData();
+    this.item = request.getItem();
     this.manager = request.getManager();
     this.commentSubjectId = CommentSubjectId.from(this.id.getValue().toString());
     this.attachmentId = request.getAttachmentId();
-    this.info = this.type.createInfo();
+    this.info = request.getProcessInfoLifecycler().initialize(this.type.getInfoTypeId());
     this.lossRate = request.getLossRate();
     this.adjustCost = request.getAdjustCost();
     this.adjustCostReason = request.getAdjustCostReason();
+    this.name = String.format("%s (%s)", type.getName(), item.getCode().getValue());
     this.estimatedCost = this.type.createEstimatedCost(this);
     return new ProcessMessages.CreateResponse(
       Arrays.asList(new ProcessEvents.CreatedEvent(this.id))
@@ -107,11 +107,10 @@ public class Process implements Serializable {
   }
 
   public ProcessMessages.UpdateResponse apply(ProcessMessages.UpdateRequest request) {
-    if (!canModify()) {
+    if (!isUpdatable()) {
       throw new CannotModifyException();
     }
     Process old = toBuilder().build();
-    this.name = request.getName();
     this.type = request.getType();
     this.difficulty = request.getDifficulty();
     this.description = request.getDescription();
@@ -126,7 +125,7 @@ public class Process implements Serializable {
       if (this.status.isTypeFixed()) {
         throw new ProcessExceptions.CannotChangeTypeException();
       }
-      ProcessInfo info = this.type.createInfo();
+      ProcessInfo info = request.getProcessInfoLifecycler().initialize(this.type.getInfoTypeId());
       if (!info.getClass().equals(old.info.getClass())) {
         this.info = info;
       }
@@ -150,7 +149,7 @@ public class Process implements Serializable {
     ProcessMessages.CalculateEstimatedCostRequest request) {
     /*
     확정 상태와 상관 없이 공정 유형의 영향을 받는 것이 맞다고 판단됨
-    if (!canModify()) {
+    if (!isUpdatable()) {
       throw new CannotModifyException();
     }
      */
@@ -164,13 +163,6 @@ public class Process implements Serializable {
     return new ProcessMessages.CalculateEstimatedCostResponse(Collections.emptyList());
   }
 
-  public ProcessMessages.RenameResponse apply(ProcessMessages.RenameRequest request) {
-    this.name = String.format("[%s] %s", type.getName(), itemData.getName());
-    return new ProcessMessages.RenameResponse(
-      Collections.emptyList()
-    );
-  }
-
   public ProcessMessages.CompletePlanResponse apply(
     ProcessMessages.CompletePlanRequest request) {
     if (status == ProcessStatusKind.DETERMINED) {
@@ -182,8 +174,8 @@ public class Process implements Serializable {
     );
   }
 
-  public boolean canModify() {
-    return status.isModifiable();
+  public boolean isUpdatable() {
+    return status.isUpdatable();
   }
 
   public boolean isPlanned() {

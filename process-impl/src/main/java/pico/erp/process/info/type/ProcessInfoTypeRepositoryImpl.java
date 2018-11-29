@@ -26,4 +26,14 @@ public class ProcessInfoTypeRepositoryImpl implements ProcessInfoTypeRepository 
       .findFirst();
   }
 
+  @Override
+  public boolean exists(ProcessInfoTypeId id) {
+    for (ProcessInfoType type : types) {
+      if (type.getId().equals(id)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
 }

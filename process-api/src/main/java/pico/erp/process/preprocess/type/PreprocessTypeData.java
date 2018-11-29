@@ -19,6 +19,8 @@ public class PreprocessTypeData implements Serializable {
 
   String name;
 
+  String description;
+
   ProcessInfoTypeId infoTypeId;
 
   BigDecimal baseCost;

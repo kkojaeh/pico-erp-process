@@ -45,7 +45,7 @@ public abstract class ProcessTypeMapper {
       .name(entity.getName())
       .lossRate(entity.getLossRate())
       .baseUnitCost(entity.getBaseUnitCost())
-      .infoType(processInfoTypeMapper.map(entity.getInfoTypeId()))
+      .infoTypeId(entity.getInfoTypeId())
       .difficultyGrades(
         entity.getDifficultyGrades().stream()
           .map(processDifficultyGradeMapper::domain)
@@ -63,8 +63,7 @@ public abstract class ProcessTypeMapper {
   }
 
   @Mappings({
-    @Mapping(target = "infoTypeId", source = "infoType.id"),
-    @Mapping(target = "infoTypeName", source = "infoType.name"),
+    @Mapping(target = "infoTypeId", source = "infoTypeId"),
     @Mapping(target = "createdBy", ignore = true),
     @Mapping(target = "createdDate", ignore = true),
     @Mapping(target = "lastModifiedBy", ignore = true),

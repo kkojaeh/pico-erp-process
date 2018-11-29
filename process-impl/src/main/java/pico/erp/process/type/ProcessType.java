@@ -8,7 +8,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import javax.persistence.Id;
-import javax.persistence.Transient;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,8 +22,7 @@ import pico.erp.process.cost.ProcessCost;
 import pico.erp.process.cost.ProcessCostRates;
 import pico.erp.process.difficulty.grade.ProcessDifficultyGrade;
 import pico.erp.process.difficulty.grade.ProcessDifficultyKind;
-import pico.erp.process.info.ProcessInfo;
-import pico.erp.process.info.type.ProcessInfoType;
+import pico.erp.process.info.type.ProcessInfoTypeId;
 import pico.erp.process.preprocess.PreprocessExceptions;
 import pico.erp.process.preprocess.type.PreprocessType;
 import pico.erp.process.type.ProcessTypeEvents.CostChangedEvent;
@@ -60,8 +58,7 @@ public class ProcessType implements Serializable {
    */
   BigDecimal baseUnitCost;
 
-  @Transient
-  ProcessInfoType infoType;
+  ProcessInfoTypeId infoTypeId;
 
   BigDecimal lossRate;
 
@@ -81,7 +78,7 @@ public class ProcessType implements Serializable {
     this.baseUnitCost = request.getBaseUnitCost();
     this.lossRate = request.getLossRate();
     this.costRates = request.getCostRates();
-    this.infoType = request.getInfoType();
+    this.infoTypeId = request.getInfoTypeId();
     this.difficultyGrades = request.getDifficultyGrades();
     return new ProcessTypeMessages.CreateResponse(
       Arrays.asList(new CreatedEvent(this.id))
@@ -95,7 +92,7 @@ public class ProcessType implements Serializable {
     this.baseUnitCost = request.getBaseUnitCost();
     this.lossRate = request.getLossRate();
     this.costRates = request.getCostRates();
-    this.infoType = request.getInfoType();
+    this.infoTypeId = request.getInfoTypeId();
     this.difficultyGrades = request.getDifficultyGrades();
     events.add(new UpdatedEvent(this.id));
     if (
@@ -146,10 +143,6 @@ public class ProcessType implements Serializable {
       .findFirst().get();
     val cost = baseUnitCost.multiply(grade.getCostRate()).add(process.getAdjustCost());
     return costRates.calculate(cost);
-  }
-
-  public ProcessInfo createInfo() {
-    return infoType.create();
   }
 
 }

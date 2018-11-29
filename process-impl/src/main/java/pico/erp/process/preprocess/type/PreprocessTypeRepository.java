@@ -2,22 +2,15 @@ package pico.erp.process.preprocess.type;
 
 import java.util.Optional;
 import java.util.stream.Stream;
-import javax.validation.constraints.NotNull;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PreprocessTypeRepository {
 
-  PreprocessType create(@NotNull PreprocessType preprocessType);
+  boolean exists(PreprocessTypeId id);
 
-  void deleteBy(@NotNull PreprocessTypeId id);
+  Stream<PreprocessType> findAll();
 
-  boolean exists(@NotNull PreprocessTypeId id);
-
-  Optional<PreprocessType> findBy(@NotNull PreprocessTypeId id);
-
-  Stream<PreprocessType> getAll();
-
-  void update(@NotNull PreprocessType preprocessType);
+  Optional<PreprocessType> findBy(PreprocessTypeId id);
 
 }

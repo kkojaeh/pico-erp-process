@@ -35,4 +35,9 @@ public class ProcessInfoTypeServiceLogic implements ProcessInfoTypeService {
       .map(mapper::map)
       .collect(Collectors.toList());
   }
+
+  @Override
+  public boolean exists(ProcessInfoTypeId id) {
+    return processInfoTypeRepository.exists(id);
+  }
 }

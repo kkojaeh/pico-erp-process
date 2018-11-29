@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.Value;
 import pico.erp.attachment.AttachmentId;
 import pico.erp.process.Process;
+import pico.erp.process.info.ProcessInfoLifecycler;
 import pico.erp.process.preprocess.type.PreprocessType;
 import pico.erp.shared.TypeDefinitions;
 import pico.erp.shared.event.Event;
@@ -25,10 +26,6 @@ public interface PreprocessMessages {
 
     Process process;
 
-    @Size(min = 3, max = TypeDefinitions.NAME_X2_LENGTH)
-    @NotNull
-    String name;
-
     @NotNull
     PreprocessType type;
 
@@ -43,14 +40,13 @@ public interface PreprocessMessages {
     @Valid
     AttachmentId attachmentId;
 
+    @NotNull
+    ProcessInfoLifecycler processInfoLifecycler;
+
   }
 
   @Data
   class UpdateRequest {
-
-    @Size(min = 3, max = TypeDefinitions.NAME_X2_LENGTH)
-    @NotNull
-    String name;
 
     @Size(max = TypeDefinitions.CLOB_LENGTH)
     String description;
@@ -61,6 +57,9 @@ public interface PreprocessMessages {
 
     @Valid
     AttachmentId attachmentId;
+
+    @NotNull
+    ProcessInfoLifecycler processInfoLifecycler;
 
   }
 

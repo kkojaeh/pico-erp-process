@@ -41,8 +41,7 @@ public class ProcessTypeQueryJpa implements ProcessTypeQuery {
     val query = new JPAQuery<LabeledValue>(entityManager);
     val select = Projections.bean(ExtendedLabeledValue.class,
       processType.id.value.as("value"),
-      processType.name.as("label"),
-      processType.infoTypeName.as("subLabel")
+      processType.name.as("label")
     );
     query.select(select);
     query.from(processType);
@@ -65,8 +64,7 @@ public class ProcessTypeQueryJpa implements ProcessTypeQuery {
       processType.createdDate,
       processType.lastModifiedBy,
       processType.lastModifiedDate,
-      processType.infoTypeId,
-      processType.infoTypeName
+      processType.infoTypeId
     );
     query.select(select);
     query.from(processType);
@@ -78,8 +76,8 @@ public class ProcessTypeQueryJpa implements ProcessTypeQuery {
         .likeIgnoreCase(queryDslJpaSupport.toLikeKeyword("%", filter.getName(), "%")));
     }
 
-    if (filter.getProcessInfoTypeId() != null) {
-      builder.and(processType.infoTypeId.eq(filter.getProcessInfoTypeId()));
+    if (filter.getInfoTypeId() != null) {
+      builder.and(processType.infoTypeId.eq(filter.getInfoTypeId()));
     }
 
     query.where(builder);
