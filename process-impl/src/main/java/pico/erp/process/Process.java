@@ -21,7 +21,7 @@ import pico.erp.audit.annotation.Audit;
 import pico.erp.comment.subject.CommentSubjectId;
 import pico.erp.item.ItemData;
 import pico.erp.process.ProcessEvents.DeletedEvent;
-import pico.erp.process.ProcessExceptions.CannotModifyException;
+import pico.erp.process.ProcessExceptions.CannotUpdateException;
 import pico.erp.process.cost.ProcessCost;
 import pico.erp.process.difficulty.grade.ProcessDifficultyKind;
 import pico.erp.process.info.ProcessInfo;
@@ -99,7 +99,7 @@ public class Process implements Serializable {
     this.lossRate = request.getLossRate();
     this.adjustCost = request.getAdjustCost();
     this.adjustCostReason = request.getAdjustCostReason();
-    this.name = String.format("%s (%s)", type.getName(), item.getCode().getValue());
+    this.name = String.format("%s [%s]", type.getName(), item.getCode().getValue());
     this.estimatedCost = this.type.createEstimatedCost(this);
     return new ProcessMessages.CreateResponse(
       Arrays.asList(new ProcessEvents.CreatedEvent(this.id))
@@ -108,7 +108,7 @@ public class Process implements Serializable {
 
   public ProcessMessages.UpdateResponse apply(ProcessMessages.UpdateRequest request) {
     if (!isUpdatable()) {
-      throw new CannotModifyException();
+      throw new CannotUpdateException();
     }
     Process old = toBuilder().build();
     this.type = request.getType();
@@ -150,7 +150,7 @@ public class Process implements Serializable {
     /*
     확정 상태와 상관 없이 공정 유형의 영향을 받는 것이 맞다고 판단됨
     if (!isUpdatable()) {
-      throw new CannotModifyException();
+      throw new CannotUpdateException();
     }
      */
     ProcessCost oldEstimatedCost = this.estimatedCost;

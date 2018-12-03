@@ -18,7 +18,6 @@ import pico.erp.attachment.AttachmentId;
 import pico.erp.audit.annotation.Audit;
 import pico.erp.comment.subject.CommentSubjectId;
 import pico.erp.process.Process;
-import pico.erp.process.ProcessExceptions.CannotModifyException;
 import pico.erp.process.info.ProcessInfo;
 import pico.erp.process.preprocess.type.PreprocessType;
 import pico.erp.shared.event.Event;
@@ -88,8 +87,8 @@ public class Preprocess implements Serializable {
   }
 
   public PreprocessMessages.UpdateResponse apply(PreprocessMessages.UpdateRequest request) {
-    if (!canModify()) {
-      throw new CannotModifyException();
+    if (!isUpdatable()) {
+      throw new PreprocessExceptions.CannotUpdateException();
     }
     Preprocess old = toBuilder().build();
     this.description = request.getDescription();
@@ -117,7 +116,7 @@ public class Preprocess implements Serializable {
   }
 
 
-  public boolean canModify() {
+  public boolean isUpdatable() {
     return status == PreprocessStatusKind.DRAFT;
   }
 

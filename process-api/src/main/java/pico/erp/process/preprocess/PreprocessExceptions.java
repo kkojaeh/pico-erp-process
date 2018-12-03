@@ -11,8 +11,8 @@ public interface PreprocessExceptions {
     private static final long serialVersionUID = 1L;
   }
 
-  @ResponseStatus(code = HttpStatus.NOT_ACCEPTABLE, reason = "preprocess.cannot.modify.exception")
-  class CannotModifyException extends RuntimeException {
+  @ResponseStatus(code = HttpStatus.NOT_ACCEPTABLE, reason = "preprocess.cannot.update.exception")
+  class CannotUpdateException extends RuntimeException {
 
     private static final long serialVersionUID = 1L;
   }
