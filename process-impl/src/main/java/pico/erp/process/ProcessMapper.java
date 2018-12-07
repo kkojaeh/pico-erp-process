@@ -14,9 +14,9 @@ import pico.erp.item.ItemService;
 import pico.erp.process.cost.ProcessCostMapper;
 import pico.erp.process.cost.ProcessCostRates;
 import pico.erp.process.cost.ProcessCostRatesData;
-import pico.erp.process.difficulty.grade.ProcessDifficultyGrade;
-import pico.erp.process.difficulty.grade.ProcessDifficultyGradeData;
-import pico.erp.process.difficulty.grade.ProcessDifficultyGradeMapper;
+import pico.erp.process.difficulty.ProcessDifficulty;
+import pico.erp.process.difficulty.ProcessDifficultyData;
+import pico.erp.process.difficulty.ProcessDifficultyMapper;
 import pico.erp.process.info.ProcessInfoLifecycler;
 import pico.erp.process.info.type.ProcessInfoType;
 import pico.erp.process.info.type.ProcessInfoTypeData;
@@ -67,7 +67,7 @@ public abstract class ProcessMapper {
 
   @Lazy
   @Autowired
-  protected ProcessDifficultyGradeMapper processDifficultyGradeMapper;
+  protected ProcessDifficultyMapper processDifficultyMapper;
 
   @Lazy
   @Autowired
@@ -205,8 +205,8 @@ public abstract class ProcessMapper {
   })
   public abstract ProcessData map(Process process);
 
-  protected ProcessDifficultyGrade map(ProcessDifficultyGradeData data) {
-    return processDifficultyGradeMapper.map(data);
+  protected ProcessDifficulty map(ProcessDifficultyData data) {
+    return processDifficultyMapper.map(data);
   }
 
   protected ProcessCostRates map(ProcessCostRatesData data) {

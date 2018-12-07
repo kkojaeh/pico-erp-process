@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pico.erp.item.ItemId;
-import pico.erp.process.difficulty.grade.ProcessDifficultyKind;
+import pico.erp.process.difficulty.ProcessDifficultyKind;
 import pico.erp.process.type.ProcessTypeId;
 import pico.erp.shared.data.Auditor;
 import pico.erp.user.UserId;

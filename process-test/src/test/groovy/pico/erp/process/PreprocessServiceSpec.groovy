@@ -6,7 +6,7 @@ import org.springframework.test.annotation.Rollback
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.transaction.annotation.Transactional
 import pico.erp.item.ItemId
-import pico.erp.process.difficulty.grade.ProcessDifficultyKind
+import pico.erp.process.difficulty.ProcessDifficultyKind
 import pico.erp.process.preprocess.PreprocessExceptions
 import pico.erp.process.preprocess.PreprocessId
 import pico.erp.process.preprocess.PreprocessRequests

@@ -4,9 +4,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import pico.erp.config.process.info.BondingProcessInfo;
 import pico.erp.config.process.info.CoatingProcessInfo;
+import pico.erp.config.process.info.CuttingProcessInfo;
 import pico.erp.config.process.info.DesigningProcessInfo;
 import pico.erp.config.process.info.EmbossingProcessInfo;
 import pico.erp.config.process.info.FoilingProcessInfo;
+import pico.erp.config.process.info.LaminatingProcessInfo;
 import pico.erp.config.process.info.OutputProcessInfo;
 import pico.erp.config.process.info.PackagingProcessInfo;
 import pico.erp.config.process.info.PressMoldingProcessInfo;
@@ -85,6 +87,20 @@ public class ProcessConfiguration {
   public ProcessInfoType thomsonProcessInfo() {
     return new ClassBasedProcessInfoType("thomson", ThomsonProcessInfo.class);
   }
+
+  @Public
+  @Bean
+  public ProcessInfoType cuttingProcessInfo() {
+    return new ClassBasedProcessInfoType("cutting", CuttingProcessInfo.class);
+  }
+
+  @Public
+  @Bean
+  public ProcessInfoType laminatingProcessInfo() {
+    return new ClassBasedProcessInfoType("laminating", LaminatingProcessInfo.class);
+  }
+
+
 
 
 }

@@ -1,4 +1,4 @@
-package pico.erp.process.difficulty.grade;
+package pico.erp.process.difficulty;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -20,10 +20,7 @@ import pico.erp.shared.TypeDefinitions;
 @NoArgsConstructor
 @EqualsAndHashCode(of = "difficulty")
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ProcessDifficultyGradeData implements Serializable {
-
-  @NotNull
-  ProcessDifficultyKind difficulty;
+public class ProcessDifficultyData implements Serializable {
 
   @Size(max = TypeDefinitions.DESCRIPTION_LENGTH)
   String description;

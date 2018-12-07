@@ -10,19 +10,19 @@ data:
       indirect-labor: 0.1
       indirect-material: 0.25
       indirect-expenses: 0.25
-    difficulty-grades:
-    - difficulty: EASY
-      description: 하기 쉬움
-      cost-rate: 0.95
-    - difficulty: NORMAL
-      description: 보통 정도 수준
-      cost-rate: 1
-    - difficulty: HARD
-      description: 이러 저러한 상황이라 어려움
-      cost-rate: 1.1
-    - difficulty: VERY_HARD
-      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
-      cost-rate: 1.2
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
   - id: PU
     name: 인쇄(UV)
     base-unit-cost: 100
@@ -33,19 +33,19 @@ data:
       indirect-labor: 0.1
       indirect-material: 0.25
       indirect-expenses: 0.25
-    difficulty-grades:
-    - difficulty: EASY
-      description: 하기 쉬움
-      cost-rate: 0.95
-    - difficulty: NORMAL
-      description: 보통 정도 수준
-      cost-rate: 1
-    - difficulty: HARD
-      description: 이러 저러한 상황이라 어려움
-      cost-rate: 1.1
-    - difficulty: VERY_HARD
-      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
-      cost-rate: 1.2
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
   - id: PCO
     name: 인쇄-코팅(옵셋)
     base-unit-cost: 100
@@ -56,19 +56,19 @@ data:
       indirect-labor: 0.1
       indirect-material: 0.25
       indirect-expenses: 0.25
-    difficulty-grades:
-    - difficulty: EASY
-      description: 하기 쉬움
-      cost-rate: 0.95
-    - difficulty: NORMAL
-      description: 보통 정도 수준
-      cost-rate: 1
-    - difficulty: HARD
-      description: 이러 저러한 상황이라 어려움
-      cost-rate: 1.1
-    - difficulty: VERY_HARD
-      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
-      cost-rate: 1.2
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
   - id: PCU
     name: 인쇄-코팅(UV)
     base-unit-cost: 100
@@ -79,19 +79,19 @@ data:
       indirect-labor: 0.1
       indirect-material: 0.25
       indirect-expenses: 0.25
-    difficulty-grades:
-    - difficulty: EASY
-      description: 하기 쉬움
-      cost-rate: 0.95
-    - difficulty: NORMAL
-      description: 보통 정도 수준
-      cost-rate: 1
-    - difficulty: HARD
-      description: 이러 저러한 상황이라 어려움
-      cost-rate: 1.1
-    - difficulty: VERY_HARD
-      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
-      cost-rate: 1.2
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
   - id: PCE
     name: 인쇄-코팅(엣칭)
     base-unit-cost: 100
@@ -102,19 +102,19 @@ data:
       indirect-labor: 0.1
       indirect-material: 0.25
       indirect-expenses: 0.25
-    difficulty-grades:
-    - difficulty: EASY
-      description: 하기 쉬움
-      cost-rate: 0.95
-    - difficulty: NORMAL
-      description: 보통 정도 수준
-      cost-rate: 1
-    - difficulty: HARD
-      description: 이러 저러한 상황이라 어려움
-      cost-rate: 1.1
-    - difficulty: VERY_HARD
-      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
-      cost-rate: 1.2
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
   - id: CLG
     name: 코팅(라이네이팅/유광)
     base-unit-cost: 100
@@ -125,19 +125,19 @@ data:
       indirect-labor: 0.1
       indirect-material: 0.25
       indirect-expenses: 0.25
-    difficulty-grades:
-    - difficulty: EASY
-      description: 하기 쉬움
-      cost-rate: 0.95
-    - difficulty: NORMAL
-      description: 보통 정도 수준
-      cost-rate: 1
-    - difficulty: HARD
-      description: 이러 저러한 상황이라 어려움
-      cost-rate: 1.1
-    - difficulty: VERY_HARD
-      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
-      cost-rate: 1.2
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
   - id: CLM
     name: 코팅(라이네이팅/무광)
     base-unit-cost: 100
@@ -148,19 +148,19 @@ data:
       indirect-labor: 0.1
       indirect-material: 0.25
       indirect-expenses: 0.25
-    difficulty-grades:
-    - difficulty: EASY
-      description: 하기 쉬움
-      cost-rate: 0.95
-    - difficulty: NORMAL
-      description: 보통 정도 수준
-      cost-rate: 1
-    - difficulty: HARD
-      description: 이러 저러한 상황이라 어려움
-      cost-rate: 1.1
-    - difficulty: VERY_HARD
-      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
-      cost-rate: 1.2
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
   - id: CLW
     name: 코팅(라이네이팅/창문)
     base-unit-cost: 100
@@ -171,19 +171,19 @@ data:
       indirect-labor: 0.1
       indirect-material: 0.25
       indirect-expenses: 0.25
-    difficulty-grades:
-    - difficulty: EASY
-      description: 하기 쉬움
-      cost-rate: 0.95
-    - difficulty: NORMAL
-      description: 보통 정도 수준
-      cost-rate: 1
-    - difficulty: HARD
-      description: 이러 저러한 상황이라 어려움
-      cost-rate: 1.1
-    - difficulty: VERY_HARD
-      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
-      cost-rate: 1.2
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
   - id: CB
     name: 코팅(접착)
     base-unit-cost: 100
@@ -194,19 +194,19 @@ data:
       indirect-labor: 0.1
       indirect-material: 0.25
       indirect-expenses: 0.25
-    difficulty-grades:
-    - difficulty: EASY
-      description: 하기 쉬움
-      cost-rate: 0.95
-    - difficulty: NORMAL
-      description: 보통 정도 수준
-      cost-rate: 1
-    - difficulty: HARD
-      description: 이러 저러한 상황이라 어려움
-      cost-rate: 1.1
-    - difficulty: VERY_HARD
-      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
-      cost-rate: 1.2
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
   - id: CCG
     name: 코팅(CR/유광)
     base-unit-cost: 100
@@ -217,19 +217,19 @@ data:
       indirect-labor: 0.1
       indirect-material: 0.25
       indirect-expenses: 0.25
-    difficulty-grades:
-    - difficulty: EASY
-      description: 하기 쉬움
-      cost-rate: 0.95
-    - difficulty: NORMAL
-      description: 보통 정도 수준
-      cost-rate: 1
-    - difficulty: HARD
-      description: 이러 저러한 상황이라 어려움
-      cost-rate: 1.1
-    - difficulty: VERY_HARD
-      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
-      cost-rate: 1.2
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
   - id: CCM
     name: 코팅(CR/무광)
     base-unit-cost: 100
@@ -240,19 +240,19 @@ data:
       indirect-labor: 0.1
       indirect-material: 0.25
       indirect-expenses: 0.25
-    difficulty-grades:
-    - difficulty: EASY
-      description: 하기 쉬움
-      cost-rate: 0.95
-    - difficulty: NORMAL
-      description: 보통 정도 수준
-      cost-rate: 1
-    - difficulty: HARD
-      description: 이러 저러한 상황이라 어려움
-      cost-rate: 1.1
-    - difficulty: VERY_HARD
-      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
-      cost-rate: 1.2
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
   - id: CU
     name: 코팅(UV)
     base-unit-cost: 100
@@ -263,19 +263,19 @@ data:
       indirect-labor: 0.1
       indirect-material: 0.25
       indirect-expenses: 0.25
-    difficulty-grades:
-    - difficulty: EASY
-      description: 하기 쉬움
-      cost-rate: 0.95
-    - difficulty: NORMAL
-      description: 보통 정도 수준
-      cost-rate: 1
-    - difficulty: HARD
-      description: 이러 저러한 상황이라 어려움
-      cost-rate: 1.1
-    - difficulty: VERY_HARD
-      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
-      cost-rate: 1.2
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
   - id: EI
     name: 형압(음각)
     base-unit-cost: 100
@@ -286,19 +286,19 @@ data:
       indirect-labor: 0.1
       indirect-material: 0.25
       indirect-expenses: 0.25
-    difficulty-grades:
-    - difficulty: EASY
-      description: 하기 쉬움
-      cost-rate: 0.95
-    - difficulty: NORMAL
-      description: 보통 정도 수준
-      cost-rate: 1
-    - difficulty: HARD
-      description: 이러 저러한 상황이라 어려움
-      cost-rate: 1.1
-    - difficulty: VERY_HARD
-      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
-      cost-rate: 1.2
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
   - id: EC
     name: 형압(양각)
     base-unit-cost: 100
@@ -309,19 +309,19 @@ data:
       indirect-labor: 0.1
       indirect-material: 0.25
       indirect-expenses: 0.25
-    difficulty-grades:
-    - difficulty: EASY
-      description: 하기 쉬움
-      cost-rate: 0.95
-    - difficulty: NORMAL
-      description: 보통 정도 수준
-      cost-rate: 1
-    - difficulty: HARD
-      description: 이러 저러한 상황이라 어려움
-      cost-rate: 1.1
-    - difficulty: VERY_HARD
-      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
-      cost-rate: 1.2
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
   - id: FG
     name: 박(금박)
     base-unit-cost: 100
@@ -332,19 +332,19 @@ data:
       indirect-labor: 0.1
       indirect-material: 0.25
       indirect-expenses: 0.25
-    difficulty-grades:
-    - difficulty: EASY
-      description: 하기 쉬움
-      cost-rate: 0.95
-    - difficulty: NORMAL
-      description: 보통 정도 수준
-      cost-rate: 1
-    - difficulty: HARD
-      description: 이러 저러한 상황이라 어려움
-      cost-rate: 1.1
-    - difficulty: VERY_HARD
-      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
-      cost-rate: 1.2
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
   - id: FS
     name: 박(은박)
     base-unit-cost: 100
@@ -355,19 +355,19 @@ data:
       indirect-labor: 0.1
       indirect-material: 0.25
       indirect-expenses: 0.25
-    difficulty-grades:
-    - difficulty: EASY
-      description: 하기 쉬움
-      cost-rate: 0.95
-    - difficulty: NORMAL
-      description: 보통 정도 수준
-      cost-rate: 1
-    - difficulty: HARD
-      description: 이러 저러한 상황이라 어려움
-      cost-rate: 1.1
-    - difficulty: VERY_HARD
-      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
-      cost-rate: 1.2
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
   - id: FH
     name: 박(홀로그램박)
     base-unit-cost: 100
@@ -378,42 +378,19 @@ data:
       indirect-labor: 0.1
       indirect-material: 0.25
       indirect-expenses: 0.25
-    difficulty-grades:
-    - difficulty: EASY
-      description: 하기 쉬움
-      cost-rate: 0.95
-    - difficulty: NORMAL
-      description: 보통 정도 수준
-      cost-rate: 1
-    - difficulty: HARD
-      description: 이러 저러한 상황이라 어려움
-      cost-rate: 1.1
-    - difficulty: VERY_HARD
-      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
-      cost-rate: 1.2
-  - id: T
-    name: 톰슨
-    base-unit-cost: 100
-    info-type-id: thomson
-    loss-rate: 0.01
-    cost-rates:
-      direct-labor: 0.4
-      indirect-labor: 0.1
-      indirect-material: 0.25
-      indirect-expenses: 0.25
-    difficulty-grades:
-    - difficulty: EASY
-      description: 하기 쉬움
-      cost-rate: 0.95
-    - difficulty: NORMAL
-      description: 보통 정도 수준
-      cost-rate: 1
-    - difficulty: HARD
-      description: 이러 저러한 상황이라 어려움
-      cost-rate: 1.1
-    - difficulty: VERY_HARD
-      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
-      cost-rate: 1.2
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
   - id: TE
     name: 톰슨(형압)
     base-unit-cost: 100
@@ -424,19 +401,19 @@ data:
       indirect-labor: 0.1
       indirect-material: 0.25
       indirect-expenses: 0.25
-    difficulty-grades:
-    - difficulty: EASY
-      description: 하기 쉬움
-      cost-rate: 0.95
-    - difficulty: NORMAL
-      description: 보통 정도 수준
-      cost-rate: 1
-    - difficulty: HARD
-      description: 이러 저러한 상황이라 어려움
-      cost-rate: 1.1
-    - difficulty: VERY_HARD
-      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
-      cost-rate: 1.2
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
   - id: BO
     name: 접착(단면)
     base-unit-cost: 100
@@ -447,19 +424,19 @@ data:
       indirect-labor: 0.1
       indirect-material: 0.25
       indirect-expenses: 0.25
-    difficulty-grades:
-    - difficulty: EASY
-      description: 하기 쉬움
-      cost-rate: 0.95
-    - difficulty: NORMAL
-      description: 보통 정도 수준
-      cost-rate: 1
-    - difficulty: HARD
-      description: 이러 저러한 상황이라 어려움
-      cost-rate: 1.1
-    - difficulty: VERY_HARD
-      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
-      cost-rate: 1.2
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
   - id: BB
     name: 접착(양면)
     base-unit-cost: 100
@@ -470,19 +447,19 @@ data:
       indirect-labor: 0.1
       indirect-material: 0.25
       indirect-expenses: 0.25
-    difficulty-grades:
-    - difficulty: EASY
-      description: 하기 쉬움
-      cost-rate: 0.95
-    - difficulty: NORMAL
-      description: 보통 정도 수준
-      cost-rate: 1
-    - difficulty: HARD
-      description: 이러 저러한 상황이라 어려움
-      cost-rate: 1.1
-    - difficulty: VERY_HARD
-      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
-      cost-rate: 1.2
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
   - id: BF
     name: 접착(4면)
     base-unit-cost: 100
@@ -493,19 +470,19 @@ data:
       indirect-labor: 0.1
       indirect-material: 0.25
       indirect-expenses: 0.25
-    difficulty-grades:
-    - difficulty: EASY
-      description: 하기 쉬움
-      cost-rate: 0.95
-    - difficulty: NORMAL
-      description: 보통 정도 수준
-      cost-rate: 1
-    - difficulty: HARD
-      description: 이러 저러한 상황이라 어려움
-      cost-rate: 1.1
-    - difficulty: VERY_HARD
-      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
-      cost-rate: 1.2
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
   - id: BM
     name: 접착(수작업)
     base-unit-cost: 100
@@ -516,19 +493,19 @@ data:
       indirect-labor: 0.1
       indirect-material: 0.25
       indirect-expenses: 0.25
-    difficulty-grades:
-    - difficulty: EASY
-      description: 하기 쉬움
-      cost-rate: 0.95
-    - difficulty: NORMAL
-      description: 보통 정도 수준
-      cost-rate: 1
-    - difficulty: HARD
-      description: 이러 저러한 상황이라 어려움
-      cost-rate: 1.1
-    - difficulty: VERY_HARD
-      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
-      cost-rate: 1.2
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
   - id: OC
     name: 출력(CTP)
     base-unit-cost: 100
@@ -539,19 +516,206 @@ data:
       indirect-labor: 0.1
       indirect-material: 0.25
       indirect-expenses: 0.25
-    difficulty-grades:
-    - difficulty: EASY
-      description: 하기 쉬움
-      cost-rate: 0.95
-    - difficulty: NORMAL
-      description: 보통 정도 수준
-      cost-rate: 1
-    - difficulty: HARD
-      description: 이러 저러한 상황이라 어려움
-      cost-rate: 1.1
-    - difficulty: VERY_HARD
-      description: 이러 저러한 상황에 특이 사항이라 매우 어려움
-      cost-rate: 1.2
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
+
+
+  - id: CM
+    name: 커팅(성형)
+    base-unit-cost: 100
+    info-type-id: cutting
+    loss-rate: 0.01
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
+  - id: PCOW
+    name: 인쇄-코팅(옵셋/전지)
+    base-unit-cost: 100
+    info-type-id: print-coating
+    loss-rate: 0.01
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
+  - id: POW
+    name: 인쇄(옵셋/전지)
+    base-unit-cost: 100
+    info-type-id: printing
+    loss-rate: 0.01
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
+  - id: LO
+    name: 합지(단면)
+    base-unit-cost: 100
+    info-type-id: laminating
+    loss-rate: 0.01
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
+  - id: LB
+    name: 합지(양면)
+    base-unit-cost: 100
+    info-type-id: laminating
+    loss-rate: 0.01
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
+  - id: TF
+    name: 톰슨(전면)
+    base-unit-cost: 100
+    info-type-id: thomson
+    loss-rate: 0.01
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
+  - id: TB
+    name: 톰슨(후면)
+    base-unit-cost: 100
+    info-type-id: thomson
+    loss-rate: 0.01
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
+  - id: BT
+    name: 접착(3면)
+    base-unit-cost: 100
+    info-type-id: bonding
+    loss-rate: 0.01
+    cost-rates:
+      direct-labor: 0.4
+      indirect-labor: 0.1
+      indirect-material: 0.25
+      indirect-expenses: 0.25
+    difficulties:
+      EASY:
+        description: 하기 쉬움
+        cost-rate: 0.95
+      NORMAL:
+        description: 보통 정도 수준
+        cost-rate: 1
+      HARD:
+        description: 이러 저러한 상황이라 어려움
+        cost-rate: 1.1
+      VERY_HARD:
+        description: 이러 저러한 상황에 특이 사항이라 매우 어려움
+        cost-rate: 1.2
+
   process-type-preprocess-types:
   - id: PCU
     preprocess-type-id: PD

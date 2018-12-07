@@ -6,8 +6,8 @@ import org.springframework.test.annotation.Rollback
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.transaction.annotation.Transactional
 import pico.erp.process.cost.ProcessCostRatesData
-import pico.erp.process.difficulty.grade.ProcessDifficultyGradeData
-import pico.erp.process.difficulty.grade.ProcessDifficultyKind
+import pico.erp.process.difficulty.ProcessDifficultyData
+import pico.erp.process.difficulty.ProcessDifficultyKind
 import pico.erp.process.info.type.ProcessInfoTypeId
 import pico.erp.process.type.ProcessTypeExceptions
 import pico.erp.process.type.ProcessTypeId
@@ -33,11 +33,11 @@ class ProcessTypeServiceSpec extends Specification {
 
   def processInfoTypeId = ProcessInfoTypeId.from("printing")
 
-  def difficultyGrades = [
-    new ProcessDifficultyGradeData(difficulty: ProcessDifficultyKind.EASY, costRate: 0.9),
-    new ProcessDifficultyGradeData(difficulty: ProcessDifficultyKind.NORMAL, costRate: 1),
-    new ProcessDifficultyGradeData(difficulty: ProcessDifficultyKind.HARD, costRate: 1.1),
-    new ProcessDifficultyGradeData(difficulty: ProcessDifficultyKind.VERY_HARD, costRate: 1.2)
+  def difficulties = [
+    (ProcessDifficultyKind.EASY)     : new ProcessDifficultyData(costRate: 0.9),
+    (ProcessDifficultyKind.NORMAL)   : new ProcessDifficultyData(costRate: 1),
+    (ProcessDifficultyKind.HARD)     : new ProcessDifficultyData(costRate: 1.1),
+    (ProcessDifficultyKind.VERY_HARD): new ProcessDifficultyData(costRate: 1.2)
   ]
 
   def processCostRates = new ProcessCostRatesData(directLabor: 0.4, indirectLabor: 0.1, indirectMaterial: 0.25, indirectExpenses: 0.25)
@@ -49,7 +49,7 @@ class ProcessTypeServiceSpec extends Specification {
         infoTypeId: processInfoTypeId,
         baseUnitCost: 100,
         lossRate: 0.01,
-        difficultyGrades: difficultyGrades,
+        difficulties: difficulties,
         costRates: processCostRates
       )
     )
@@ -79,14 +79,10 @@ class ProcessTypeServiceSpec extends Specification {
     processType.id == processTypeId
     processType.name == processTypeName
     processType.lossRate == 0.01
-    processType.difficultyGrades[0].difficulty == difficultyGrades[0].difficulty
-    processType.difficultyGrades[1].difficulty == difficultyGrades[1].difficulty
-    processType.difficultyGrades[2].difficulty == difficultyGrades[2].difficulty
-    processType.difficultyGrades[3].difficulty == difficultyGrades[3].difficulty
-    processType.difficultyGrades[0].costRate == difficultyGrades[0].costRate
-    processType.difficultyGrades[1].costRate == difficultyGrades[1].costRate
-    processType.difficultyGrades[2].costRate == difficultyGrades[2].costRate
-    processType.difficultyGrades[3].costRate == difficultyGrades[3].costRate
+    processType.difficulties[ProcessDifficultyKind.EASY].costRate == difficulties[ProcessDifficultyKind.EASY].costRate
+    processType.difficulties[ProcessDifficultyKind.NORMAL].costRate == difficulties[ProcessDifficultyKind.NORMAL].costRate
+    processType.difficulties[ProcessDifficultyKind.HARD].costRate == difficulties[ProcessDifficultyKind.HARD].costRate
+    processType.difficulties[ProcessDifficultyKind.VERY_HARD].costRate == difficulties[ProcessDifficultyKind.VERY_HARD].costRate
     processType.costRates.directLabor == processCostRates.directLabor
     processType.costRates.indirectLabor == processCostRates.indirectLabor
     processType.costRates.indirectMaterial == processCostRates.indirectMaterial

@@ -29,7 +29,7 @@ class ProcessTypeQuerySpec extends Specification {
 
     where:
     condition                              | pageable               || totalElements
-    new ProcessTypeView.Filter(name: "인쇄") | new PageRequest(0, 10) || 5
+    new ProcessTypeView.Filter(name: "인쇄") | new PageRequest(0, 10) || 7
     new ProcessTypeView.Filter(name: "UV") | new PageRequest(0, 10) || 3
   }
 

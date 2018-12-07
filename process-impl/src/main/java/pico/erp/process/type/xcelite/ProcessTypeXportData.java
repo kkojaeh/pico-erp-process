@@ -1,4 +1,4 @@
-package pico.erp.process.info.type.xcelite;
+package pico.erp.process.type.xcelite;
 
 import com.ebay.xcelite.annotations.Column;
 import com.ebay.xcelite.annotations.Row;

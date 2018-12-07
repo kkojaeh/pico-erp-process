@@ -1,8 +1,7 @@
 package pico.erp.process.type;
 
 import java.math.BigDecimal;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Map;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -12,7 +11,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pico.erp.process.cost.ProcessCostRatesData;
-import pico.erp.process.difficulty.grade.ProcessDifficultyGradeData;
+import pico.erp.process.difficulty.ProcessDifficultyData;
+import pico.erp.process.difficulty.ProcessDifficultyKind;
 import pico.erp.process.info.type.ProcessInfoTypeId;
 import pico.erp.process.preprocess.type.PreprocessTypeId;
 import pico.erp.shared.TypeDefinitions;
@@ -49,10 +49,8 @@ public interface ProcessTypeRequests {
     @NotNull
     ProcessCostRatesData costRates;
 
-    @Size(min = 4, max = 4)
     @NotNull
-    @Builder.Default
-    List<ProcessDifficultyGradeData> difficultyGrades = new LinkedList<>();
+    Map<ProcessDifficultyKind, ProcessDifficultyData> difficulties;
 
   }
 
@@ -86,10 +84,8 @@ public interface ProcessTypeRequests {
     @NotNull
     ProcessCostRatesData costRates;
 
-    @Size(min = 4, max = 4)
     @NotNull
-    @Builder.Default
-    List<ProcessDifficultyGradeData> difficultyGrades = new LinkedList<>();
+    Map<ProcessDifficultyKind, ProcessDifficultyData> difficulties;
 
   }
 

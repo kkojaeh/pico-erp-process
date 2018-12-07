@@ -33,7 +33,7 @@ import pico.erp.attachment.AttachmentId;
 import pico.erp.comment.subject.CommentSubjectId;
 import pico.erp.item.ItemId;
 import pico.erp.process.cost.ProcessCostEmbeddable;
-import pico.erp.process.difficulty.grade.ProcessDifficultyKind;
+import pico.erp.process.difficulty.ProcessDifficultyKind;
 import pico.erp.process.type.ProcessTypeId;
 import pico.erp.shared.TypeDefinitions;
 import pico.erp.shared.data.Auditor;

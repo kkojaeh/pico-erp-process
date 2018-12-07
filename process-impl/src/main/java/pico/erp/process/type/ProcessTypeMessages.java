@@ -2,15 +2,18 @@ package pico.erp.process.type;
 
 import java.math.BigDecimal;
 import java.util.Collection;
-import java.util.List;
+import java.util.Map;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.Value;
 import pico.erp.process.cost.ProcessCostRates;
-import pico.erp.process.difficulty.grade.ProcessDifficultyGrade;
+import pico.erp.process.difficulty.ProcessDifficulty;
+import pico.erp.process.difficulty.ProcessDifficultyKind;
 import pico.erp.process.info.type.ProcessInfoTypeId;
 import pico.erp.process.preprocess.type.PreprocessType;
 import pico.erp.shared.TypeDefinitions;
@@ -44,9 +47,8 @@ public interface ProcessTypeMessages {
     @Valid
     ProcessCostRates costRates;
 
-    @Size(min = 4, max = 4)
     @NotNull
-    List<ProcessDifficultyGrade> difficultyGrades;
+    Map<ProcessDifficultyKind, ProcessDifficulty> difficulties;
 
   }
 
@@ -72,10 +74,17 @@ public interface ProcessTypeMessages {
     @Valid
     ProcessCostRates costRates;
 
-    @Size(min = 4, max = 4)
     @NotNull
-    List<ProcessDifficultyGrade> difficultyGrades;
+    Map<ProcessDifficultyKind, ProcessDifficulty> difficulties;
 
+  }
+
+  @NoArgsConstructor
+  @AllArgsConstructor
+  @Data
+  class PrepareImportRequest {
+
+    ProcessType previous;
   }
 
   @Data
@@ -129,6 +138,13 @@ public interface ProcessTypeMessages {
 
   @Value
   class RemovePreprocessTypeResponse {
+
+    Collection<Event> events;
+
+  }
+
+  @Value
+  class PrepareImportResponse {
 
     Collection<Event> events;
 

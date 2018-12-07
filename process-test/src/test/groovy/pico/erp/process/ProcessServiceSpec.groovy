@@ -9,8 +9,8 @@ import org.springframework.test.context.ActiveProfiles
 import org.springframework.transaction.annotation.Transactional
 import pico.erp.item.ItemId
 import pico.erp.process.cost.ProcessCostRatesData
-import pico.erp.process.difficulty.grade.ProcessDifficultyGradeData
-import pico.erp.process.difficulty.grade.ProcessDifficultyKind
+import pico.erp.process.difficulty.ProcessDifficultyData
+import pico.erp.process.difficulty.ProcessDifficultyKind
 import pico.erp.process.info.type.ProcessInfoTypeId
 import pico.erp.process.type.ProcessTypeId
 import pico.erp.process.type.ProcessTypeRequests
@@ -40,11 +40,11 @@ class ProcessServiceSpec extends Specification {
 
   def processInfoTypeId = ProcessInfoTypeId.from("printing")
 
-  def difficultyGrades = [
-    new ProcessDifficultyGradeData(difficulty: ProcessDifficultyKind.EASY, costRate: 0.9),
-    new ProcessDifficultyGradeData(difficulty: ProcessDifficultyKind.NORMAL, costRate: 1),
-    new ProcessDifficultyGradeData(difficulty: ProcessDifficultyKind.HARD, costRate: 1.1),
-    new ProcessDifficultyGradeData(difficulty: ProcessDifficultyKind.VERY_HARD, costRate: 1.2)
+  def difficulties = [
+    (ProcessDifficultyKind.EASY)     : new ProcessDifficultyData(costRate: 0.9),
+    (ProcessDifficultyKind.NORMAL)   : new ProcessDifficultyData(costRate: 1),
+    (ProcessDifficultyKind.HARD)     : new ProcessDifficultyData(costRate: 1.1),
+    (ProcessDifficultyKind.VERY_HARD): new ProcessDifficultyData(costRate: 1.2)
   ]
 
   def processCostRates = new ProcessCostRatesData(directLabor: 0.4, indirectLabor: 0.1, indirectMaterial: 0.25, indirectExpenses: 0.25)
@@ -64,7 +64,7 @@ class ProcessServiceSpec extends Specification {
         infoTypeId: processInfoTypeId,
         baseUnitCost: 100,
         lossRate: 0.01,
-        difficultyGrades: difficultyGrades,
+        difficulties: difficulties,
         costRates: processCostRates
       )
     )

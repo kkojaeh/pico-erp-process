@@ -23,7 +23,7 @@ import pico.erp.item.ItemData;
 import pico.erp.process.ProcessEvents.DeletedEvent;
 import pico.erp.process.ProcessExceptions.CannotUpdateException;
 import pico.erp.process.cost.ProcessCost;
-import pico.erp.process.difficulty.grade.ProcessDifficultyKind;
+import pico.erp.process.difficulty.ProcessDifficultyKind;
 import pico.erp.process.info.ProcessInfo;
 import pico.erp.process.type.ProcessType;
 import pico.erp.shared.event.Event;

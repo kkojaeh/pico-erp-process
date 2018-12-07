@@ -9,9 +9,9 @@ import org.mapstruct.Mappings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import pico.erp.process.cost.ProcessCostMapper;
-import pico.erp.process.difficulty.grade.ProcessDifficultyGrade;
-import pico.erp.process.difficulty.grade.ProcessDifficultyGradeEmbeddable;
-import pico.erp.process.difficulty.grade.ProcessDifficultyGradeMapper;
+import pico.erp.process.difficulty.ProcessDifficulty;
+import pico.erp.process.difficulty.ProcessDifficultyEmbeddable;
+import pico.erp.process.difficulty.ProcessDifficultyMapper;
 import pico.erp.process.info.type.ProcessInfoTypeMapper;
 import pico.erp.process.preprocess.type.PreprocessType;
 import pico.erp.process.preprocess.type.PreprocessTypeId;
@@ -22,7 +22,7 @@ public abstract class ProcessTypeMapper {
 
   @Lazy
   @Autowired
-  protected ProcessDifficultyGradeMapper processDifficultyGradeMapper;
+  protected ProcessDifficultyMapper processDifficultyMapper;
 
   @Lazy
   @Autowired
@@ -46,10 +46,10 @@ public abstract class ProcessTypeMapper {
       .lossRate(entity.getLossRate())
       .baseUnitCost(entity.getBaseUnitCost())
       .infoTypeId(entity.getInfoTypeId())
-      .difficultyGrades(
-        entity.getDifficultyGrades().stream()
-          .map(processDifficultyGradeMapper::domain)
-          .collect(Collectors.toList())
+      .difficulties(
+        entity.getDifficulties().entrySet().stream()
+          .collect(
+            Collectors.toMap(e -> e.getKey(), e -> processDifficultyMapper.jpa(e.getValue())))
       )
       .costRates(
         processCostMapper.domain(entity.getCostRates())
@@ -71,8 +71,8 @@ public abstract class ProcessTypeMapper {
   })
   public abstract ProcessTypeEntity jpa(ProcessType processType);
 
-  protected ProcessDifficultyGradeEmbeddable jpa(ProcessDifficultyGrade grade) {
-    return processDifficultyGradeMapper.entity(grade);
+  protected ProcessDifficultyEmbeddable jpa(ProcessDifficulty grade) {
+    return processDifficultyMapper.entity(grade);
   }
 
   protected PreprocessTypeId map(PreprocessType preprocessType) {

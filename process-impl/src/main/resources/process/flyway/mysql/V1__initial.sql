@@ -15,25 +15,10 @@ create table prs_preprocess (
 	last_modified_date datetime,
 	manager_id varchar(50),
 	manager_name varchar(50),
-	name varchar(150),
+	name varchar(50),
 	process_id binary(16),
 	status varchar(20),
 	type_id varchar(50),
-	primary key (id)
-) engine=InnoDB;
-
-create table prs_preprocess_type (
-	id varchar(50) not null,
-	base_cost decimal(19,2),
-	created_by_id varchar(50),
-	created_by_name varchar(50),
-	created_date datetime,
-	info_type_id varchar(200),
-	info_type_name varchar(50),
-	last_modified_by_id varchar(50),
-	last_modified_by_name varchar(50),
-	last_modified_date datetime,
-	name varchar(50),
 	primary key (id)
 ) engine=InnoDB;
 
@@ -59,9 +44,10 @@ create table prs_process (
 	last_modified_by_id varchar(50),
 	last_modified_by_name varchar(50),
 	last_modified_date datetime,
+	loss_rate decimal(7,5),
 	manager_id varchar(50),
 	manager_name varchar(50),
-	name varchar(100),
+	name varchar(50),
 	status varchar(20),
 	type_id varchar(50),
 	primary key (id)
@@ -78,22 +64,20 @@ create table prs_process_type (
 	created_by_name varchar(50),
 	created_date datetime,
 	info_type_id varchar(200),
-	info_type_name varchar(50),
 	last_modified_by_id varchar(50),
 	last_modified_by_name varchar(50),
 	last_modified_date datetime,
+	loss_rate decimal(7,5),
 	name varchar(50),
 	primary key (id)
 ) engine=InnoDB;
 
-create table prs_process_type_difficulty_grade (
+create table prs_process_type_difficulty (
 	process_type_id varchar(50) not null,
 	cost_rate decimal(7,5),
 	description varchar(200),
-	difficulty varchar(20),
-	ordinal integer not null,
-	difficulty_grades_order integer not null,
-	primary key (process_type_id,difficulty_grades_order)
+	difficulty varchar(20) not null,
+	primary key (process_type_id,difficulty)
 ) engine=InnoDB;
 
 create table prs_process_type_preprocess_type (
@@ -110,8 +94,8 @@ create index IDXe1vcflsrij5u2mrbpbp9wrayg
 alter table prs_process_type_preprocess_type
 	add constraint UK21l4x1s5lye9iubmwmteglxvq unique (process_type_id,preprocess_type_id);
 
-alter table prs_process_type_difficulty_grade
-	add constraint FK5tkdbfefall1pwy6sisw5e3ib foreign key (process_type_id)
+alter table prs_process_type_difficulty
+	add constraint FKgeeun2kal1ake5ceiwgbwgp50 foreign key (process_type_id)
 	references prs_process_type (id);
 
 alter table prs_process_type_preprocess_type

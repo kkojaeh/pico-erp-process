@@ -1,4 +1,4 @@
-package pico.erp.process.difficulty.grade;
+package pico.erp.process.difficulty;
 
 import pico.erp.shared.data.LocalizedNameable;
 

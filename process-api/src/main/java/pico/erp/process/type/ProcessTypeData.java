@@ -3,12 +3,14 @@ package pico.erp.process.type;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.Id;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 import pico.erp.process.cost.ProcessCostRatesData;
-import pico.erp.process.difficulty.grade.ProcessDifficultyGradeData;
+import pico.erp.process.difficulty.ProcessDifficultyData;
+import pico.erp.process.difficulty.ProcessDifficultyKind;
 import pico.erp.process.info.type.ProcessInfoTypeId;
 import pico.erp.process.preprocess.type.PreprocessTypeData;
 
@@ -31,7 +33,7 @@ public class ProcessTypeData implements Serializable {
 
   ProcessCostRatesData costRates;
 
-  List<ProcessDifficultyGradeData> difficultyGrades;
+  Map<ProcessDifficultyKind, ProcessDifficultyData> difficulties;
 
   List<PreprocessTypeData> preprocessTypes;
 

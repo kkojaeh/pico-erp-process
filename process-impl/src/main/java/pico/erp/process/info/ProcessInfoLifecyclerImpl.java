@@ -35,11 +35,11 @@ public class ProcessInfoLifecyclerImpl implements ProcessInfoLifecycler {
 
   @SneakyThrows
   @Override
-  public ProcessInfo parse(ProcessInfoTypeId typeId, String serializable) {
+  public ProcessInfo parse(ProcessInfoTypeId typeId, String text) {
     val type = processInfoTypeRepository.findBy(typeId)
       .orElseThrow(ProcessInfoTypExceptions.NotFoundException::new);
 
-    return (ProcessInfo) objectMapper.readValue(serializable, type.getType());
+    return (ProcessInfo) objectMapper.readValue(text, type.getType());
   }
 
   @SneakyThrows

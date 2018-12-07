@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.Map;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.CollectionTable;
@@ -14,10 +15,11 @@ import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.EnumType;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.OrderBy;
-import javax.persistence.OrderColumn;
+import javax.persistence.MapKeyColumn;
+import javax.persistence.MapKeyEnumerated;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import lombok.AccessLevel;
@@ -34,7 +36,8 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import pico.erp.process.cost.ProcessCostRatesEmbeddable;
-import pico.erp.process.difficulty.grade.ProcessDifficultyGradeEmbeddable;
+import pico.erp.process.difficulty.ProcessDifficultyEmbeddable;
+import pico.erp.process.difficulty.ProcessDifficultyKind;
 import pico.erp.process.info.type.ProcessInfoTypeId;
 import pico.erp.process.preprocess.type.PreprocessTypeId;
 import pico.erp.shared.TypeDefinitions;
@@ -102,11 +105,18 @@ public class ProcessTypeEntity implements Serializable {
   ProcessCostRatesEmbeddable costRates;
 
   @ElementCollection(fetch = FetchType.LAZY)
+  @MapKeyColumn(name = "DIFFICULTY", length = TypeDefinitions.ENUM_LENGTH)
+  @MapKeyEnumerated(EnumType.STRING)
   @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-  @CollectionTable(name = "PRS_PROCESS_TYPE_DIFFICULTY_GRADE", joinColumns = @JoinColumn(name = "PROCESS_TYPE_ID"))
-  @OrderColumn
-  @OrderBy("ordinal")
-  List<ProcessDifficultyGradeEmbeddable> difficultyGrades;
+  @CollectionTable(name = "PRS_PROCESS_TYPE_DIFFICULTY", joinColumns = @JoinColumn(name = "PROCESS_TYPE_ID"))
+  Map<ProcessDifficultyKind, ProcessDifficultyEmbeddable> difficulties;
+
+  /*
+  @NotNull
+  @Column(length = TypeDefinitions.ENUM_LENGTH)
+  @Enumerated(EnumType.STRING)
+  ProcessDifficultyKind difficulty;
+   */
 
 /*  @ManyToMany
   @JoinTable(name = "PRS_PROCESS_TYPE_PREPROCESS_TYPE",

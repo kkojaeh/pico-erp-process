@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import javax.persistence.Id;
 import lombok.AccessLevel;
@@ -20,8 +21,8 @@ import pico.erp.audit.annotation.Audit;
 import pico.erp.process.Process;
 import pico.erp.process.cost.ProcessCost;
 import pico.erp.process.cost.ProcessCostRates;
-import pico.erp.process.difficulty.grade.ProcessDifficultyGrade;
-import pico.erp.process.difficulty.grade.ProcessDifficultyKind;
+import pico.erp.process.difficulty.ProcessDifficulty;
+import pico.erp.process.difficulty.ProcessDifficultyKind;
 import pico.erp.process.info.type.ProcessInfoTypeId;
 import pico.erp.process.preprocess.PreprocessExceptions;
 import pico.erp.process.preprocess.type.PreprocessType;
@@ -64,7 +65,7 @@ public class ProcessType implements Serializable {
 
   ProcessCostRates costRates;
 
-  List<ProcessDifficultyGrade> difficultyGrades;
+  Map<ProcessDifficultyKind, ProcessDifficulty> difficulties;
 
   List<PreprocessType> preprocessTypes;
 
@@ -79,7 +80,7 @@ public class ProcessType implements Serializable {
     this.lossRate = request.getLossRate();
     this.costRates = request.getCostRates();
     this.infoTypeId = request.getInfoTypeId();
-    this.difficultyGrades = request.getDifficultyGrades();
+    this.difficulties = request.getDifficulties();
     return new ProcessTypeMessages.CreateResponse(
       Arrays.asList(new CreatedEvent(this.id))
     );
@@ -93,7 +94,7 @@ public class ProcessType implements Serializable {
     this.lossRate = request.getLossRate();
     this.costRates = request.getCostRates();
     this.infoTypeId = request.getInfoTypeId();
-    this.difficultyGrades = request.getDifficultyGrades();
+    this.difficulties = request.getDifficulties();
     events.add(new UpdatedEvent(this.id));
     if (
       !Optional.ofNullable(old.baseUnitCost)
@@ -135,13 +136,21 @@ public class ProcessType implements Serializable {
     );
   }
 
+  public ProcessTypeMessages.PrepareImportResponse apply(
+    ProcessTypeMessages.PrepareImportRequest request) {
+
+    return new ProcessTypeMessages.PrepareImportResponse(
+      Collections.emptyList()
+    );
+  }
+
   public ProcessCost createEstimatedCost(Process process) {
-    val difficulty = Optional.ofNullable(process.getDifficulty())
+    val level = Optional.ofNullable(process.getDifficulty())
       .orElse(ProcessDifficultyKind.NORMAL);
-    val grade = difficultyGrades.stream()
-      .filter(g -> difficulty == g.getDifficulty())
-      .findFirst().get();
-    val cost = baseUnitCost.multiply(grade.getCostRate()).add(process.getAdjustCost());
+    val difficulty = difficulties.get(level);
+    val costRate = Optional.ofNullable(difficulty.getCostRate())
+      .orElse(BigDecimal.ONE);
+    val cost = baseUnitCost.multiply(costRate).add(process.getAdjustCost());
     return costRates.calculate(cost);
   }
 
