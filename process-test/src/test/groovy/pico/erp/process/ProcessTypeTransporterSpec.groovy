@@ -9,7 +9,6 @@ import org.springframework.core.io.Resource
 import org.springframework.test.annotation.Rollback
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.transaction.annotation.Transactional
-import org.springframework.util.FileCopyUtils
 import pico.erp.process.info.type.ProcessInfoTypeId
 import pico.erp.process.type.ProcessTypeId
 import pico.erp.process.type.ProcessTypeService
@@ -43,7 +42,6 @@ class ProcessTypeTransporterSpec extends Specification {
     )
 
     then:
-    FileCopyUtils.copy(inputStream, new FileOutputStream("/Users/kojaehun/test.xlsx"))
     inputStream.contentLength > 0
   }
 
