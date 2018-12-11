@@ -9,9 +9,9 @@ import pico.erp.config.process.info.DesigningProcessInfo;
 import pico.erp.config.process.info.EmbossingProcessInfo;
 import pico.erp.config.process.info.FoilingProcessInfo;
 import pico.erp.config.process.info.LaminatingProcessInfo;
+import pico.erp.config.process.info.MoldingProcessInfo;
 import pico.erp.config.process.info.OutputProcessInfo;
 import pico.erp.config.process.info.PackagingProcessInfo;
-import pico.erp.config.process.info.PressMoldingProcessInfo;
 import pico.erp.config.process.info.PrintCoatingProcessInfo;
 import pico.erp.config.process.info.PrintingProcessInfo;
 import pico.erp.config.process.info.ThomsonProcessInfo;
@@ -66,8 +66,8 @@ public class ProcessConfiguration {
 
   @Public
   @Bean
-  public ProcessInfoType pressMoldingProcessInfo() {
-    return new ClassBasedProcessInfoType("press-molding", PressMoldingProcessInfo.class);
+  public ProcessInfoType moldingProcessInfo() {
+    return new ClassBasedProcessInfoType("molding", MoldingProcessInfo.class);
   }
 
   @Public
