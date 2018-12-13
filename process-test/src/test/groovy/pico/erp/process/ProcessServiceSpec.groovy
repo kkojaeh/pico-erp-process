@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.test.annotation.Rollback
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.transaction.annotation.Transactional
-import pico.erp.item.ItemId
 import pico.erp.process.cost.ProcessCostRatesData
 import pico.erp.process.difficulty.ProcessDifficultyData
 import pico.erp.process.difficulty.ProcessDifficultyKind
@@ -49,8 +48,6 @@ class ProcessServiceSpec extends Specification {
 
   def processCostRates = new ProcessCostRatesData(directLabor: 0.4, indirectLabor: 0.1, indirectMaterial: 0.25, indirectExpenses: 0.25)
 
-  def itemId = ItemId.from("item-1")
-
   def processId = ProcessId.from("process-1")
 
   def unknownProcessId = ProcessId.from("unknown")
@@ -72,7 +69,6 @@ class ProcessServiceSpec extends Specification {
     processService.create(
       new ProcessRequests.CreateRequest(
         id: processId,
-        itemId: itemId,
         adjustCost: 0,
         lossRate: 0.01,
         typeId: processTypeId,
@@ -103,7 +99,6 @@ class ProcessServiceSpec extends Specification {
     def process = processService.get(processId)
 
     then:
-    process.itemId == itemId
     process.adjustCost == 0
     process.lossRate == 0.01
     process.typeId == processTypeId

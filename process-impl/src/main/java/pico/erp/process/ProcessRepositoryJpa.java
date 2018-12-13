@@ -9,21 +9,14 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import pico.erp.item.ItemId;
 import pico.erp.process.type.ProcessTypeId;
 
 @Repository
 interface ProcessEntityRepository extends
   CrudRepository<ProcessEntity, ProcessId> {
 
-  @Query("SELECT CASE WHEN COUNT(p) > 0 THEN true ELSE false END FROM Process p WHERE p.itemId = :itemId AND p.deleted = false")
-  boolean exists(@Param("itemId") ItemId itemId);
-
   @Query("SELECT p FROM Process p WHERE p.typeId = :processTypeId")
   Stream<ProcessEntity> findAllBy(@Param("processTypeId") ProcessTypeId processTypeId);
-
-  @Query("SELECT p FROM Process p WHERE p.itemId = :itemId AND p.deleted = false")
-  ProcessEntity findBy(@Param("itemId") ItemId itemId);
 
 }
 
@@ -54,10 +47,6 @@ public class ProcessRepositoryJpa implements ProcessRepository {
     return repository.exists(id);
   }
 
-  @Override
-  public boolean exists(ItemId itemId) {
-    return repository.exists(itemId);
-  }
 
   @Override
   public Stream<Process> findAllBy(ProcessTypeId id) {
@@ -68,12 +57,6 @@ public class ProcessRepositoryJpa implements ProcessRepository {
   @Override
   public Optional<Process> findBy(ProcessId id) {
     return Optional.ofNullable(repository.findOne(id))
-      .map(mapper::jpa);
-  }
-
-  @Override
-  public Optional<Process> findBy(ItemId itemId) {
-    return Optional.ofNullable(repository.findBy(itemId))
       .map(mapper::jpa);
   }
 

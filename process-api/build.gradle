@@ -19,7 +19,5 @@ dependencies {
 
   compile("com.github.kkojaeh.pico-erp-audit:audit-api:${auditVersion}")
 
-  compile("com.github.kkojaeh.pico-erp-item:item-api:${itemVersion}")
-
 }
 

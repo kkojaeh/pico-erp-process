@@ -8,9 +8,6 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
-import pico.erp.item.ItemData;
-import pico.erp.item.ItemId;
-import pico.erp.item.ItemService;
 import pico.erp.process.cost.ProcessCostMapper;
 import pico.erp.process.cost.ProcessCostRates;
 import pico.erp.process.cost.ProcessCostRatesData;
@@ -55,10 +52,6 @@ public abstract class ProcessMapper {
 
   @Lazy
   @Autowired
-  private ItemService itemService;
-
-  @Lazy
-  @Autowired
   private UserService userService;
 
   @Lazy
@@ -90,12 +83,6 @@ public abstract class ProcessMapper {
     return Optional.ofNullable(typeId)
       .map(id -> processTypeRepository.findBy(id)
         .orElseThrow(NotFoundException::new))
-      .orElse(null);
-  }
-
-  protected ItemData map(ItemId itemId) {
-    return Optional.ofNullable(itemId)
-      .map(itemService::get)
       .orElse(null);
   }
 
@@ -133,10 +120,7 @@ public abstract class ProcessMapper {
   public abstract ProcessTypeMessages.UpdateRequest map(ProcessTypeRequests.UpdateRequest request);
 
   @Mappings({
-    @Mapping(target = "itemId", source = "item.id"),
     @Mapping(target = "typeId", source = "type.id"),
-    @Mapping(target = "managerId", source = "manager.id"),
-    @Mapping(target = "managerName", source = "manager.name"),
     @Mapping(target = "info", ignore = true),
     @Mapping(target = "createdBy", ignore = true),
     @Mapping(target = "createdDate", ignore = true),
@@ -173,16 +157,12 @@ public abstract class ProcessMapper {
     return Process.builder()
       .id(entity.getId())
       .name(entity.getName())
-      .item(map(entity.getItemId()))
       .type(type)
       .status(entity.getStatus())
       .difficulty(entity.getDifficulty())
       .description(entity.getDescription())
-      .manager(map(entity.getManagerId()))
-      .commentSubjectId(entity.getCommentSubjectId())
       .info(processInfoLifecycler.parse(type.getInfoTypeId(), entity.getInfo()))
       .estimatedCost(processCostMapper.domain(entity.getEstimatedCost()))
-      .attachmentId(entity.getAttachmentId())
       .deleted(entity.isDeleted())
       .deletedDate(entity.getDeletedDate())
       .adjustCost(entity.getAdjustCost())
@@ -193,15 +173,12 @@ public abstract class ProcessMapper {
 
   @Mappings({
     @Mapping(target = "type", source = "typeId"),
-    @Mapping(target = "manager", source = "managerId"),
     @Mapping(target = "processInfoLifecycler", expression = "java(processInfoLifecycler)")
   })
   public abstract ProcessMessages.UpdateRequest map(ProcessRequests.UpdateRequest request);
 
   @Mappings({
-    @Mapping(target = "itemId", source = "item.id"),
-    @Mapping(target = "typeId", source = "type.id"),
-    @Mapping(target = "managerId", source = "manager.id")
+    @Mapping(target = "typeId", source = "type.id")
   })
   public abstract ProcessData map(Process process);
 
@@ -226,9 +203,7 @@ public abstract class ProcessMapper {
   }
 
   @Mappings({
-    @Mapping(target = "item", source = "itemId"),
     @Mapping(target = "type", source = "typeId"),
-    @Mapping(target = "manager", source = "managerId"),
     @Mapping(target = "processInfoLifecycler", expression = "java(processInfoLifecycler)")
   })
   public abstract ProcessMessages.CreateRequest map(ProcessRequests.CreateRequest request);

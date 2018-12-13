@@ -8,14 +8,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import lombok.Data;
 import lombok.Value;
-import pico.erp.attachment.AttachmentId;
-import pico.erp.item.ItemData;
 import pico.erp.process.difficulty.ProcessDifficultyKind;
 import pico.erp.process.info.ProcessInfoLifecycler;
 import pico.erp.process.type.ProcessType;
 import pico.erp.shared.TypeDefinitions;
 import pico.erp.shared.event.Event;
-import pico.erp.user.UserData;
 
 public interface ProcessMessages {
 
@@ -27,9 +24,6 @@ public interface ProcessMessages {
     ProcessId id;
 
     @NotNull
-    ItemData item;
-
-    @NotNull
     ProcessType type;
 
     @NotNull
@@ -38,14 +32,9 @@ public interface ProcessMessages {
     @Size(max = TypeDefinitions.CLOB_LENGTH)
     String description;
 
-    UserData manager;
-
     @NotNull
     @Min(0)
     BigDecimal lossRate;
-
-    @Valid
-    AttachmentId attachmentId;
 
     @NotNull
     BigDecimal adjustCost;
@@ -70,14 +59,9 @@ public interface ProcessMessages {
     @Size(max = TypeDefinitions.CLOB_LENGTH)
     String description;
 
-    UserData manager;
-
     @NotNull
     @Min(0)
     BigDecimal lossRate;
-
-    @Valid
-    AttachmentId attachmentId;
 
     @NotNull
     BigDecimal adjustCost;

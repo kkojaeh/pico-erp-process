@@ -13,7 +13,6 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.Index;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 import lombok.AccessLevel;
@@ -29,20 +28,14 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import pico.erp.attachment.AttachmentId;
-import pico.erp.comment.subject.CommentSubjectId;
-import pico.erp.item.ItemId;
 import pico.erp.process.cost.ProcessCostEmbeddable;
 import pico.erp.process.difficulty.ProcessDifficultyKind;
 import pico.erp.process.type.ProcessTypeId;
 import pico.erp.shared.TypeDefinitions;
 import pico.erp.shared.data.Auditor;
-import pico.erp.user.UserId;
 
 @Entity(name = "Process")
-@Table(name = "PRS_PROCESS", indexes = {
-  @Index(columnList = "ITEM_ID")
-})
+@Table(name = "PRS_PROCESS")
 @Data
 @EqualsAndHashCode(of = "id")
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -66,30 +59,12 @@ public class ProcessEntity implements Serializable {
   String name;
 
   @AttributeOverrides({
-    @AttributeOverride(name = "value", column = @Column(name = "ITEM_ID", length = TypeDefinitions.UUID_BINARY_LENGTH))
-  })
-  ItemId itemId;
-
-  @AttributeOverrides({
     @AttributeOverride(name = "value", column = @Column(name = "TYPE_ID", length = TypeDefinitions.ID_LENGTH))
   })
   ProcessTypeId typeId;
 
-  @AttributeOverrides({
-    @AttributeOverride(name = "value", column = @Column(name = "MANAGER_ID", length = TypeDefinitions.ID_LENGTH))
-  })
-  UserId managerId;
-
   @Column(name = "LOSS_RATE", precision = 7, scale = 5)
   BigDecimal lossRate;
-
-  @Column(length = TypeDefinitions.NAME_LENGTH)
-  String managerName;
-
-  @AttributeOverrides({
-    @AttributeOverride(name = "value", column = @Column(name = "COMMENT_SUBJECT_ID", length = TypeDefinitions.ID_LENGTH))
-  })
-  CommentSubjectId commentSubjectId;
 
   @Enumerated(EnumType.STRING)
   @Column(length = TypeDefinitions.ENUM_LENGTH)
@@ -115,11 +90,6 @@ public class ProcessEntity implements Serializable {
     @AttributeOverride(name = "indirectExpenses", column = @Column(name = "ESTIMATED_COST_INDIRECT_EXPENSES", scale = 2))
   })
   ProcessCostEmbeddable estimatedCost;
-
-  @AttributeOverrides({
-    @AttributeOverride(name = "value", column = @Column(name = "ATTACHMENT_ID", length = TypeDefinitions.UUID_BINARY_LENGTH))
-  })
-  AttachmentId attachmentId;
 
   @Embedded
   @AttributeOverrides({

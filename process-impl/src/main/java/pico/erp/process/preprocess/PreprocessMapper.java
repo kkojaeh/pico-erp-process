@@ -56,8 +56,6 @@ public abstract class PreprocessMapper {
   @Mappings({
     @Mapping(target = "processId", source = "process.id"),
     @Mapping(target = "typeId", source = "type.id"),
-    @Mapping(target = "managerId", source = "manager.id"),
-    @Mapping(target = "managerName", source = "manager.name"),
     @Mapping(target = "info", ignore = true),
     @Mapping(target = "createdBy", ignore = true),
     @Mapping(target = "createdDate", ignore = true),
@@ -75,18 +73,14 @@ public abstract class PreprocessMapper {
       .type(type)
       .status(entity.getStatus())
       .description(entity.getDescription())
-      .manager(map(entity.getManagerId()))
-      .commentSubjectId(entity.getCommentSubjectId())
       .chargeCost(entity.getChargeCost())
       .info(processInfoLifecycler.parse(type.getInfoTypeId(), entity.getInfo()))
-      .attachmentId(entity.getAttachmentId())
       .deleted(entity.isDeleted())
       .deletedDate(entity.getDeletedDate())
       .build();
   }
 
   @Mappings({
-    @Mapping(target = "manager", source = "managerId"),
     @Mapping(target = "processInfoLifecycler", expression = "java(processInfoLifecycler)")
   })
   public abstract PreprocessMessages.UpdateRequest map(PreprocessRequests.UpdateRequest request);
@@ -95,8 +89,7 @@ public abstract class PreprocessMapper {
 
   @Mappings({
     @Mapping(target = "processId", source = "process.id"),
-    @Mapping(target = "typeId", source = "type.id"),
-    @Mapping(target = "managerId", source = "manager.id")
+    @Mapping(target = "typeId", source = "type.id")
   })
   public abstract PreprocessData map(Preprocess preprocess);
 
@@ -117,7 +110,6 @@ public abstract class PreprocessMapper {
   @Mappings({
     @Mapping(target = "process", source = "processId"),
     @Mapping(target = "type", source = "typeId"),
-    @Mapping(target = "manager", source = "managerId"),
     @Mapping(target = "processInfoLifecycler", expression = "java(processInfoLifecycler)")
   })
   public abstract PreprocessMessages.CreateRequest map(PreprocessRequests.CreateRequest request);

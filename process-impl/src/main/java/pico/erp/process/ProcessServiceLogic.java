@@ -1,9 +1,5 @@
 package pico.erp.process;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import lombok.Builder;
-import lombok.Getter;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -11,12 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import pico.erp.audit.AuditService;
-import pico.erp.item.ItemId;
 import pico.erp.process.ProcessRequests.CompletePlanRequest;
 import pico.erp.process.ProcessRequests.CreateRequest;
 import pico.erp.process.ProcessRequests.DeleteRequest;
+import pico.erp.process.ProcessRequests.RecalculateCostByTypeRequest;
 import pico.erp.process.ProcessRequests.UpdateRequest;
-import pico.erp.process.type.ProcessTypeId;
 import pico.erp.shared.Public;
 import pico.erp.shared.event.EventPublisher;
 
@@ -52,9 +47,6 @@ public class ProcessServiceLogic implements ProcessService {
 
   @Override
   public ProcessData create(CreateRequest request) {
-    if (processRepository.exists(request.getItemId())) {
-      throw new ProcessExceptions.AlreadyExistsException();
-    }
     val process = new Process();
     val response = process.apply(mapper.map(request));
 
@@ -77,22 +69,12 @@ public class ProcessServiceLogic implements ProcessService {
     eventPublisher.publishEvents(response.getEvents());
   }
 
-  @Override
-  public boolean exists(ItemId itemId) {
-    return processRepository.exists(itemId);
-  }
 
   @Override
   public boolean exists(ProcessId id) {
     return processRepository.exists(id);
   }
 
-  @Override
-  public ProcessData get(ItemId itemId) {
-    return processRepository.findBy(itemId)
-      .map(mapper::map)
-      .orElseThrow(ProcessExceptions.NotFoundException::new);
-  }
 
   @Override
   public ProcessData get(ProcessId id) {
@@ -111,6 +93,7 @@ public class ProcessServiceLogic implements ProcessService {
     eventPublisher.publishEvents(response.getEvents());
   }
 
+  @Override
   public void recalculateCostByType(RecalculateCostByTypeRequest request) {
     processRepository.findAllBy(request.getProcessTypeId())
       .forEach(process -> {
@@ -118,16 +101,6 @@ public class ProcessServiceLogic implements ProcessService {
         processRepository.update(process);
         eventPublisher.publishEvents(response.getEvents());
       });
-  }
-
-  @Getter
-  @Builder
-  public static class RecalculateCostByTypeRequest {
-
-    @Valid
-    @NotNull
-    ProcessTypeId processTypeId;
-
   }
 
 

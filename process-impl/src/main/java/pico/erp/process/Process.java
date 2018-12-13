@@ -16,10 +16,7 @@ import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 import lombok.val;
-import pico.erp.attachment.AttachmentId;
 import pico.erp.audit.annotation.Audit;
-import pico.erp.comment.subject.CommentSubjectId;
-import pico.erp.item.ItemData;
 import pico.erp.process.ProcessEvents.DeletedEvent;
 import pico.erp.process.ProcessExceptions.CannotUpdateException;
 import pico.erp.process.cost.ProcessCost;
@@ -27,7 +24,6 @@ import pico.erp.process.difficulty.ProcessDifficultyKind;
 import pico.erp.process.info.ProcessInfo;
 import pico.erp.process.type.ProcessType;
 import pico.erp.shared.event.Event;
-import pico.erp.user.UserData;
 
 /**
  * 공정은 하나의 품목에 국한 될수 없다 지게차 이동 및 재고 조사 등의 작업은 도출되는 결과가 품목이 아닐 수 없다 작업과 공정의 차이가 혼동 될 수 있지만 투입과 결과라는
@@ -49,8 +45,6 @@ public class Process implements Serializable {
 
   String name;
 
-  ItemData item;
-
   ProcessType type;
 
   ProcessStatusKind status;
@@ -59,13 +53,7 @@ public class Process implements Serializable {
 
   String description;
 
-  UserData manager;
-
   BigDecimal lossRate;
-
-  CommentSubjectId commentSubjectId;
-
-  AttachmentId attachmentId;
 
   ProcessInfo info;
 
@@ -91,15 +79,11 @@ public class Process implements Serializable {
     this.status = ProcessStatusKind.DRAFT;
     this.difficulty = request.getDifficulty();
     this.description = request.getDescription();
-    this.item = request.getItem();
-    this.manager = request.getManager();
-    this.commentSubjectId = CommentSubjectId.from(this.id.getValue().toString());
-    this.attachmentId = request.getAttachmentId();
     this.info = request.getProcessInfoLifecycler().initialize(this.type.getInfoTypeId());
     this.lossRate = request.getLossRate();
     this.adjustCost = request.getAdjustCost();
     this.adjustCostReason = request.getAdjustCostReason();
-    this.name = String.format("%s [%s]", type.getName(), item.getCode().getValue());
+    this.name = type.getName();
     this.estimatedCost = this.type.createEstimatedCost(this);
     return new ProcessMessages.CreateResponse(
       Arrays.asList(new ProcessEvents.CreatedEvent(this.id))
@@ -114,8 +98,6 @@ public class Process implements Serializable {
     this.type = request.getType();
     this.difficulty = request.getDifficulty();
     this.description = request.getDescription();
-    this.manager = request.getManager();
-    this.attachmentId = request.getAttachmentId();
     this.lossRate = request.getLossRate();
     this.adjustCost = request.getAdjustCost();
     this.adjustCostReason = request.getAdjustCostReason();
@@ -124,6 +106,8 @@ public class Process implements Serializable {
     if (!this.type.equals(old.type)) {
       if (this.status.isTypeFixed()) {
         throw new ProcessExceptions.CannotChangeTypeException();
+      } else {
+        this.name = type.getName();
       }
       ProcessInfo info = request.getProcessInfoLifecycler().initialize(this.type.getInfoTypeId());
       if (!info.getClass().equals(old.info.getClass())) {

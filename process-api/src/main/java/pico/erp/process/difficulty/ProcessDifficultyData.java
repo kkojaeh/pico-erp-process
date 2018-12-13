@@ -9,7 +9,6 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import pico.erp.shared.TypeDefinitions;
@@ -18,7 +17,6 @@ import pico.erp.shared.TypeDefinitions;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(of = "difficulty")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProcessDifficultyData implements Serializable {
 

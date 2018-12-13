@@ -8,9 +8,9 @@ import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import pico.erp.attachment.AttachmentId;
-import pico.erp.item.ItemId;
 import pico.erp.process.difficulty.ProcessDifficultyKind;
 import pico.erp.process.type.ProcessTypeId;
 import pico.erp.shared.TypeDefinitions;
@@ -27,11 +27,6 @@ public interface ProcessRequests {
     @Valid
     @NotNull
     ProcessId id;
-
-    @Valid
-    @NotNull
-    ItemId itemId;
-
 
     ProcessDifficultyKind difficulty;
 
@@ -116,6 +111,16 @@ public interface ProcessRequests {
     @Valid
     @NotNull
     ProcessId id;
+
+  }
+
+  @Getter
+  @Builder
+  class RecalculateCostByTypeRequest {
+
+    @Valid
+    @NotNull
+    ProcessTypeId processTypeId;
 
   }
 }

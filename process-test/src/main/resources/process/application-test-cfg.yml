@@ -790,66 +790,54 @@ data:
     preprocess-type-id: PD
   processes:
   - id: item-2-process-1
-    item-id: item-2
     difficulty: NORMAL
     type-id: FS
     loss-rate: 0.01
     adjust-cost: 0
   - id: item-3-process-1
-    item-id: item-3
     difficulty: NORMAL
     type-id: PO
     loss-rate: 0.01
     adjust-cost: 0
   - id: toothbrush-0
-    item-id: toothbrush-0
     difficulty: NORMAL
     type-id: PKTB8
     loss-rate: 0.01
     adjust-cost: 0
   - id: toothbrush-05
-    item-id: toothbrush-05
     type-id: TF
     loss-rate: 0.01
     adjust-cost: 0
   - id: toothbrush-051
-    item-id: toothbrush-051
     type-id: PU
     loss-rate: 0.01
     adjust-cost: 0
   - id: toothbrush-052
-    item-id: toothbrush-052
     type-id: CB
     loss-rate: 0.01
     adjust-cost: 0
   - id: toothbrush-06
-    item-id: toothbrush-06
     type-id: CM
     loss-rate: 0.01
     adjust-cost: 0
   - id: toothbrush-061
-    item-id: toothbrush-061
     type-id: MP
     loss-rate: 0.01
     adjust-cost: 0
 
   - id: toothbrush-07
-    item-id: toothbrush-07
     type-id: BT
     loss-rate: 0.01
     adjust-cost: 0
   - id: toothbrush-071
-    item-id: toothbrush-071
     type-id: POW
     loss-rate: 0.01
     adjust-cost: 0
   - id: toothbrush-072
-    item-id: toothbrush-072
     type-id: LO
     loss-rate: 0.01
     adjust-cost: 0
   - id: toothbrush-073
-    item-id: toothbrush-073
     type-id: TF
     loss-rate: 0.01
     adjust-cost: 0

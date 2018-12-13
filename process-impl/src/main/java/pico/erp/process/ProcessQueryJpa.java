@@ -40,13 +40,10 @@ public class ProcessQueryJpa implements ProcessQuery {
     val select = Projections.bean(ProcessView.class,
       process.id,
       process.name,
-      process.itemId,
       processType.id.as("typeId"),
       processType.name.as("typeName"),
       process.status,
       process.difficulty,
-      process.managerId,
-      process.managerName,
       process.lossRate,
       process.createdBy,
       process.createdDate,
@@ -64,15 +61,8 @@ public class ProcessQueryJpa implements ProcessQuery {
       builder.and(process.name
         .likeIgnoreCase(queryDslJpaSupport.toLikeKeyword("%", filter.getName(), "%")));
     }
-    if (filter.getItemId() != null) {
-      builder.and(process.itemId.eq(filter.getItemId()));
-    }
-    if (filter.getManagerId() != null) {
-      builder.and(process.managerId.eq(filter.getManagerId()));
-    }
-
-    if (filter.getProcessTypeId() != null) {
-      builder.and(process.typeId.eq(filter.getProcessTypeId()));
+    if (filter.getTypeId() != null) {
+      builder.and(process.typeId.eq(filter.getTypeId()));
     }
 
     query.where(builder);

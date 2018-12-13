@@ -29,13 +29,10 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import pico.erp.attachment.AttachmentId;
-import pico.erp.comment.subject.CommentSubjectId;
 import pico.erp.process.ProcessId;
 import pico.erp.process.preprocess.type.PreprocessTypeId;
 import pico.erp.shared.TypeDefinitions;
 import pico.erp.shared.data.Auditor;
-import pico.erp.user.UserId;
 
 @Entity(name = "Preprocess")
 @Table(name = "PRS_PREPROCESS", indexes = {
@@ -73,19 +70,6 @@ public class PreprocessEntity implements Serializable {
   })
   PreprocessTypeId typeId;
 
-  @AttributeOverrides({
-    @AttributeOverride(name = "value", column = @Column(name = "MANAGER_ID", length = TypeDefinitions.ID_LENGTH))
-  })
-  UserId managerId;
-
-  @Column(length = TypeDefinitions.NAME_LENGTH)
-  String managerName;
-
-  @AttributeOverrides({
-    @AttributeOverride(name = "value", column = @Column(name = "COMMENT_SUBJECT_ID", length = TypeDefinitions.ID_LENGTH))
-  })
-  CommentSubjectId commentSubjectId;
-
   @Enumerated(EnumType.STRING)
   @Column(length = TypeDefinitions.ENUM_LENGTH)
   PreprocessStatusKind status;
@@ -97,11 +81,6 @@ public class PreprocessEntity implements Serializable {
   @Lob
   @Column(length = TypeDefinitions.CLOB_LENGTH)
   String description;
-
-  @AttributeOverrides({
-    @AttributeOverride(name = "value", column = @Column(name = "ATTACHMENT_ID", length = TypeDefinitions.UUID_BINARY_LENGTH))
-  })
-  AttachmentId attachmentId;
 
   @Embedded
   @AttributeOverrides({

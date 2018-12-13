@@ -25,7 +25,7 @@ public class ProcessEventListener {
     + CostChangedEvent.CHANNEL)
   public void onProcessTypeCostChanged(ProcessTypeEvents.CostChangedEvent event) {
     processService.recalculateCostByType(
-      ProcessServiceLogic.RecalculateCostByTypeRequest.builder()
+      ProcessRequests.RecalculateCostByTypeRequest.builder()
         .processTypeId(event.getProcessTypeId())
         .build()
     );
