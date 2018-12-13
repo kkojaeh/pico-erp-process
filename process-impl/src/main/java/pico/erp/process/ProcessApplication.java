@@ -1,20 +1,11 @@
 package pico.erp.process;
 
-import java.util.HashMap;
 import java.util.Properties;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.util.UriTemplate;
-import pico.erp.attachment.category.AttachmentCategory;
-import pico.erp.attachment.category.AttachmentCategory.AttachmentCategoryImpl;
-import pico.erp.attachment.category.AttachmentCategoryId;
 import pico.erp.audit.AuditConfiguration;
-import pico.erp.comment.subject.type.CommentSubjectType;
-import pico.erp.comment.subject.type.CommentSubjectType.CommentSubjectTypeImpl;
-import pico.erp.comment.subject.type.CommentSubjectTypeId;
 import pico.erp.process.cost.ProcessCostRatesData;
 import pico.erp.shared.ApplicationStarter;
 import pico.erp.shared.Public;
@@ -67,52 +58,10 @@ public class ProcessApplication implements ApplicationStarter {
     return false;
   }
 
-  @Public
-  @Bean
-  public AttachmentCategory preprocessAttachmentCategory() {
-    return new AttachmentCategoryImpl(AttachmentCategoryId.from("preprocess"), "사전 공정");
-  }
-
-  @Bean
-  @Public
-  public CommentSubjectType preprocessCommentSubjectType(
-    final @Value("${comment.uri.preprocess}") String template) {
-    return new CommentSubjectTypeImpl(
-      CommentSubjectTypeId.from("preprocess"),
-      info -> new UriTemplate(template).expand(new HashMap<String, String>() {
-        {
-          put("subjectId", info.getSubjectId().getValue());
-          put("commentId", info.getId().getValue().toString());
-        }
-      })
-    );
-  }
-
   @Bean
   @Public
   public Role processAccessorRole() {
     return ROLE.PROCESS_ACCESSOR;
-  }
-
-  @Public
-  @Bean
-  public AttachmentCategory processAttachmentCategory() {
-    return new AttachmentCategoryImpl(AttachmentCategoryId.from("process"), "공정");
-  }
-
-  @Bean
-  @Public
-  public CommentSubjectType processCommentSubjectType(
-    final @Value("${comment.uri.process}") String template) {
-    return new CommentSubjectTypeImpl(
-      CommentSubjectTypeId.from("process"),
-      info -> new UriTemplate(template).expand(new HashMap<String, String>() {
-        {
-          put("subjectId", info.getSubjectId().getValue());
-          put("commentId", info.getId().getValue().toString());
-        }
-      })
-    );
   }
 
   @Bean

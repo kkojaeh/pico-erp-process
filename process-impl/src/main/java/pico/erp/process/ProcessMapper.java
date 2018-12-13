@@ -31,10 +31,6 @@ import pico.erp.process.type.ProcessTypeMapper;
 import pico.erp.process.type.ProcessTypeMessages;
 import pico.erp.process.type.ProcessTypeRepository;
 import pico.erp.process.type.ProcessTypeRequests;
-import pico.erp.shared.event.EventPublisher;
-import pico.erp.user.UserData;
-import pico.erp.user.UserId;
-import pico.erp.user.UserService;
 
 @Mapper
 public abstract class ProcessMapper {
@@ -46,13 +42,6 @@ public abstract class ProcessMapper {
   @Lazy
   @Autowired
   private ProcessRepository processRepository;
-
-  @Autowired
-  private EventPublisher eventPublisher;
-
-  @Lazy
-  @Autowired
-  private UserService userService;
 
   @Lazy
   @Autowired
@@ -83,12 +72,6 @@ public abstract class ProcessMapper {
     return Optional.ofNullable(typeId)
       .map(id -> processTypeRepository.findBy(id)
         .orElseThrow(NotFoundException::new))
-      .orElse(null);
-  }
-
-  protected UserData map(UserId userId) {
-    return Optional.ofNullable(userId)
-      .map(userService::get)
       .orElse(null);
   }
 

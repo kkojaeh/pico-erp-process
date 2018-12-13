@@ -1,6 +1,5 @@
 package pico.erp.process.preprocess;
 
-import java.util.Optional;
 import lombok.val;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
@@ -19,9 +18,6 @@ import pico.erp.process.info.type.ProcessInfoTypeMapper;
 import pico.erp.process.preprocess.type.PreprocessType;
 import pico.erp.process.preprocess.type.PreprocessTypeId;
 import pico.erp.process.preprocess.type.PreprocessTypeMapper;
-import pico.erp.user.UserData;
-import pico.erp.user.UserId;
-import pico.erp.user.UserService;
 
 @Mapper
 public abstract class PreprocessMapper {
@@ -41,10 +37,6 @@ public abstract class PreprocessMapper {
   @Lazy
   @Autowired
   protected ProcessInfoLifecycler processInfoLifecycler;
-
-  @Lazy
-  @Autowired
-  private UserService userService;
 
   @AfterMapping
   protected void afterMapping(Preprocess domain, @MappingTarget PreprocessEntity entity) {
@@ -92,12 +84,6 @@ public abstract class PreprocessMapper {
     @Mapping(target = "typeId", source = "type.id")
   })
   public abstract PreprocessData map(Preprocess preprocess);
-
-  protected UserData map(UserId userId) {
-    return Optional.ofNullable(userId)
-      .map(userService::get)
-      .orElse(null);
-  }
 
   protected Process map(ProcessId processId) {
     return processMapper.map(processId);

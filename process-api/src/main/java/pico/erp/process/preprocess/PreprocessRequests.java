@@ -8,11 +8,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pico.erp.attachment.AttachmentId;
 import pico.erp.process.ProcessId;
 import pico.erp.process.preprocess.type.PreprocessTypeId;
 import pico.erp.shared.TypeDefinitions;
-import pico.erp.user.UserId;
 
 public interface PreprocessRequests {
 
@@ -37,12 +35,7 @@ public interface PreprocessRequests {
     @Size(max = TypeDefinitions.CLOB_LENGTH)
     String description;
 
-    UserId managerId;
-
     BigDecimal chargeCost;
-
-    @Valid
-    AttachmentId attachmentId;
 
   }
 
@@ -59,12 +52,7 @@ public interface PreprocessRequests {
     @Size(max = TypeDefinitions.CLOB_LENGTH)
     String description;
 
-    UserId managerId;
-
     BigDecimal chargeCost;
-
-    @Valid
-    AttachmentId attachmentId;
 
   }
 

@@ -7,15 +7,9 @@ apply from: 'https://github.com/kkojaeh/pico-erp-gradle/raw/master/api.gradle'
 
 dependencies {
 
+  compile("org.projectlombok:lombok:${lombokVersion}")
+
   compile("com.github.kkojaeh.pico-erp-shared:shared-api:${sharedVersion}")
-
-  compile("com.github.kkojaeh.pico-erp-user:user-api:${userVersion}")
-
-  compile("com.github.kkojaeh.pico-erp-company:company-api:${companyVersion}")
-
-  compile("com.github.kkojaeh.pico-erp-comment:comment-api:${commentVersion}")
-
-  compile("com.github.kkojaeh.pico-erp-attachment:attachment-api:${attachmentVersion}")
 
   compile("com.github.kkojaeh.pico-erp-audit:audit-api:${auditVersion}")
 

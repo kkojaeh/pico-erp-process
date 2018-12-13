@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import pico.erp.process.difficulty.ProcessDifficultyKind;
 import pico.erp.process.type.ProcessTypeId;
 import pico.erp.shared.data.Auditor;
-import pico.erp.user.UserId;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,10 +27,6 @@ public class ProcessView {
   ProcessStatusKind status;
 
   ProcessDifficultyKind difficulty;
-
-  UserId managerId;
-
-  String managerName;
 
   BigDecimal lossRate;
 

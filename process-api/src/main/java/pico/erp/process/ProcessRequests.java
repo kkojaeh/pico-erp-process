@@ -10,11 +10,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import pico.erp.attachment.AttachmentId;
 import pico.erp.process.difficulty.ProcessDifficultyKind;
 import pico.erp.process.type.ProcessTypeId;
 import pico.erp.shared.TypeDefinitions;
-import pico.erp.user.UserId;
 
 public interface ProcessRequests {
 
@@ -37,14 +35,9 @@ public interface ProcessRequests {
     @Size(max = TypeDefinitions.CLOB_LENGTH)
     String description;
 
-    UserId managerId;
-
     @NotNull
     @Min(0)
     BigDecimal lossRate;
-
-    @Valid
-    AttachmentId attachmentId;
 
     @NotNull
     BigDecimal adjustCost;
@@ -73,14 +66,9 @@ public interface ProcessRequests {
     @Size(max = TypeDefinitions.CLOB_LENGTH)
     String description;
 
-    UserId managerId;
-
     @NotNull
     @Min(0)
     BigDecimal lossRate;
-
-    @Valid
-    AttachmentId attachmentId;
 
     @NotNull
     BigDecimal adjustCost;

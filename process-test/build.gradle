@@ -9,14 +9,6 @@ dependencies {
 
   compile project(':process-impl')
 
-  testRuntimeOnly("com.github.kkojaeh.pico-erp-user:user-test:${userVersion}")
-
-  testRuntimeOnly("com.github.kkojaeh.pico-erp-company:company-test:${companyVersion}")
-
-  testRuntimeOnly("com.github.kkojaeh.pico-erp-comment:comment-test:${commentVersion}")
-
   testRuntimeOnly("com.github.kkojaeh.pico-erp-audit:audit-test:${auditVersion}")
-
-  testRuntimeOnly("com.github.kkojaeh.pico-erp-work-schedule:work-schedule-test:${workScheduleVersion}")
 
 }
