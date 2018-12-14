@@ -39,7 +39,7 @@ import pico.erp.process.cost.ProcessCostRatesEmbeddable;
 import pico.erp.process.difficulty.ProcessDifficultyEmbeddable;
 import pico.erp.process.difficulty.ProcessDifficultyKind;
 import pico.erp.process.info.type.ProcessInfoTypeId;
-import pico.erp.process.preprocess.type.PreprocessTypeId;
+import pico.erp.process.preparation.type.ProcessPreparationTypeId;
 import pico.erp.shared.TypeDefinitions;
 import pico.erp.shared.data.Auditor;
 
@@ -122,16 +122,16 @@ public class ProcessTypeEntity implements Serializable {
   @JoinTable(name = "PRS_PROCESS_TYPE_PREPROCESS_TYPE",
     joinColumns = @JoinColumn(name = "PROCESS_TYPE_ID"),
     inverseJoinColumns = @JoinColumn(name = "PREPROCESS_TYPE_ID"))
-  private List<PreprocessTypeEntity> preprocessTypes;*/
+  private List<PreprocessTypeEntity> preparationTypes;*/
 
   @ElementCollection(fetch = FetchType.LAZY)
   @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
   @AttributeOverrides({
-    @AttributeOverride(name = "value", column = @Column(name = "PREPROCESS_TYPE_ID", length = TypeDefinitions.ID_LENGTH, nullable = false))
+    @AttributeOverride(name = "value", column = @Column(name = "PROCESS_PREPARATION_TYPE_ID", length = TypeDefinitions.ID_LENGTH, nullable = false))
   })
-  @CollectionTable(name = "PRS_PROCESS_TYPE_PREPROCESS_TYPE", joinColumns = @JoinColumn(name = "PROCESS_TYPE_ID"), uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"PROCESS_TYPE_ID", "PREPROCESS_TYPE_ID"})
+  @CollectionTable(name = "PRS_PROCESS_TYPE_PROCESS_PREPARATION_TYPE", joinColumns = @JoinColumn(name = "PROCESS_TYPE_ID"), uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"PROCESS_TYPE_ID", "PROCESS_PREPARATION_TYPE_ID"})
   })
-  private List<PreprocessTypeId> preprocessTypes;
+  private List<ProcessPreparationTypeId> preparationTypes;
 
 }

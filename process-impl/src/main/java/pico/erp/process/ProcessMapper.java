@@ -19,10 +19,10 @@ import pico.erp.process.info.type.ProcessInfoType;
 import pico.erp.process.info.type.ProcessInfoTypeData;
 import pico.erp.process.info.type.ProcessInfoTypeId;
 import pico.erp.process.info.type.ProcessInfoTypeMapper;
-import pico.erp.process.preprocess.type.PreprocessType;
-import pico.erp.process.preprocess.type.PreprocessTypeData;
-import pico.erp.process.preprocess.type.PreprocessTypeId;
-import pico.erp.process.preprocess.type.PreprocessTypeMapper;
+import pico.erp.process.preparation.type.ProcessPreparationType;
+import pico.erp.process.preparation.type.ProcessPreparationTypeData;
+import pico.erp.process.preparation.type.ProcessPreparationTypeId;
+import pico.erp.process.preparation.type.ProcessPreparationTypeMapper;
 import pico.erp.process.type.ProcessType;
 import pico.erp.process.type.ProcessTypeData;
 import pico.erp.process.type.ProcessTypeExceptions.NotFoundException;
@@ -61,7 +61,7 @@ public abstract class ProcessMapper {
 
   @Lazy
   @Autowired
-  private PreprocessTypeMapper preprocessTypeMapper;
+  private ProcessPreparationTypeMapper processPreparationTypeMapper;
 
   @Lazy
   @Autowired
@@ -80,13 +80,13 @@ public abstract class ProcessMapper {
   public abstract ProcessTypeMessages.CreateRequest map(ProcessTypeRequests.CreateRequest request);
 
   @Mappings({
-    @Mapping(target = "preprocessType", source = "preprocessTypeId")
+    @Mapping(target = "preparationType", source = "preparationTypeId")
   })
   public abstract ProcessTypeMessages.AddPreprocessTypeRequest map(
     ProcessTypeRequests.AddPreprocessTypeRequest request);
 
   @Mappings({
-    @Mapping(target = "preprocessType", source = "preprocessTypeId")
+    @Mapping(target = "preparationType", source = "preparationTypeId")
   })
   public abstract ProcessTypeMessages.RemovePreprocessTypeRequest map(
     ProcessTypeRequests.RemovePreprocessTypeRequest request);
@@ -173,12 +173,12 @@ public abstract class ProcessMapper {
     return processCostMapper.map(data);
   }
 
-  protected PreprocessType map(PreprocessTypeId typeId) {
-    return preprocessTypeMapper.map(typeId);
+  protected ProcessPreparationType map(ProcessPreparationTypeId typeId) {
+    return processPreparationTypeMapper.map(typeId);
   }
 
-  protected PreprocessTypeData map(PreprocessType type) {
-    return preprocessTypeMapper.map(type);
+  protected ProcessPreparationTypeData map(ProcessPreparationType type) {
+    return processPreparationTypeMapper.map(type);
   }
 
   protected ProcessInfoType map(ProcessInfoTypeId infoTypeId) {

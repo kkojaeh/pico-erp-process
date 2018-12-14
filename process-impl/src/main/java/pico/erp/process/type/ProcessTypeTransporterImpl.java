@@ -27,9 +27,9 @@ import pico.erp.process.cost.ProcessCostRates;
 import pico.erp.process.difficulty.ProcessDifficulty;
 import pico.erp.process.difficulty.ProcessDifficultyKind;
 import pico.erp.process.info.type.ProcessInfoTypeId;
-import pico.erp.process.preprocess.type.PreprocessType;
-import pico.erp.process.preprocess.type.PreprocessTypeId;
-import pico.erp.process.preprocess.type.PreprocessTypeMapper;
+import pico.erp.process.preparation.type.ProcessPreparationType;
+import pico.erp.process.preparation.type.ProcessPreparationTypeId;
+import pico.erp.process.preparation.type.ProcessPreparationTypeMapper;
 import pico.erp.shared.Public;
 import pico.erp.shared.data.ContentInputStream;
 import pico.erp.shared.event.EventPublisher;
@@ -47,7 +47,7 @@ public class ProcessTypeTransporterImpl implements ProcessTypeTransporter {
   private ProcessTypeRepository processTypeRepository;
 
   @Autowired
-  private PreprocessTypeMapper preprocessTypeMapper;
+  private ProcessPreparationTypeMapper processPreparationTypeMapper;
 
   @SneakyThrows
   @Override
@@ -86,11 +86,11 @@ public class ProcessTypeTransporterImpl implements ProcessTypeTransporter {
             e -> e.getDifficulties().get(ProcessDifficultyKind.HARD).getCostRate())
           .add("difficulties[VERY_HARD].description",
             e -> e.getDifficulties().get(ProcessDifficultyKind.HARD).getDescription())
-          .add("preprocessTypes", e ->
+          .add("preparationTypes", e ->
             StringUtils.collectionToCommaDelimitedString(
-              e.getPreprocessTypes().stream()
-                .map(PreprocessType::getId)
-                .map(PreprocessTypeId::getValue)
+              e.getPreparationTypes().stream()
+                .map(ProcessPreparationType::getId)
+                .map(ProcessPreparationTypeId::getValue)
                 .collect(Collectors.toList())
             )
           )
@@ -180,11 +180,11 @@ public class ProcessTypeTransporterImpl implements ProcessTypeTransporter {
             Collectors.toMap(ProcessDifficultyWithKind::getDifficulty, d -> d)
           )
         )
-        .preprocessTypes(
-          StringUtils.commaDelimitedListToSet(row.cell("preprocessTypes").asString())
+        .preparationTypes(
+          StringUtils.commaDelimitedListToSet(row.cell("preparationTypes").asString())
             .stream()
-            .map(PreprocessTypeId::from)
-            .map(preprocessTypeMapper::map)
+            .map(ProcessPreparationTypeId::from)
+            .map(processPreparationTypeMapper::map)
             .collect(Collectors.toList())
         )
         .build()

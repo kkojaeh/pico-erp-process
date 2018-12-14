@@ -13,9 +13,9 @@ import pico.erp.process.difficulty.ProcessDifficulty;
 import pico.erp.process.difficulty.ProcessDifficultyEmbeddable;
 import pico.erp.process.difficulty.ProcessDifficultyMapper;
 import pico.erp.process.info.type.ProcessInfoTypeMapper;
-import pico.erp.process.preprocess.type.PreprocessType;
-import pico.erp.process.preprocess.type.PreprocessTypeId;
-import pico.erp.process.preprocess.type.PreprocessTypeMapper;
+import pico.erp.process.preparation.type.ProcessPreparationType;
+import pico.erp.process.preparation.type.ProcessPreparationTypeId;
+import pico.erp.process.preparation.type.ProcessPreparationTypeMapper;
 
 @Mapper
 public abstract class ProcessTypeMapper {
@@ -34,7 +34,7 @@ public abstract class ProcessTypeMapper {
 
   @Lazy
   @Autowired
-  private PreprocessTypeMapper preprocessTypeMapper;
+  private ProcessPreparationTypeMapper processPreparationTypeMapper;
 
   @Autowired
   private ProcessTypeEntityRepository processTypeEntityRepository;
@@ -54,9 +54,9 @@ public abstract class ProcessTypeMapper {
       .costRates(
         processCostMapper.domain(entity.getCostRates())
       )
-      .preprocessTypes(
-        entity.getPreprocessTypes().stream()
-          .map(preprocessTypeMapper::map)
+      .preparationTypes(
+        entity.getPreparationTypes().stream()
+          .map(processPreparationTypeMapper::map)
           .collect(Collectors.toList())
       )
       .build();
@@ -75,9 +75,9 @@ public abstract class ProcessTypeMapper {
     return processDifficultyMapper.entity(grade);
   }
 
-  protected PreprocessTypeId map(PreprocessType preprocessType) {
-    return Optional.ofNullable(preprocessType)
-      .map(PreprocessType::getId)
+  protected ProcessPreparationTypeId map(ProcessPreparationType processPreparationType) {
+    return Optional.ofNullable(processPreparationType)
+      .map(ProcessPreparationType::getId)
       .orElse(null);
   }
 

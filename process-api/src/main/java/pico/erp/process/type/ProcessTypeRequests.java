@@ -14,7 +14,7 @@ import pico.erp.process.cost.ProcessCostRatesData;
 import pico.erp.process.difficulty.ProcessDifficultyData;
 import pico.erp.process.difficulty.ProcessDifficultyKind;
 import pico.erp.process.info.type.ProcessInfoTypeId;
-import pico.erp.process.preprocess.type.PreprocessTypeId;
+import pico.erp.process.preparation.type.ProcessPreparationTypeId;
 import pico.erp.shared.TypeDefinitions;
 
 public interface ProcessTypeRequests {
@@ -113,7 +113,7 @@ public interface ProcessTypeRequests {
 
     @Valid
     @NotNull
-    PreprocessTypeId preprocessTypeId;
+    ProcessPreparationTypeId preparationTypeId;
 
   }
 
@@ -129,7 +129,7 @@ public interface ProcessTypeRequests {
 
     @Valid
     @NotNull
-    PreprocessTypeId preprocessTypeId;
+    ProcessPreparationTypeId preparationTypeId;
 
   }
 }

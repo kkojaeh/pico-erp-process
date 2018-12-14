@@ -24,8 +24,8 @@ import pico.erp.process.cost.ProcessCostRates;
 import pico.erp.process.difficulty.ProcessDifficulty;
 import pico.erp.process.difficulty.ProcessDifficultyKind;
 import pico.erp.process.info.type.ProcessInfoTypeId;
-import pico.erp.process.preprocess.PreprocessExceptions;
-import pico.erp.process.preprocess.type.PreprocessType;
+import pico.erp.process.preparation.ProcessPreparationExceptions;
+import pico.erp.process.preparation.type.ProcessPreparationType;
 import pico.erp.process.type.ProcessTypeEvents.CostChangedEvent;
 import pico.erp.process.type.ProcessTypeEvents.CreatedEvent;
 import pico.erp.process.type.ProcessTypeEvents.DeletedEvent;
@@ -67,10 +67,10 @@ public class ProcessType implements Serializable {
 
   Map<ProcessDifficultyKind, ProcessDifficulty> difficulties;
 
-  List<PreprocessType> preprocessTypes;
+  List<ProcessPreparationType> preparationTypes;
 
   public ProcessType() {
-    preprocessTypes = new LinkedList<>();
+    preparationTypes = new LinkedList<>();
   }
 
   public ProcessTypeMessages.CreateResponse apply(ProcessTypeMessages.CreateRequest request) {
@@ -114,11 +114,11 @@ public class ProcessType implements Serializable {
 
   public ProcessTypeMessages.AddPreprocessTypeResponse apply(
     ProcessTypeMessages.AddPreprocessTypeRequest request) {
-    val preprocessType = request.getPreprocessType();
-    if (preprocessTypes.contains(preprocessType)) {
-      throw new PreprocessExceptions.AlreadyExistsException();
+    val preparationType = request.getPreparationType();
+    if (preparationTypes.contains(preparationType)) {
+      throw new ProcessPreparationExceptions.AlreadyExistsException();
     }
-    preprocessTypes.add(preprocessType);
+    preparationTypes.add(preparationType);
     return new ProcessTypeMessages.AddPreprocessTypeResponse(
       Collections.emptyList()
     );
@@ -126,11 +126,11 @@ public class ProcessType implements Serializable {
 
   public ProcessTypeMessages.RemovePreprocessTypeResponse apply(
     ProcessTypeMessages.RemovePreprocessTypeRequest request) {
-    val preprocessType = request.getPreprocessType();
-    if (!preprocessTypes.contains(preprocessType)) {
-      throw new PreprocessExceptions.NotFoundException();
+    val preparationType = request.getPreparationType();
+    if (!preparationTypes.contains(preparationType)) {
+      throw new ProcessPreparationExceptions.NotFoundException();
     }
-    preprocessTypes.remove(preprocessType);
+    preparationTypes.remove(preparationType);
     return new ProcessTypeMessages.RemovePreprocessTypeResponse(
       Collections.emptyList()
     );

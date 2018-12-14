@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.Profile;
-import pico.erp.process.preprocess.type.PreprocessTypeService;
+import pico.erp.process.preparation.type.ProcessPreparationTypeService;
 import pico.erp.process.type.ProcessTypeRequests;
 import pico.erp.process.type.ProcessTypeService;
 import pico.erp.shared.ApplicationInitializer;
@@ -24,7 +24,7 @@ public class TestDataInitializer implements ApplicationInitializer {
 
   @Lazy
   @Autowired
-  private PreprocessTypeService preprocessTypeService;
+  private ProcessPreparationTypeService processPreparationTypeService;
 
   @Lazy
   @Autowired
@@ -38,7 +38,7 @@ public class TestDataInitializer implements ApplicationInitializer {
   public void initialize() {
 
     dataProperties.processTypes.forEach(processTypeService::create);
-    dataProperties.processTypePreprocessTypes.forEach(processTypeService::add);
+    dataProperties.processTypePreparationTypes.forEach(processTypeService::add);
     dataProperties.processes.forEach(processService::create);
     dataProperties.planCompletedProcesses.forEach(processService::completePlan);
 
@@ -51,7 +51,7 @@ public class TestDataInitializer implements ApplicationInitializer {
 
     List<ProcessTypeRequests.CreateRequest> processTypes = new LinkedList<>();
 
-    List<ProcessTypeRequests.AddPreprocessTypeRequest> processTypePreprocessTypes = new LinkedList<>();
+    List<ProcessTypeRequests.AddPreprocessTypeRequest> processTypePreparationTypes = new LinkedList<>();
 
     List<ProcessRequests.CreateRequest> processes = new LinkedList<>();
 

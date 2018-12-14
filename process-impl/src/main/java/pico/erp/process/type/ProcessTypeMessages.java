@@ -15,7 +15,7 @@ import pico.erp.process.cost.ProcessCostRates;
 import pico.erp.process.difficulty.ProcessDifficulty;
 import pico.erp.process.difficulty.ProcessDifficultyKind;
 import pico.erp.process.info.type.ProcessInfoTypeId;
-import pico.erp.process.preprocess.type.PreprocessType;
+import pico.erp.process.preparation.type.ProcessPreparationType;
 import pico.erp.shared.TypeDefinitions;
 import pico.erp.shared.event.Event;
 
@@ -117,7 +117,7 @@ public interface ProcessTypeMessages {
   class AddPreprocessTypeRequest {
 
     @NotNull
-    PreprocessType preprocessType;
+    ProcessPreparationType preparationType;
 
   }
 
@@ -132,7 +132,7 @@ public interface ProcessTypeMessages {
   class RemovePreprocessTypeRequest {
 
     @NotNull
-    PreprocessType preprocessType;
+    ProcessPreparationType preparationType;
 
   }
 

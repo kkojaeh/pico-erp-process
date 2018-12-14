@@ -785,9 +785,9 @@ data:
         description: 이러 저러한 상황에 특이 사항이라 매우 어려움
         cost-rate: 1.2
 
-  process-type-preprocess-types:
+  process-type-preparation-types:
   - id: PCU
-    preprocess-type-id: PD
+    preparation-type-id: PD
   processes:
   - id: item-2-process-1
     difficulty: NORMAL

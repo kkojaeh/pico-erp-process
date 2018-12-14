@@ -12,7 +12,7 @@ import pico.erp.process.cost.ProcessCostRatesData;
 import pico.erp.process.difficulty.ProcessDifficultyData;
 import pico.erp.process.difficulty.ProcessDifficultyKind;
 import pico.erp.process.info.type.ProcessInfoTypeId;
-import pico.erp.process.preprocess.type.PreprocessTypeData;
+import pico.erp.process.preparation.type.ProcessPreparationTypeData;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -35,6 +35,6 @@ public class ProcessTypeData implements Serializable {
 
   Map<ProcessDifficultyKind, ProcessDifficultyData> difficulties;
 
-  List<PreprocessTypeData> preprocessTypes;
+  List<ProcessPreparationTypeData> preparationTypes;
 
 }
