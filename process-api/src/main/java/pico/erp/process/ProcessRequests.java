@@ -26,6 +26,7 @@ public interface ProcessRequests {
     @NotNull
     ProcessId id;
 
+    @NotNull
     ProcessDifficultyKind difficulty;
 
     @Valid
@@ -57,6 +58,7 @@ public interface ProcessRequests {
     @NotNull
     ProcessId id;
 
+    @NotNull
     ProcessDifficultyKind difficulty;
 
     @Valid

@@ -13,7 +13,7 @@ public class ProcessPreparationConfiguration {
 
   @Public
   @Bean
-  public ProcessPreparationType metallicPatternPreprocessType() {
+  public ProcessPreparationType metallicPatternProcessPreparationType() {
     return ProcessPreparationTypeImpl.builder()
       .id(ProcessPreparationTypeId.from("MP"))
       .name("금형")
@@ -23,7 +23,7 @@ public class ProcessPreparationConfiguration {
 
   @Public
   @Bean
-  public ProcessPreparationType printDesignPreprocessType() {
+  public ProcessPreparationType printDesignProcessPreparationType() {
     return ProcessPreparationTypeImpl.builder()
       .id(ProcessPreparationTypeId.from("PD"))
       .name("인쇄디자인")
@@ -33,7 +33,7 @@ public class ProcessPreparationConfiguration {
 
   @Public
   @Bean
-  public ProcessPreparationType woodenPatternPreprocessType() {
+  public ProcessPreparationType woodenPatternProcessPreparationType() {
     return ProcessPreparationTypeImpl.builder()
       .id(ProcessPreparationTypeId.from("WP"))
       .name("목형")

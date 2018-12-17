@@ -805,38 +805,47 @@ data:
     loss-rate: 0.01
     adjust-cost: 0
   - id: toothbrush-051
+    difficulty: NORMAL
     type-id: PU
     loss-rate: 0.01
     adjust-cost: 0
   - id: toothbrush-052
+    difficulty: NORMAL
     type-id: CB
     loss-rate: 0.01
     adjust-cost: 0
   - id: toothbrush-053
+    difficulty: NORMAL
     type-id: TF
     loss-rate: 0.01
     adjust-cost: 0
   - id: toothbrush-061
+    difficulty: NORMAL
     type-id: MP
     loss-rate: 0.01
     adjust-cost: 0
   - id: toothbrush-062
+    difficulty: NORMAL
     type-id: CM
     loss-rate: 0.01
     adjust-cost: 0
   - id: toothbrush-071
+    difficulty: NORMAL
     type-id: POW
     loss-rate: 0.01
     adjust-cost: 0
   - id: toothbrush-072
+    difficulty: NORMAL
     type-id: LO
     loss-rate: 0.01
     adjust-cost: 0
   - id: toothbrush-073
+    difficulty: NORMAL
     type-id: TF
     loss-rate: 0.01
     adjust-cost: 0
   - id: toothbrush-074
+    difficulty: NORMAL
     type-id: BT
     loss-rate: 0.01
     adjust-cost: 0
