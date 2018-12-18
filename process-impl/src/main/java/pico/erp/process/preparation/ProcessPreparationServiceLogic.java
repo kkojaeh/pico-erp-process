@@ -11,6 +11,9 @@ import org.springframework.validation.annotation.Validated;
 import pico.erp.audit.AuditService;
 import pico.erp.process.ProcessId;
 import pico.erp.process.ProcessService;
+import pico.erp.process.preparation.ProcessPreparationRequests.CancelRequest;
+import pico.erp.process.preparation.ProcessPreparationRequests.CommitRequest;
+import pico.erp.process.preparation.ProcessPreparationRequests.CompleteRequest;
 import pico.erp.process.preparation.ProcessPreparationRequests.GenerateRequest;
 import pico.erp.process.type.ProcessTypeService;
 import pico.erp.shared.Public;
@@ -106,6 +109,36 @@ public class ProcessPreparationServiceLogic implements ProcessPreparationService
 
   @Override
   public void update(ProcessPreparationRequests.UpdateRequest request) {
+    val preprocessType = processPreparationRepository.findBy(request.getId())
+      .orElseThrow(ProcessPreparationExceptions.NotFoundException::new);
+    val response = preprocessType.apply(mapper.map(request));
+    processPreparationRepository.update(preprocessType);
+    auditService.commit(preprocessType);
+    eventPublisher.publishEvents(response.getEvents());
+  }
+
+  @Override
+  public void cancel(CancelRequest request) {
+    val preprocessType = processPreparationRepository.findBy(request.getId())
+      .orElseThrow(ProcessPreparationExceptions.NotFoundException::new);
+    val response = preprocessType.apply(mapper.map(request));
+    processPreparationRepository.update(preprocessType);
+    auditService.commit(preprocessType);
+    eventPublisher.publishEvents(response.getEvents());
+  }
+
+  @Override
+  public void commit(CommitRequest request) {
+    val preprocessType = processPreparationRepository.findBy(request.getId())
+      .orElseThrow(ProcessPreparationExceptions.NotFoundException::new);
+    val response = preprocessType.apply(mapper.map(request));
+    processPreparationRepository.update(preprocessType);
+    auditService.commit(preprocessType);
+    eventPublisher.publishEvents(response.getEvents());
+  }
+
+  @Override
+  public void complete(CompleteRequest request) {
     val preprocessType = processPreparationRepository.findBy(request.getId())
       .orElseThrow(ProcessPreparationExceptions.NotFoundException::new);
     val response = preprocessType.apply(mapper.map(request));

@@ -6,10 +6,7 @@ import org.springframework.test.annotation.Rollback
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.transaction.annotation.Transactional
 import pico.erp.process.difficulty.ProcessDifficultyKind
-import pico.erp.process.preparation.ProcessPreparationExceptions
-import pico.erp.process.preparation.ProcessPreparationId
-import pico.erp.process.preparation.ProcessPreparationRequests
-import pico.erp.process.preparation.ProcessPreparationService
+import pico.erp.process.preparation.*
 import pico.erp.process.preparation.type.ProcessPreparationTypeId
 import pico.erp.process.preparation.type.ProcessPreparationTypeService
 import pico.erp.process.type.ProcessTypeId
@@ -94,6 +91,44 @@ class ProcessPreparationServiceSpec extends Specification {
 
     then:
     thrown(ProcessPreparationExceptions.NotFoundException)
+  }
+
+  def "완료 - 완료"() {
+    when:
+    preparationService.commit(
+      new ProcessPreparationRequests.CommitRequest(
+        id: preprocessId
+      )
+    )
+    preparationService.complete(
+      new ProcessPreparationRequests.CompleteRequest(
+        id: preprocessId
+      )
+    )
+
+    def preprocess = preparationService.get(preprocessId)
+
+    then:
+    preprocess.status == ProcessPreparationStatusKind.COMPLETED
+  }
+
+  def "취소 - 취소"() {
+    when:
+    preparationService.commit(
+      new ProcessPreparationRequests.CommitRequest(
+        id: preprocessId
+      )
+    )
+    preparationService.cancel(
+      new ProcessPreparationRequests.CancelRequest(
+        id: preprocessId
+      )
+    )
+
+    def preprocess = preparationService.get(preprocessId)
+
+    then:
+    preprocess.status == ProcessPreparationStatusKind.CANCELED
   }
 
 }

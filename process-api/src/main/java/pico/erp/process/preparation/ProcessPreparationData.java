@@ -7,7 +7,6 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 import pico.erp.process.ProcessId;
-import pico.erp.process.info.ProcessInfo;
 import pico.erp.process.preparation.type.ProcessPreparationTypeId;
 
 @Data
@@ -26,12 +25,22 @@ public class ProcessPreparationData implements Serializable {
 
   BigDecimal chargeCost;
 
-  ProcessInfo info;
-
   String description;
 
   boolean deleted;
 
   OffsetDateTime deletedDate;
+
+  boolean updatable;
+
+  boolean committable;
+
+  boolean acceptable;
+
+  boolean completable;
+
+  boolean cancelable;
+
+  boolean done;
 
 }

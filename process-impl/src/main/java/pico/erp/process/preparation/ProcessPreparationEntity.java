@@ -108,4 +108,10 @@ public class ProcessPreparationEntity implements Serializable {
   @Column(scale = 2)
   BigDecimal chargeCost;
 
+  OffsetDateTime canceledDate;
+
+  OffsetDateTime committedDate;
+
+  OffsetDateTime completedDate;
+
 }

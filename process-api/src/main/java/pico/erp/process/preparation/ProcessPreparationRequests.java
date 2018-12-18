@@ -78,4 +78,40 @@ public interface ProcessPreparationRequests {
     ProcessId processId;
 
   }
+
+  @Data
+  @NoArgsConstructor
+  @AllArgsConstructor
+  @Builder
+  class CommitRequest {
+
+    @Valid
+    @NotNull
+    ProcessPreparationId id;
+
+  }
+
+  @Data
+  @NoArgsConstructor
+  @AllArgsConstructor
+  @Builder
+  class CompleteRequest {
+
+    @Valid
+    @NotNull
+    ProcessPreparationId id;
+
+  }
+
+  @Data
+  @NoArgsConstructor
+  @AllArgsConstructor
+  @Builder
+  class CancelRequest {
+
+    @Valid
+    @NotNull
+    ProcessPreparationId id;
+
+  }
 }

@@ -29,7 +29,7 @@ import pico.erp.shared.event.Event;
 @EqualsAndHashCode(of = "id")
 @Builder(toBuilder = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Audit(alias = "preprocess")
+@Audit(alias = "process-preparation")
 public class ProcessPreparation implements Serializable {
 
   private static final long serialVersionUID = 1L;
@@ -53,6 +53,12 @@ public class ProcessPreparation implements Serializable {
 
   OffsetDateTime deletedDate;
 
+  OffsetDateTime canceledDate;
+
+  OffsetDateTime committedDate;
+
+  OffsetDateTime completedDate;
+
   public ProcessPreparation() {
     deleted = false;
   }
@@ -67,7 +73,7 @@ public class ProcessPreparation implements Serializable {
     this.chargeCost = request.getChargeCost();
     this.name = type.getName();
     return new ProcessPreparationMessages.CreateResponse(
-      Arrays.asList(new ProcessPreparationEvents.CreatedEvent(this.id))
+      Arrays.asList(new ProcessPreparationEvents.CreatedEvent(this.id, this.type.getId()))
     );
   }
 
@@ -78,7 +84,7 @@ public class ProcessPreparation implements Serializable {
     }
     this.description = request.getDescription();
     Collection<Event> events = new LinkedList<>();
-    events.add(new ProcessPreparationEvents.UpdatedEvent(this.id));
+    events.add(new ProcessPreparationEvents.UpdatedEvent(this.id, this.type.getId()));
     return new ProcessPreparationMessages.UpdateResponse(events);
   }
 
@@ -87,13 +93,65 @@ public class ProcessPreparation implements Serializable {
     deleted = true;
     deletedDate = OffsetDateTime.now();
     return new ProcessPreparationMessages.DeleteResponse(
-      Arrays.asList(new ProcessPreparationEvents.DeletedEvent(this.id))
+      Arrays.asList(new ProcessPreparationEvents.DeletedEvent(this.id, this.type.getId()))
     );
   }
 
+  public ProcessPreparationMessages.CommitResponse apply(
+    ProcessPreparationMessages.CommitRequest request) {
+    if (!isCommittable()) {
+      throw new ProcessPreparationExceptions.CannotCommitException();
+    }
+    status = ProcessPreparationStatusKind.COMMITTED;
+    committedDate = OffsetDateTime.now();
+    return new ProcessPreparationMessages.CommitResponse(
+      Arrays.asList(new ProcessPreparationEvents.CommittedEvent(this.id, this.type.getId()))
+    );
+  }
+
+  public ProcessPreparationMessages.CompleteResponse apply(
+    ProcessPreparationMessages.CompleteRequest request) {
+    if (!isCompletable()) {
+      throw new ProcessPreparationExceptions.CannotCompleteException();
+    }
+    status = ProcessPreparationStatusKind.COMPLETED;
+    completedDate = OffsetDateTime.now();
+    return new ProcessPreparationMessages.CompleteResponse(
+      Arrays.asList(new ProcessPreparationEvents.CompletedEvent(this.id, this.type.getId()))
+    );
+  }
+
+  public ProcessPreparationMessages.CancelResponse apply(
+    ProcessPreparationMessages.CancelRequest request) {
+    if (!isCancelable()) {
+      throw new ProcessPreparationExceptions.CannotCancelException();
+    }
+    status = ProcessPreparationStatusKind.CANCELED;
+    canceledDate = OffsetDateTime.now();
+    return new ProcessPreparationMessages.CancelResponse(
+      Arrays.asList(new ProcessPreparationEvents.CanceledEvent(this.id, this.type.getId()))
+    );
+  }
+
+  public boolean isCancelable() {
+    return status.isCancelable();
+  }
+
+  public boolean isCommittable() {
+    return status.isCommittable();
+  }
+
+  public boolean isCompletable() {
+    return status.isCompletable();
+  }
+
+  public boolean isDone() {
+    return status == ProcessPreparationStatusKind.CANCELED
+      || status == ProcessPreparationStatusKind.COMPLETED;
+  }
 
   public boolean isUpdatable() {
-    return status == ProcessPreparationStatusKind.DRAFT;
+    return status.isUpdatable();
   }
 
 

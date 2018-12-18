@@ -22,5 +22,10 @@ public interface ProcessPreparationService {
 
   void update(@Valid ProcessPreparationRequests.UpdateRequest request);
 
+  void cancel(@Valid ProcessPreparationRequests.CancelRequest request);
+
+  void commit(@Valid ProcessPreparationRequests.CommitRequest request);
+
+  void complete(@Valid ProcessPreparationRequests.CompleteRequest request);
 
 }

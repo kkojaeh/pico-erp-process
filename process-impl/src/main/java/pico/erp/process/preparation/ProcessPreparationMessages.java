@@ -49,6 +49,21 @@ public interface ProcessPreparationMessages {
 
   }
 
+  @Data
+  class CommitRequest {
+
+  }
+
+  @Data
+  class CompleteRequest {
+
+  }
+
+  @Data
+  class CancelRequest {
+
+  }
+
   @Value
   class CreateResponse {
 
@@ -65,6 +80,26 @@ public interface ProcessPreparationMessages {
 
   @Value
   class DeleteResponse {
+
+    Collection<Event> events;
+
+  }
+
+  @Value
+  class CommitResponse {
+
+    Collection<Event> events;
+  }
+
+  @Value
+  class CompleteResponse {
+
+    Collection<Event> events;
+
+  }
+
+  @Value
+  class CancelResponse {
 
     Collection<Event> events;
 

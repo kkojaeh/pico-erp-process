@@ -65,6 +65,17 @@ public abstract class ProcessPreparationMapper {
   public abstract ProcessPreparationMessages.DeleteRequest map(
     ProcessPreparationRequests.DeleteRequest request);
 
+  public abstract ProcessPreparationMessages.CommitRequest map(
+    ProcessPreparationRequests.CommitRequest request);
+
+  public abstract ProcessPreparationMessages.CompleteRequest map(
+    ProcessPreparationRequests.CompleteRequest request);
+
+  public abstract ProcessPreparationMessages.CancelRequest map(
+    ProcessPreparationRequests.CancelRequest request);
+
+
+
   @Mappings({
     @Mapping(target = "processId", source = "process.id"),
     @Mapping(target = "typeId", source = "type.id")
