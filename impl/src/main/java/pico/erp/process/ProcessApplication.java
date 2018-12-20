@@ -1,12 +1,17 @@
 package pico.erp.process;
 
 import java.util.Properties;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
+import pico.erp.audit.AuditApi;
 import pico.erp.audit.AuditConfiguration;
 import pico.erp.process.cost.ProcessCostRatesData;
+import pico.erp.shared.ApplicationId;
 import pico.erp.shared.ApplicationStarter;
 import pico.erp.shared.Public;
 import pico.erp.shared.SpringBootConfigs;
@@ -49,8 +54,13 @@ public class ProcessApplication implements ApplicationStarter {
   }
 
   @Override
-  public int getOrder() {
-    return 5;
+  public Set<ApplicationId> getDependencies() {
+    return Stream.of(AuditApi.ID).collect(Collectors.toSet());
+  }
+
+  @Override
+  public ApplicationId getId() {
+    return ProcessApi.ID;
   }
 
   @Override

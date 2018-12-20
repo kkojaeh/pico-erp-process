@@ -7,8 +7,8 @@ apply from: 'https://github.com/kkojaeh/pico-erp-gradle/raw/master/test.gradle'
 
 dependencies {
 
-  compile project(':process-impl')
+  compile project(':impl')
 
-  testRuntimeOnly("com.github.kkojaeh.pico-erp-audit:audit-test:${auditVersion}")
+  testRuntimeOnly("com.github.kkojaeh.pico-erp-audit:test:${auditVersion}")
 
 }
