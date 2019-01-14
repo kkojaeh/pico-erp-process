@@ -2,9 +2,6 @@ banner:
   location: classpath:process/banner.txt
 
 spring:
-  profiles:
-    include:
-    - test-cfg
   application:
     name: pico-process
   session:
