@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.test.annotation.Rollback
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.transaction.annotation.Transactional
+import pico.erp.item.ItemId
 import pico.erp.process.cost.ProcessCostRatesData
 import pico.erp.process.difficulty.ProcessDifficultyData
 import pico.erp.process.difficulty.ProcessDifficultyKind
@@ -54,6 +55,10 @@ class ProcessServiceSpec extends Specification {
 
   def description = "좋은 보통 작업"
 
+  def itemId = ItemId.from("item-1")
+
+  def inputRate = 1
+
   def setup() {
     processTypeService.create(
       new ProcessTypeRequests.CreateRequest(id: processTypeId,
@@ -73,7 +78,9 @@ class ProcessServiceSpec extends Specification {
         lossRate: 0.01,
         typeId: processTypeId,
         difficulty: ProcessDifficultyKind.NORMAL,
-        description: description
+        description: description,
+        itemId: itemId,
+        inputRate: inputRate
       )
     )
   }
@@ -108,6 +115,9 @@ class ProcessServiceSpec extends Specification {
     process.estimatedCost.indirectLabor == 10
     process.estimatedCost.indirectMaterial == 25
     process.estimatedCost.indirectExpenses == 25
+    process.itemId == itemId
+    process.inputRate == inputRate
+    process.order == 0
     println process
   }
 

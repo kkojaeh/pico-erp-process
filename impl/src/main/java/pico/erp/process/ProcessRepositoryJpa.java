@@ -9,6 +9,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import pico.erp.item.ItemId;
 import pico.erp.process.type.ProcessTypeId;
 
 @Repository
@@ -17,6 +18,12 @@ interface ProcessEntityRepository extends
 
   @Query("SELECT p FROM Process p WHERE p.typeId = :processTypeId")
   Stream<ProcessEntity> findAllBy(@Param("processTypeId") ProcessTypeId processTypeId);
+
+  @Query("SELECT COUNT(p) FROM Process p WHERE p.itemId = :itemId")
+  long countBy(@Param("itemId") ItemId itemId);
+
+  @Query("SELECT p FROM Process p WHERE p.itemId = :itemId AND p.deleted = false ORDER BY p.order")
+  Stream<ProcessEntity> findAllBy(@Param("itemId") ItemId itemId);
 
 }
 
@@ -55,6 +62,11 @@ public class ProcessRepositoryJpa implements ProcessRepository {
   }
 
   @Override
+  public long countBy(ItemId itemId) {
+    return repository.countBy(itemId);
+  }
+
+  @Override
   public Optional<Process> findBy(ProcessId id) {
     return Optional.ofNullable(repository.findOne(id))
       .map(mapper::jpa);
@@ -65,5 +77,11 @@ public class ProcessRepositoryJpa implements ProcessRepository {
     ProcessEntity entity = repository.findOne(process.getId());
     mapper.pass(mapper.jpa(process), entity);
     repository.save(entity);
+  }
+
+  @Override
+  public Stream<Process> findAllBy(ItemId itemId) {
+    return repository.findAllBy(itemId)
+      .map(mapper::jpa);
   }
 }

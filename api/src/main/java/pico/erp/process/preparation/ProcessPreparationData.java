@@ -35,8 +35,6 @@ public class ProcessPreparationData implements Serializable {
 
   boolean committable;
 
-  boolean acceptable;
-
   boolean completable;
 
   boolean cancelable;

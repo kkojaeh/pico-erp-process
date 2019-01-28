@@ -9,7 +9,10 @@ import org.mapstruct.Mappings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import pico.erp.process.cost.ProcessCostMapper;
+import pico.erp.process.cost.ProcessCostRates;
+import pico.erp.process.cost.ProcessCostRatesData;
 import pico.erp.process.difficulty.ProcessDifficulty;
+import pico.erp.process.difficulty.ProcessDifficultyData;
 import pico.erp.process.difficulty.ProcessDifficultyEmbeddable;
 import pico.erp.process.difficulty.ProcessDifficultyMapper;
 import pico.erp.process.info.type.ProcessInfoTypeMapper;
@@ -82,5 +85,43 @@ public abstract class ProcessTypeMapper {
   }
 
   public abstract void pass(ProcessTypeEntity from, @MappingTarget ProcessTypeEntity to);
+
+  @Mappings({
+  })
+  public abstract ProcessTypeMessages.CreateRequest map(ProcessTypeRequests.CreateRequest request);
+
+  @Mappings({
+    @Mapping(target = "preparationType", source = "preparationTypeId")
+  })
+  public abstract ProcessTypeMessages.AddPreprocessTypeRequest map(
+    ProcessTypeRequests.AddPreprocessTypeRequest request);
+
+  @Mappings({
+    @Mapping(target = "preparationType", source = "preparationTypeId")
+  })
+  public abstract ProcessTypeMessages.RemovePreprocessTypeRequest map(
+    ProcessTypeRequests.RemovePreprocessTypeRequest request);
+
+  @Mappings({
+  })
+  public abstract ProcessTypeMessages.UpdateRequest map(ProcessTypeRequests.UpdateRequest request);
+
+  @Mappings({
+  })
+  public abstract ProcessTypeData map(ProcessType processType);
+
+  public abstract ProcessTypeMessages.DeleteRequest map(ProcessTypeRequests.DeleteRequest request);
+
+  protected ProcessCostRates map(ProcessCostRatesData data) {
+    return processCostMapper.map(data);
+  }
+
+  protected ProcessDifficulty map(ProcessDifficultyData data) {
+    return processDifficultyMapper.map(data);
+  }
+
+  protected ProcessPreparationType map(ProcessPreparationTypeId typeId) {
+    return processPreparationTypeMapper.map(typeId);
+  }
 
 }

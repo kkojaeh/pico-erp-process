@@ -8,11 +8,10 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import pico.erp.item.ItemData;
+import pico.erp.item.ItemId;
+import pico.erp.item.ItemService;
 import pico.erp.process.cost.ProcessCostMapper;
-import pico.erp.process.cost.ProcessCostRates;
-import pico.erp.process.cost.ProcessCostRatesData;
-import pico.erp.process.difficulty.ProcessDifficulty;
-import pico.erp.process.difficulty.ProcessDifficultyData;
 import pico.erp.process.difficulty.ProcessDifficultyMapper;
 import pico.erp.process.info.ProcessInfoLifecycler;
 import pico.erp.process.info.type.ProcessInfoType;
@@ -21,16 +20,12 @@ import pico.erp.process.info.type.ProcessInfoTypeId;
 import pico.erp.process.info.type.ProcessInfoTypeMapper;
 import pico.erp.process.preparation.type.ProcessPreparationType;
 import pico.erp.process.preparation.type.ProcessPreparationTypeData;
-import pico.erp.process.preparation.type.ProcessPreparationTypeId;
 import pico.erp.process.preparation.type.ProcessPreparationTypeMapper;
 import pico.erp.process.type.ProcessType;
-import pico.erp.process.type.ProcessTypeData;
 import pico.erp.process.type.ProcessTypeExceptions.NotFoundException;
 import pico.erp.process.type.ProcessTypeId;
 import pico.erp.process.type.ProcessTypeMapper;
-import pico.erp.process.type.ProcessTypeMessages;
 import pico.erp.process.type.ProcessTypeRepository;
-import pico.erp.process.type.ProcessTypeRequests;
 
 @Mapper
 public abstract class ProcessMapper {
@@ -67,6 +62,10 @@ public abstract class ProcessMapper {
   @Autowired
   private ProcessInfoTypeMapper processInfoTypeMapper;
 
+  @Lazy
+  @Autowired
+  protected ItemService itemService;
+
 
   protected ProcessType map(ProcessTypeId typeId) {
     return Optional.ofNullable(typeId)
@@ -75,21 +74,15 @@ public abstract class ProcessMapper {
       .orElse(null);
   }
 
-  @Mappings({
-  })
-  public abstract ProcessTypeMessages.CreateRequest map(ProcessTypeRequests.CreateRequest request);
 
-  @Mappings({
-    @Mapping(target = "preparationType", source = "preparationTypeId")
-  })
-  public abstract ProcessTypeMessages.AddPreprocessTypeRequest map(
-    ProcessTypeRequests.AddPreprocessTypeRequest request);
+  @AfterMapping
+  protected void afterMapping(ProcessRequests.CreateRequest request,
+    @MappingTarget ProcessMessages.Create.Request message) {
+    message.setOrder(
+      (int) processRepository.countBy(request.getItemId())
+    );
+  }
 
-  @Mappings({
-    @Mapping(target = "preparationType", source = "preparationTypeId")
-  })
-  public abstract ProcessTypeMessages.RemovePreprocessTypeRequest map(
-    ProcessTypeRequests.RemovePreprocessTypeRequest request);
 
   @AfterMapping
   protected void afterMapping(Process domain, @MappingTarget ProcessEntity entity) {
@@ -98,12 +91,10 @@ public abstract class ProcessMapper {
     );
   }
 
-  @Mappings({
-  })
-  public abstract ProcessTypeMessages.UpdateRequest map(ProcessTypeRequests.UpdateRequest request);
 
   @Mappings({
     @Mapping(target = "typeId", source = "type.id"),
+    @Mapping(target = "itemId", source = "item.id"),
     @Mapping(target = "info", ignore = true),
     @Mapping(target = "createdBy", ignore = true),
     @Mapping(target = "createdDate", ignore = true),
@@ -111,28 +102,6 @@ public abstract class ProcessMapper {
     @Mapping(target = "lastModifiedDate", ignore = true)
   })
   public abstract ProcessEntity jpa(Process process);
-
-  public abstract ProcessMessages.CompletePlanRequest map(
-    ProcessRequests.CompletePlanRequest request);
-
-  public abstract ProcessTypeMessages.DeleteRequest map(ProcessTypeRequests.DeleteRequest request);
-
-
-  public abstract ProcessMessages.DeleteRequest map(ProcessRequests.DeleteRequest request);
-
-  @Mappings({
-  })
-  public abstract ProcessTypeData map(ProcessType processType);
-
-
-  public abstract ProcessInfoTypeData map(ProcessInfoType type);
-
-  public Process map(ProcessId processId) {
-    return Optional.ofNullable(processId)
-      .map(id -> processRepository.findBy(id)
-        .orElseThrow(NotFoundException::new))
-      .orElse(null);
-  }
 
   public Process jpa(ProcessEntity entity) {
     ProcessType type = map(entity.getTypeId());
@@ -151,31 +120,45 @@ public abstract class ProcessMapper {
       .adjustCost(entity.getAdjustCost())
       .adjustCostReason(entity.getAdjustCostReason())
       .lossRate(entity.getLossRate())
+      .item(map(entity.getItemId()))
+      .inputRate(entity.getInputRate())
+      .order(entity.getOrder())
       .build();
   }
+
+  public abstract ProcessMessages.CompletePlan.Request map(
+    ProcessRequests.CompletePlanRequest request);
+
+  public abstract ProcessMessages.Delete.Request map(ProcessRequests.DeleteRequest request);
+
+
+  public abstract ProcessInfoTypeData map(ProcessInfoType type);
+
+  public Process map(ProcessId processId) {
+    return Optional.ofNullable(processId)
+      .map(id -> processRepository.findBy(id)
+        .orElseThrow(NotFoundException::new))
+      .orElse(null);
+  }
+
+  public abstract ProcessMessages.ChangeOrder.Request map(
+    ProcessRequests.ChangeOrderRequest request);
 
   @Mappings({
     @Mapping(target = "type", source = "typeId"),
     @Mapping(target = "processInfoLifecycler", expression = "java(processInfoLifecycler)")
   })
-  public abstract ProcessMessages.UpdateRequest map(ProcessRequests.UpdateRequest request);
+  public abstract ProcessMessages.Update.Request map(ProcessRequests.UpdateRequest request);
 
   @Mappings({
-    @Mapping(target = "typeId", source = "type.id")
+    @Mapping(target = "typeId", source = "type.id"),
+    @Mapping(target = "itemId", source = "item.id")
   })
   public abstract ProcessData map(Process process);
 
-  protected ProcessDifficulty map(ProcessDifficultyData data) {
-    return processDifficultyMapper.map(data);
-  }
 
-  protected ProcessCostRates map(ProcessCostRatesData data) {
-    return processCostMapper.map(data);
-  }
 
-  protected ProcessPreparationType map(ProcessPreparationTypeId typeId) {
-    return processPreparationTypeMapper.map(typeId);
-  }
+
 
   protected ProcessPreparationTypeData map(ProcessPreparationType type) {
     return processPreparationTypeMapper.map(type);
@@ -187,10 +170,18 @@ public abstract class ProcessMapper {
 
   @Mappings({
     @Mapping(target = "type", source = "typeId"),
-    @Mapping(target = "processInfoLifecycler", expression = "java(processInfoLifecycler)")
+    @Mapping(target = "processInfoLifecycler", expression = "java(processInfoLifecycler)"),
+    @Mapping(target = "item", source = "itemId"),
+    @Mapping(target = "order", ignore = true),
   })
-  public abstract ProcessMessages.CreateRequest map(ProcessRequests.CreateRequest request);
+  public abstract ProcessMessages.Create.Request map(ProcessRequests.CreateRequest request);
 
   public abstract void pass(ProcessEntity from, @MappingTarget ProcessEntity to);
+
+  protected ItemData map(ItemId id) {
+    return Optional.ofNullable(id)
+      .map(itemService::get)
+      .orElse(null);
+  }
 
 }

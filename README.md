@@ -20,7 +20,7 @@ build/generated-schema/create.sql
 
 * Settings
   * Build, Execution, Deployment > Build Tools > Gradle > Runner
-    * Delegate IDE build/run actions to Gradle 활성화
+    * Delegate IDE build/run actiosns to Gradle 활성화
 
 # 상태
 

@@ -17,6 +17,7 @@ import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 import lombok.val;
 import pico.erp.audit.annotation.Audit;
+import pico.erp.item.ItemData;
 import pico.erp.process.ProcessEvents.DeletedEvent;
 import pico.erp.process.ProcessExceptions.CannotUpdateException;
 import pico.erp.process.cost.ProcessCost;
@@ -69,11 +70,17 @@ public class Process implements Serializable {
 
   OffsetDateTime deletedDate;
 
+  ItemData item;
+
+  BigDecimal inputRate;
+
+  int order;
+
   public Process() {
     deleted = false;
   }
 
-  public ProcessMessages.CreateResponse apply(ProcessMessages.CreateRequest request) {
+  public ProcessMessages.Create.Response apply(ProcessMessages.Create.Request request) {
     this.id = request.getId();
     this.type = request.getType();
     this.status = ProcessStatusKind.DRAFT;
@@ -83,14 +90,17 @@ public class Process implements Serializable {
     this.lossRate = request.getLossRate();
     this.adjustCost = request.getAdjustCost();
     this.adjustCostReason = request.getAdjustCostReason();
+    this.item = request.getItem();
+    this.inputRate = request.getInputRate();
+    this.order = request.getOrder();
     this.name = type.getName();
     this.estimatedCost = this.type.createEstimatedCost(this);
-    return new ProcessMessages.CreateResponse(
+    return new ProcessMessages.Create.Response(
       Arrays.asList(new ProcessEvents.CreatedEvent(this.id))
     );
   }
 
-  public ProcessMessages.UpdateResponse apply(ProcessMessages.UpdateRequest request) {
+  public ProcessMessages.Update.Response apply(ProcessMessages.Update.Request request) {
     if (!isUpdatable()) {
       throw new CannotUpdateException();
     }
@@ -101,6 +111,7 @@ public class Process implements Serializable {
     this.lossRate = request.getLossRate();
     this.adjustCost = request.getAdjustCost();
     this.adjustCostReason = request.getAdjustCostReason();
+    this.inputRate = request.getInputRate();
 
     Collection<Event> events = new LinkedList<>();
     if (!this.type.equals(old.type)) {
@@ -115,22 +126,22 @@ public class Process implements Serializable {
       }
     }
     val calculateEstimatedCostResponse = apply(
-      new ProcessMessages.CalculateEstimatedCostRequest());
+      new ProcessMessages.CalculateEstimatedCost.Request());
     events.addAll(calculateEstimatedCostResponse.getEvents());
     events.add(new ProcessEvents.UpdatedEvent(this.id));
-    return new ProcessMessages.UpdateResponse(events);
+    return new ProcessMessages.Update.Response(events);
   }
 
-  public ProcessMessages.DeleteResponse apply(ProcessMessages.DeleteRequest request) {
+  public ProcessMessages.Delete.Response apply(ProcessMessages.Delete.Request request) {
     deleted = true;
     deletedDate = OffsetDateTime.now();
-    return new ProcessMessages.DeleteResponse(
+    return new ProcessMessages.Delete.Response(
       Arrays.asList(new DeletedEvent(this.id))
     );
   }
 
-  public ProcessMessages.CalculateEstimatedCostResponse apply(
-    ProcessMessages.CalculateEstimatedCostRequest request) {
+  public ProcessMessages.CalculateEstimatedCost.Response apply(
+    ProcessMessages.CalculateEstimatedCost.Request request) {
     /*
     확정 상태와 상관 없이 공정 유형의 영향을 받는 것이 맞다고 판단됨
     if (!isUpdatable()) {
@@ -141,22 +152,35 @@ public class Process implements Serializable {
     ProcessCost newEstimatedCost = this.type.createEstimatedCost(this);
     if (!oldEstimatedCost.equals(newEstimatedCost)) {
       this.estimatedCost = newEstimatedCost;
-      return new ProcessMessages.CalculateEstimatedCostResponse(
+      return new ProcessMessages.CalculateEstimatedCost.Response(
         Arrays.asList(new ProcessEvents.EstimatedCostChangedEvent(this.id)));
     }
-    return new ProcessMessages.CalculateEstimatedCostResponse(Collections.emptyList());
+    return new ProcessMessages.CalculateEstimatedCost.Response(Collections.emptyList());
   }
 
-  public ProcessMessages.CompletePlanResponse apply(
-    ProcessMessages.CompletePlanRequest request) {
+  public ProcessMessages.CompletePlan.Response apply(
+    ProcessMessages.CompletePlan.Request request) {
     if (status == ProcessStatusKind.DETERMINED) {
       throw new ProcessExceptions.CannotCompletePlanException();
     }
     status = ProcessStatusKind.PLANNED;
-    return new ProcessMessages.CompletePlanResponse(
+    return new ProcessMessages.CompletePlan.Response(
       Arrays.asList(new ProcessEvents.PlannedEvent(this.id))
     );
   }
+
+  public ProcessMessages.ChangeOrder.Response apply(
+    ProcessMessages.ChangeOrder.Request request) {
+    if (status == ProcessStatusKind.DETERMINED) {
+      throw new ProcessExceptions.CannotChangeOrderException();
+    }
+    order = request.getOrder();
+    return new ProcessMessages.ChangeOrder.Response(
+      Arrays.asList(new ProcessEvents.UpdatedEvent(this.id))
+    );
+  }
+
+
 
   public boolean isUpdatable() {
     return status.isUpdatable();

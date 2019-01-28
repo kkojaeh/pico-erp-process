@@ -10,6 +10,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import pico.erp.audit.AuditApi;
 import pico.erp.audit.AuditConfiguration;
+import pico.erp.item.ItemApi;
 import pico.erp.process.cost.ProcessCostRatesData;
 import pico.erp.shared.ApplicationId;
 import pico.erp.shared.ApplicationStarter;
@@ -55,7 +56,7 @@ public class ProcessApplication implements ApplicationStarter {
 
   @Override
   public Set<ApplicationId> getDependencies() {
-    return Stream.of(AuditApi.ID).collect(Collectors.toSet());
+    return Stream.of(AuditApi.ID, ItemApi.ID).collect(Collectors.toSet());
   }
 
   @Override

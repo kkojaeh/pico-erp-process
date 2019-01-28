@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Index;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 import lombok.AccessLevel;
@@ -28,6 +29,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import pico.erp.item.ItemId;
 import pico.erp.process.cost.ProcessCostEmbeddable;
 import pico.erp.process.difficulty.ProcessDifficultyKind;
 import pico.erp.process.type.ProcessTypeId;
@@ -35,7 +37,9 @@ import pico.erp.shared.TypeDefinitions;
 import pico.erp.shared.data.Auditor;
 
 @Entity(name = "Process")
-@Table(name = "PRS_PROCESS")
+@Table(name = "PRS_PROCESS", indexes = {
+  @Index(columnList = "ITEM_ID", unique = false)
+})
 @Data
 @EqualsAndHashCode(of = "id")
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -63,7 +67,7 @@ public class ProcessEntity implements Serializable {
   })
   ProcessTypeId typeId;
 
-  @Column(name = "LOSS_RATE", precision = 7, scale = 5)
+  @Column(precision = 7, scale = 5)
   BigDecimal lossRate;
 
   @Enumerated(EnumType.STRING)
@@ -123,5 +127,16 @@ public class ProcessEntity implements Serializable {
 
   @Column(length = TypeDefinitions.DESCRIPTION_LENGTH)
   String adjustCostReason;
+
+  @AttributeOverrides({
+    @AttributeOverride(name = "value", column = @Column(name = "ITEM_ID", length = TypeDefinitions.UUID_BINARY_LENGTH))
+  })
+  ItemId itemId;
+
+  @Column(precision = 7, scale = 5)
+  BigDecimal inputRate;
+
+  @Column(name = "ITEM_ORDER")
+  int order;
 
 }

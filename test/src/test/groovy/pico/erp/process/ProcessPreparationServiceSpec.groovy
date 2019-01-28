@@ -5,6 +5,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.annotation.Rollback
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.transaction.annotation.Transactional
+import pico.erp.item.ItemId
 import pico.erp.process.difficulty.ProcessDifficultyKind
 import pico.erp.process.preparation.*
 import pico.erp.process.preparation.type.ProcessPreparationTypeId
@@ -38,6 +39,10 @@ class ProcessPreparationServiceSpec extends Specification {
 
   def unknownPreprocessId = ProcessPreparationId.from("unknown")
 
+  def itemId = ItemId.from("item-1")
+
+  def inputRate = 1
+
   def setup() {
     processService.create(
       new ProcessRequests.CreateRequest(
@@ -46,7 +51,9 @@ class ProcessPreparationServiceSpec extends Specification {
         lossRate: 0.01,
         adjustCost: 0,
         difficulty: ProcessDifficultyKind.NORMAL,
-        description: "좋은 보통 작업"
+        description: "좋은 보통 작업",
+        itemId: itemId,
+        inputRate: inputRate
       )
     )
 

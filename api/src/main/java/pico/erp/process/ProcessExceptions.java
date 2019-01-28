@@ -37,4 +37,11 @@ public interface ProcessExceptions {
     private static final long serialVersionUID = 1L;
 
   }
+
+  @ResponseStatus(code = HttpStatus.NOT_ACCEPTABLE, reason = "process.cannot.change.order.exception")
+  class CannotChangeOrderException extends RuntimeException {
+
+    private static final long serialVersionUID = 1L;
+
+  }
 }

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import pico.erp.audit.AuditService;
-import pico.erp.process.ProcessMapper;
 import pico.erp.process.type.ProcessTypeRequests.AddPreprocessTypeRequest;
 import pico.erp.process.type.ProcessTypeRequests.CreateRequest;
 import pico.erp.process.type.ProcessTypeRequests.DeleteRequest;
@@ -30,7 +29,7 @@ public class ProcessTypeServiceLogic implements ProcessTypeService {
   private EventPublisher eventPublisher;
 
   @Autowired
-  private ProcessMapper mapper;
+  private ProcessTypeMapper mapper;
 
   @Lazy
   @Autowired

@@ -10,6 +10,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import pico.erp.item.ItemId;
 import pico.erp.process.difficulty.ProcessDifficultyKind;
 import pico.erp.process.type.ProcessTypeId;
 import pico.erp.shared.TypeDefinitions;
@@ -46,6 +47,12 @@ public interface ProcessRequests {
     @Size(max = TypeDefinitions.DESCRIPTION_LENGTH)
     String adjustCostReason;
 
+    ItemId itemId;
+
+    @NotNull
+    @Min(0)
+    BigDecimal inputRate;
+
   }
 
   @Data
@@ -77,6 +84,8 @@ public interface ProcessRequests {
 
     @Size(max = TypeDefinitions.DESCRIPTION_LENGTH)
     String adjustCostReason;
+
+    BigDecimal inputRate;
 
   }
 
@@ -111,6 +120,21 @@ public interface ProcessRequests {
     @Valid
     @NotNull
     ProcessTypeId processTypeId;
+
+  }
+
+  @Data
+  @NoArgsConstructor
+  @AllArgsConstructor
+  class ChangeOrderRequest {
+
+    @Valid
+    @NotNull
+    ProcessId id;
+
+    @NotNull
+    @Min(0)
+    Integer order;
 
   }
 }

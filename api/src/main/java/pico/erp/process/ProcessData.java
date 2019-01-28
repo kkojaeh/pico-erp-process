@@ -6,6 +6,7 @@ import java.time.OffsetDateTime;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
+import pico.erp.item.ItemId;
 import pico.erp.process.cost.ProcessCostData;
 import pico.erp.process.difficulty.ProcessDifficultyKind;
 import pico.erp.process.info.ProcessInfo;
@@ -42,5 +43,11 @@ public class ProcessData implements Serializable {
   BigDecimal adjustCost;
 
   String adjustCostReason;
+
+  ItemId itemId;
+
+  BigDecimal inputRate;
+
+  int order;
 
 }

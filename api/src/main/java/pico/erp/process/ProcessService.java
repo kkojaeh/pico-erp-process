@@ -1,7 +1,9 @@
 package pico.erp.process;
 
+import java.util.List;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import pico.erp.item.ItemId;
 import pico.erp.process.ProcessRequests.RecalculateCostByTypeRequest;
 
 public interface ProcessService {
@@ -19,6 +21,10 @@ public interface ProcessService {
   void recalculateCostByType(RecalculateCostByTypeRequest request);
 
   void update(@Valid ProcessRequests.UpdateRequest request);
+
+  void changeOrder(@Valid ProcessRequests.ChangeOrderRequest request);
+
+  List<ProcessData> getAll(@NotNull ItemId itemId);
 
 
 }
