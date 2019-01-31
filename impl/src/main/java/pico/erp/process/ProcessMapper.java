@@ -121,7 +121,6 @@ public abstract class ProcessMapper {
       .adjustCostReason(entity.getAdjustCostReason())
       .lossRate(entity.getLossRate())
       .item(map(entity.getItemId()))
-      .inputRate(entity.getInputRate())
       .order(entity.getOrder())
       .build();
   }

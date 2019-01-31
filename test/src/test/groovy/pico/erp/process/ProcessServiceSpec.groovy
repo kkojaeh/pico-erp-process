@@ -57,8 +57,6 @@ class ProcessServiceSpec extends Specification {
 
   def itemId = ItemId.from("item-1")
 
-  def inputRate = 1
-
   def setup() {
     processTypeService.create(
       new ProcessTypeRequests.CreateRequest(id: processTypeId,
@@ -79,8 +77,7 @@ class ProcessServiceSpec extends Specification {
         typeId: processTypeId,
         difficulty: ProcessDifficultyKind.NORMAL,
         description: description,
-        itemId: itemId,
-        inputRate: inputRate
+        itemId: itemId
       )
     )
   }
@@ -116,7 +113,6 @@ class ProcessServiceSpec extends Specification {
     process.estimatedCost.indirectMaterial == 25
     process.estimatedCost.indirectExpenses == 25
     process.itemId == itemId
-    process.inputRate == inputRate
     process.order == 0
     println process
   }

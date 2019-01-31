@@ -46,8 +46,6 @@ public class ProcessData implements Serializable {
 
   ItemId itemId;
 
-  BigDecimal inputRate;
-
   int order;
 
 }

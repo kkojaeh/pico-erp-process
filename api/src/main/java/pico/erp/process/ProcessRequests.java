@@ -49,10 +49,6 @@ public interface ProcessRequests {
 
     ItemId itemId;
 
-    @NotNull
-    @Min(0)
-    BigDecimal inputRate;
-
   }
 
   @Data
@@ -84,8 +80,6 @@ public interface ProcessRequests {
 
     @Size(max = TypeDefinitions.DESCRIPTION_LENGTH)
     String adjustCostReason;
-
-    BigDecimal inputRate;
 
   }
 

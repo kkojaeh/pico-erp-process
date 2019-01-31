@@ -41,8 +41,6 @@ class ProcessPreparationServiceSpec extends Specification {
 
   def itemId = ItemId.from("item-1")
 
-  def inputRate = 1
-
   def setup() {
     processService.create(
       new ProcessRequests.CreateRequest(
@@ -52,8 +50,7 @@ class ProcessPreparationServiceSpec extends Specification {
         adjustCost: 0,
         difficulty: ProcessDifficultyKind.NORMAL,
         description: "좋은 보통 작업",
-        itemId: itemId,
-        inputRate: inputRate
+        itemId: itemId
       )
     )
 

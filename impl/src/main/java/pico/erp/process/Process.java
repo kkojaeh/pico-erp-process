@@ -72,8 +72,6 @@ public class Process implements Serializable {
 
   ItemData item;
 
-  BigDecimal inputRate;
-
   int order;
 
   public Process() {
@@ -91,7 +89,6 @@ public class Process implements Serializable {
     this.adjustCost = request.getAdjustCost();
     this.adjustCostReason = request.getAdjustCostReason();
     this.item = request.getItem();
-    this.inputRate = request.getInputRate();
     this.order = request.getOrder();
     this.name = type.getName();
     this.estimatedCost = this.type.createEstimatedCost(this);
@@ -111,7 +108,6 @@ public class Process implements Serializable {
     this.lossRate = request.getLossRate();
     this.adjustCost = request.getAdjustCost();
     this.adjustCostReason = request.getAdjustCostReason();
-    this.inputRate = request.getInputRate();
 
     Collection<Event> events = new LinkedList<>();
     if (!this.type.equals(old.type)) {

@@ -133,9 +133,6 @@ public class ProcessEntity implements Serializable {
   })
   ItemId itemId;
 
-  @Column(precision = 7, scale = 5)
-  BigDecimal inputRate;
-
   @Column(name = "ITEM_ORDER")
   int order;
 

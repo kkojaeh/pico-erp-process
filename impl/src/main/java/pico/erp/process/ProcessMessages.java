@@ -52,10 +52,6 @@ public interface ProcessMessages {
       ItemData item;
 
       @NotNull
-      @Min(0)
-      BigDecimal inputRate;
-
-      @NotNull
       int order;
 
     }
@@ -94,11 +90,6 @@ public interface ProcessMessages {
 
       @NotNull
       ProcessInfoLifecycler processInfoLifecycler;
-
-      @NotNull
-      @Min(0)
-      BigDecimal inputRate;
-
     }
 
     @Value
