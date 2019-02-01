@@ -8,14 +8,11 @@ import pico.erp.process.info.ProcessInfo;
 @Attributes(title = "출력", description = "출력 공정에 필요한 정보")
 public class OutputProcessInfo implements ProcessInfo {
 
-  @Attributes(title = "전면 도수", pattern = "[CMYK]+")
+  @Attributes(title = "전면 도수")
   private String frontColors;
 
-  @Attributes(title = "후면 도수", pattern = "[CMYK]+")
+  @Attributes(title = "후면 도수")
   private String backColors;
-
-  @Attributes(title = "재질")
-  private String material;
 
   @Attributes(title = "비고")
   private String remark;

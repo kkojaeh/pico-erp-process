@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import pico.erp.item.ItemId;
 import pico.erp.process.difficulty.ProcessDifficultyKind;
+import pico.erp.process.info.ProcessInfo;
 import pico.erp.process.type.ProcessTypeId;
 import pico.erp.shared.TypeDefinitions;
 
@@ -67,6 +68,9 @@ public interface ProcessRequests {
     @Valid
     @NotNull
     ProcessTypeId typeId;
+
+    @NotNull
+    ProcessInfo info;
 
     @Size(max = TypeDefinitions.CLOB_LENGTH)
     String description;
