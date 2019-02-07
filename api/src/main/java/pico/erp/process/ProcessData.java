@@ -48,6 +48,8 @@ public class ProcessData implements Serializable {
 
   int order;
 
+  boolean updatable;
+
   public ProcessRequests.UpdateRequest toUpdate() {
     return ProcessRequests.UpdateRequest.builder()
       .id(id)
