@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.Value;
 import pico.erp.item.ItemData;
 import pico.erp.process.difficulty.ProcessDifficultyKind;
+import pico.erp.process.info.ProcessInfo;
 import pico.erp.process.info.ProcessInfoLifecycler;
 import pico.erp.process.type.ProcessType;
 import pico.erp.shared.TypeDefinitions;
@@ -87,6 +88,9 @@ public interface ProcessMessages {
 
       @Size(max = TypeDefinitions.DESCRIPTION_LENGTH)
       String adjustCostReason;
+
+      @NotNull
+      ProcessInfo info;
 
       @NotNull
       ProcessInfoLifecycler processInfoLifecycler;

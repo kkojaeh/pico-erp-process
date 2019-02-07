@@ -1,22 +1,21 @@
 package pico.erp.process;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import pico.erp.shared.data.LocalizedNameable;
 
-@AllArgsConstructor
 public enum ProcessStatusKind implements LocalizedNameable {
 
-  DRAFT(true, false),
+  DRAFT,
 
-  PLANNED(true, true),
+  PLANNED,
 
-  DETERMINED(false, true);
+  DETERMINED;
 
-  @Getter
-  private final boolean updatable;
+  public boolean isTypeFixed() {
+    return this == PLANNED || this == DETERMINED;
+  }
 
-  @Getter
-  private final boolean typeFixed;
+  public boolean isUpdatable() {
+    return this == DRAFT || this == PLANNED;
+  }
 
 }

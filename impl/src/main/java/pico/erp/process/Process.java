@@ -110,16 +110,21 @@ public class Process implements Serializable {
     this.adjustCostReason = request.getAdjustCostReason();
 
     Collection<Event> events = new LinkedList<>();
-    if (!this.type.equals(old.type)) {
+    boolean typeChanged = !this.type.equals(old.type);
+    if (typeChanged) {
       if (this.status.isTypeFixed()) {
         throw new ProcessExceptions.CannotChangeTypeException();
       } else {
         this.name = type.getName();
       }
       ProcessInfo info = request.getProcessInfoLifecycler().initialize(this.type.getInfoTypeId());
-      if (!info.getClass().equals(old.info.getClass())) {
+      if (info.getClass().equals(request.getInfo().getClass())) {
+        this.info = request.getInfo();
+      } else {
         this.info = info;
       }
+    } else {
+      this.info = request.getInfo();
     }
     val calculateEstimatedCostResponse = apply(
       new ProcessMessages.CalculateEstimatedCost.Request());

@@ -126,6 +126,7 @@ class ProcessServiceSpec extends Specification {
   }
 
   def updateProcessEasyDifficulty() {
+    def process = processService.get(processId)
 
     processService.update(
       new ProcessRequests.UpdateRequest(
@@ -134,6 +135,7 @@ class ProcessServiceSpec extends Specification {
         lossRate: 0.01,
         adjustCost: 0,
         difficulty: ProcessDifficultyKind.EASY,
+        info: process.info,
         description: description
       )
     )

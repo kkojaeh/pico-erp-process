@@ -48,4 +48,17 @@ public class ProcessData implements Serializable {
 
   int order;
 
+  public ProcessRequests.UpdateRequest toUpdate() {
+    return ProcessRequests.UpdateRequest.builder()
+      .id(id)
+      .difficulty(difficulty)
+      .typeId(typeId)
+      .info(info)
+      .description(description)
+      .lossRate(lossRate)
+      .adjustCost(adjustCost)
+      .adjustCostReason(adjustCostReason)
+      .build();
+  }
+
 }
