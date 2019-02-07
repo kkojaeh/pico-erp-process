@@ -11,7 +11,9 @@ import org.springframework.stereotype.Component;
 import pico.erp.process.info.type.ProcessInfoTypExceptions;
 import pico.erp.process.info.type.ProcessInfoTypeId;
 import pico.erp.process.info.type.ProcessInfoTypeRepository;
+import pico.erp.shared.Public;
 
+@Public
 @Component
 public class ProcessInfoLifecyclerImpl implements ProcessInfoLifecycler {
 
