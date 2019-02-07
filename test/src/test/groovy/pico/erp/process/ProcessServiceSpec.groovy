@@ -126,6 +126,7 @@ class ProcessServiceSpec extends Specification {
   }
 
   def updateProcessEasyDifficulty() {
+
     processService.update(
       new ProcessRequests.UpdateRequest(
         id: processId,
