@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 
 @Mapper
-public class ProcessInfoTypeMapper {
+public abstract class ProcessInfoTypeMapper {
 
   @Lazy
   @Autowired
@@ -19,5 +19,7 @@ public class ProcessInfoTypeMapper {
       )
       .orElse(null);
   }
+
+  public abstract ProcessInfoTypeData map(ProcessInfoType type);
 
 }

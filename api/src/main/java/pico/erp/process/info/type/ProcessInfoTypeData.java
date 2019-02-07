@@ -19,4 +19,6 @@ public class ProcessInfoTypeData implements Serializable {
 
   String description;
 
+  Serializable metadata;
+
 }

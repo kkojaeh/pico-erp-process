@@ -15,7 +15,6 @@ import pico.erp.process.cost.ProcessCostMapper;
 import pico.erp.process.difficulty.ProcessDifficultyMapper;
 import pico.erp.process.info.ProcessInfoLifecycler;
 import pico.erp.process.info.type.ProcessInfoType;
-import pico.erp.process.info.type.ProcessInfoTypeData;
 import pico.erp.process.info.type.ProcessInfoTypeId;
 import pico.erp.process.info.type.ProcessInfoTypeMapper;
 import pico.erp.process.preparation.type.ProcessPreparationType;
@@ -130,8 +129,6 @@ public abstract class ProcessMapper {
 
   public abstract ProcessMessages.Delete.Request map(ProcessRequests.DeleteRequest request);
 
-
-  public abstract ProcessInfoTypeData map(ProcessInfoType type);
 
   public Process map(ProcessId processId) {
     return Optional.ofNullable(processId)

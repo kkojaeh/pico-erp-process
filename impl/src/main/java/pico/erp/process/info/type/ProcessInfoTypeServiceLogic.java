@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
-import pico.erp.process.ProcessMapper;
 import pico.erp.process.info.type.ProcessInfoTypExceptions.NotFoundException;
 import pico.erp.shared.Public;
 
@@ -20,7 +19,7 @@ public class ProcessInfoTypeServiceLogic implements ProcessInfoTypeService {
   ProcessInfoTypeRepository processInfoTypeRepository;
 
   @Autowired
-  ProcessMapper mapper;
+  ProcessInfoTypeMapper mapper;
 
   @Override
   public ProcessInfoTypeData get(ProcessInfoTypeId id) {
