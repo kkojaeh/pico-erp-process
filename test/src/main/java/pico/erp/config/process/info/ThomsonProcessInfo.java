@@ -11,7 +11,7 @@ public class ThomsonProcessInfo implements ProcessInfo {
   @Attributes(title = "목형 코드")
   private String woodenPatternCode;
 
-  @Attributes(title = "비고")
+  @Attributes(title = "비고", format = "textarea")
   private String remark;
 
 }

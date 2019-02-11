@@ -14,7 +14,7 @@ public class OutputProcessInfo implements ProcessInfo {
   @Attributes(title = "후면 도수")
   private String backColors;
 
-  @Attributes(title = "비고")
+  @Attributes(title = "비고", format = "textarea")
   private String remark;
 
 }
