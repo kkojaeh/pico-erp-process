@@ -18,6 +18,7 @@ import lombok.experimental.FieldDefaults;
 import lombok.val;
 import pico.erp.audit.annotation.Audit;
 import pico.erp.item.ItemData;
+import pico.erp.item.spec.ItemSpecCode;
 import pico.erp.process.ProcessEvents.DeletedEvent;
 import pico.erp.process.ProcessExceptions.CannotUpdateException;
 import pico.erp.process.cost.ProcessCost;
@@ -189,6 +190,10 @@ public class Process implements Serializable {
 
   public boolean isPlanned() {
     return status == ProcessStatusKind.PLANNED || status == ProcessStatusKind.DETERMINED;
+  }
+
+  public ItemSpecCode getItemSpecCode() {
+    return ItemSpecCode.from(type.getId().getValue());
   }
 
 }

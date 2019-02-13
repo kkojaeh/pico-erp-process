@@ -8,6 +8,7 @@ import org.springframework.test.annotation.Rollback
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.transaction.annotation.Transactional
 import pico.erp.item.ItemId
+import pico.erp.item.spec.ItemSpecCode
 import pico.erp.process.cost.ProcessCostRatesData
 import pico.erp.process.difficulty.ProcessDifficultyData
 import pico.erp.process.difficulty.ProcessDifficultyKind
@@ -35,6 +36,8 @@ class ProcessServiceSpec extends Specification {
 
 
   def processTypeId = ProcessTypeId.from("TEST")
+
+  def itemSpecCode = ItemSpecCode.from(processTypeId.getValue())
 
   def processTypeName = "인쇄 - UV"
 
@@ -114,6 +117,7 @@ class ProcessServiceSpec extends Specification {
     process.estimatedCost.indirectExpenses == 25
     process.itemId == itemId
     process.order == 0
+    process.itemSpecCode == itemSpecCode
     println process
   }
 

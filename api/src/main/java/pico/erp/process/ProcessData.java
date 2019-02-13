@@ -7,6 +7,7 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 import pico.erp.item.ItemId;
+import pico.erp.item.spec.ItemSpecCode;
 import pico.erp.process.cost.ProcessCostData;
 import pico.erp.process.difficulty.ProcessDifficultyKind;
 import pico.erp.process.info.ProcessInfo;
@@ -49,6 +50,8 @@ public class ProcessData implements Serializable {
   int order;
 
   boolean updatable;
+
+  ItemSpecCode itemSpecCode;
 
   public ProcessRequests.UpdateRequest toUpdate() {
     return ProcessRequests.UpdateRequest.builder()
