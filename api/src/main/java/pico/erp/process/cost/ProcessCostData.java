@@ -37,7 +37,7 @@ public class ProcessCostData {
    */
   BigDecimal indirectExpenses;
 
-  BigDecimal getTotal() {
+  public BigDecimal getTotal() {
     return BigDecimal.ZERO
       .add(Optional.ofNullable(directLabor)
         .orElse(BigDecimal.ZERO))
