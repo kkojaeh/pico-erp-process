@@ -1,6 +1,7 @@
 package pico.erp.process.cost;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,4 +36,16 @@ public class ProcessCostData {
    * 간접 경비
    */
   BigDecimal indirectExpenses;
+
+  BigDecimal getTotal() {
+    return BigDecimal.ZERO
+      .add(Optional.ofNullable(directLabor)
+        .orElse(BigDecimal.ZERO))
+      .add(Optional.ofNullable(indirectLabor)
+        .orElse(BigDecimal.ZERO))
+      .add(Optional.ofNullable(indirectMaterial)
+        .orElse(BigDecimal.ZERO))
+      .add(Optional.ofNullable(indirectExpenses)
+        .orElse(BigDecimal.ZERO));
+  }
 }
