@@ -147,6 +147,7 @@ public abstract class ProcessMapper {
   public abstract ProcessMessages.Update.Request map(ProcessRequests.UpdateRequest request);
 
   @Mappings({
+    @Mapping(target = "displayProperties", source = "info.displayProperties"),
     @Mapping(target = "typeId", source = "type.id"),
     @Mapping(target = "itemId", source = "item.id")
   })

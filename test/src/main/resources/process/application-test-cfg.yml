@@ -795,84 +795,72 @@ data:
     loss-rate: 0.01
     adjust-cost: 0
     item-id: item-2
-    input-rate: 1
   - id: item-3-process-1
     difficulty: NORMAL
     type-id: PO
     loss-rate: 0.01
     adjust-cost: 0
     item-id: item-3
-    input-rate: 1
   - id: toothbrush-0
     difficulty: NORMAL
     type-id: PKTB8
     loss-rate: 0.01
     adjust-cost: 0
     item-id: toothbrush-0
-    input-rate: 1
   - id: toothbrush-051
     difficulty: NORMAL
     type-id: PU
     loss-rate: 0.01
     adjust-cost: 0
     item-id: toothbrush-05
-    input-rate: 1
   - id: toothbrush-052
     difficulty: NORMAL
     type-id: CB
     loss-rate: 0.01
     adjust-cost: 0
     item-id: toothbrush-05
-    input-rate: 1
   - id: toothbrush-053
     difficulty: NORMAL
     type-id: TF
     loss-rate: 0.01
     adjust-cost: 0
     item-id: toothbrush-05
-    input-rate: 1
   - id: toothbrush-061
     difficulty: NORMAL
     type-id: MP
     loss-rate: 0.01
     adjust-cost: 0
     item-id: toothbrush-06
-    input-rate: 1
   - id: toothbrush-062
     difficulty: NORMAL
     type-id: CM
     loss-rate: 0.01
     adjust-cost: 0
     item-id: toothbrush-06
-    input-rate: 1
   - id: toothbrush-071
     difficulty: NORMAL
     type-id: POW
     loss-rate: 0.01
     adjust-cost: 0
     item-id: toothbrush-07
-    input-rate: 1
   - id: toothbrush-072
     difficulty: NORMAL
     type-id: LO
     loss-rate: 0.01
     adjust-cost: 0
     item-id: toothbrush-07
-    input-rate: 1
   - id: toothbrush-073
     difficulty: NORMAL
     type-id: TF
     loss-rate: 0.01
     adjust-cost: 0
     item-id: toothbrush-07
-    input-rate: 1
   - id: toothbrush-074
     difficulty: NORMAL
     type-id: BT
     loss-rate: 0.01
     adjust-cost: 0
     item-id: toothbrush-07
-    input-rate: 1
 
   plan-completed-processes:
   - id: item-2-process-1

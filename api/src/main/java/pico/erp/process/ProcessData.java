@@ -3,6 +3,7 @@ package pico.erp.process;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.Map;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
@@ -52,6 +53,8 @@ public class ProcessData implements Serializable {
   boolean updatable;
 
   ItemSpecCode itemSpecCode;
+
+  Map<String, String> displayProperties;
 
   public ProcessRequests.UpdateRequest toUpdate() {
     return ProcessRequests.UpdateRequest.builder()
