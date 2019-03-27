@@ -2,13 +2,13 @@ package pico.erp.process.preparation;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import kkojaeh.spring.boot.component.Give;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
-import pico.erp.audit.AuditService;
 import pico.erp.process.ProcessId;
 import pico.erp.process.ProcessService;
 import pico.erp.process.preparation.ProcessPreparationRequests.CancelRequest;
@@ -16,12 +16,11 @@ import pico.erp.process.preparation.ProcessPreparationRequests.CommitRequest;
 import pico.erp.process.preparation.ProcessPreparationRequests.CompleteRequest;
 import pico.erp.process.preparation.ProcessPreparationRequests.GenerateRequest;
 import pico.erp.process.type.ProcessTypeService;
-import pico.erp.shared.Public;
 import pico.erp.shared.event.EventPublisher;
 
 @SuppressWarnings("Duplicates")
 @Service
-@Public
+@Give
 @Transactional
 @Validated
 public class ProcessPreparationServiceLogic implements ProcessPreparationService {
@@ -34,10 +33,6 @@ public class ProcessPreparationServiceLogic implements ProcessPreparationService
 
   @Autowired
   private ProcessPreparationMapper mapper;
-
-  @Lazy
-  @Autowired
-  private AuditService auditService;
 
   @Lazy
   @Autowired
@@ -56,7 +51,6 @@ public class ProcessPreparationServiceLogic implements ProcessPreparationService
     val preprocess = new ProcessPreparation();
     val response = preprocess.apply(mapper.map(request));
     val created = processPreparationRepository.create(preprocess);
-    auditService.commit(created);
     eventPublisher.publishEvents(response.getEvents());
     return mapper.map(created);
   }
@@ -67,7 +61,6 @@ public class ProcessPreparationServiceLogic implements ProcessPreparationService
       .orElseThrow(ProcessPreparationExceptions.NotFoundException::new);
     val response = preprocessType.apply(mapper.map(request));
     processPreparationRepository.deleteBy(preprocessType.getId());
-    auditService.delete(preprocessType);
     eventPublisher.publishEvents(response.getEvents());
   }
 
@@ -113,7 +106,6 @@ public class ProcessPreparationServiceLogic implements ProcessPreparationService
       .orElseThrow(ProcessPreparationExceptions.NotFoundException::new);
     val response = preprocessType.apply(mapper.map(request));
     processPreparationRepository.update(preprocessType);
-    auditService.commit(preprocessType);
     eventPublisher.publishEvents(response.getEvents());
   }
 
@@ -123,7 +115,6 @@ public class ProcessPreparationServiceLogic implements ProcessPreparationService
       .orElseThrow(ProcessPreparationExceptions.NotFoundException::new);
     val response = preprocessType.apply(mapper.map(request));
     processPreparationRepository.update(preprocessType);
-    auditService.commit(preprocessType);
     eventPublisher.publishEvents(response.getEvents());
   }
 
@@ -133,7 +124,6 @@ public class ProcessPreparationServiceLogic implements ProcessPreparationService
       .orElseThrow(ProcessPreparationExceptions.NotFoundException::new);
     val response = preprocessType.apply(mapper.map(request));
     processPreparationRepository.update(preprocessType);
-    auditService.commit(preprocessType);
     eventPublisher.publishEvents(response.getEvents());
   }
 
@@ -143,7 +133,6 @@ public class ProcessPreparationServiceLogic implements ProcessPreparationService
       .orElseThrow(ProcessPreparationExceptions.NotFoundException::new);
     val response = preprocessType.apply(mapper.map(request));
     processPreparationRepository.update(preprocessType);
-    auditService.commit(preprocessType);
     eventPublisher.publishEvents(response.getEvents());
   }
 

@@ -34,17 +34,17 @@ public class ProcessTypeRepositoryJpa implements ProcessTypeRepository {
 
   @Override
   public void deleteBy(ProcessTypeId id) {
-    repository.delete(id);
+    repository.deleteById(id);
   }
 
   @Override
   public boolean exists(ProcessTypeId id) {
-    return repository.exists(id);
+    return repository.existsById(id);
   }
 
   @Override
   public Optional<ProcessType> findBy(ProcessTypeId id) {
-    return Optional.ofNullable(repository.findOne(id))
+    return repository.findById(id)
       .map(mapper::jpa);
   }
 
@@ -57,7 +57,7 @@ public class ProcessTypeRepositoryJpa implements ProcessTypeRepository {
 
   @Override
   public void update(ProcessType processType) {
-    val entity = repository.findOne(processType.getId());
+    val entity = repository.findById(processType.getId()).get();
     mapper.pass(mapper.jpa(processType), entity);
     repository.save(entity);
   }

@@ -38,12 +38,12 @@ public class ProcessPreparationRepositoryJpa implements ProcessPreparationReposi
 
   @Override
   public void deleteBy(ProcessPreparationId id) {
-    repository.delete(id);
+    repository.deleteById(id);
   }
 
   @Override
   public boolean exists(ProcessPreparationId id) {
-    return repository.exists(id);
+    return repository.existsById(id);
   }
 
   @Override
@@ -54,13 +54,13 @@ public class ProcessPreparationRepositoryJpa implements ProcessPreparationReposi
 
   @Override
   public Optional<ProcessPreparation> findBy(ProcessPreparationId id) {
-    return Optional.ofNullable(repository.findOne(id))
+    return repository.findById(id)
       .map(mapper::jpa);
   }
 
   @Override
   public void update(ProcessPreparation processPreparation) {
-    val entity = repository.findOne(processPreparation.getId());
+    val entity = repository.findById(processPreparation.getId()).get();
     mapper.pass(mapper.jpa(processPreparation), entity);
     repository.save(entity);
   }

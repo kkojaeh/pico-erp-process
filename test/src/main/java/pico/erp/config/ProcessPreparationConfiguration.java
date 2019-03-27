@@ -1,17 +1,17 @@
 package pico.erp.config;
 
 import java.math.BigDecimal;
+import kkojaeh.spring.boot.component.Give;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import pico.erp.process.preparation.type.ProcessPreparationType;
 import pico.erp.process.preparation.type.ProcessPreparationType.ProcessPreparationTypeImpl;
 import pico.erp.process.preparation.type.ProcessPreparationTypeId;
-import pico.erp.shared.Public;
 
 @Configuration
 public class ProcessPreparationConfiguration {
 
-  @Public
+  @Give
   @Bean
   public ProcessPreparationType metallicPatternProcessPreparationType() {
     return ProcessPreparationTypeImpl.builder()
@@ -21,7 +21,7 @@ public class ProcessPreparationConfiguration {
       .build();
   }
 
-  @Public
+  @Give
   @Bean
   public ProcessPreparationType printDesignProcessPreparationType() {
     return ProcessPreparationTypeImpl.builder()
@@ -31,7 +31,7 @@ public class ProcessPreparationConfiguration {
       .build();
   }
 
-  @Public
+  @Give
   @Bean
   public ProcessPreparationType woodenPatternProcessPreparationType() {
     return ProcessPreparationTypeImpl.builder()

@@ -1,27 +1,27 @@
 package pico.erp.process
 
+import kkojaeh.spring.boot.component.SpringBootTestComponent
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.context.annotation.ComponentScan
-import org.springframework.context.annotation.Configuration
 import org.springframework.core.io.Resource
 import org.springframework.test.annotation.Rollback
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.transaction.annotation.Transactional
+import pico.erp.company.CompanyApplication
+import pico.erp.item.ItemApplication
 import pico.erp.process.info.type.ProcessInfoTypeId
 import pico.erp.process.type.ProcessTypeId
 import pico.erp.process.type.ProcessTypeService
 import pico.erp.process.type.ProcessTypeTransporter
-import pico.erp.shared.IntegrationConfiguration
+import pico.erp.shared.TestParentApplication
 import spock.lang.Specification
 
-@SpringBootTest(classes = [IntegrationConfiguration])
+@SpringBootTest(classes = [ProcessApplication, TestConfig])
+@SpringBootTestComponent(parent = TestParentApplication, siblings = [ItemApplication, CompanyApplication])
 @Transactional
 @Rollback
 @ActiveProfiles("test")
-@Configuration
-@ComponentScan("pico.erp.config")
 class ProcessTypeTransporterSpec extends Specification {
 
   @Autowired

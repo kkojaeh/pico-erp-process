@@ -2,7 +2,7 @@ package pico.erp.process.preparation;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -14,7 +14,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
-import pico.erp.audit.annotation.Audit;
 import pico.erp.process.Process;
 import pico.erp.process.preparation.type.ProcessPreparationType;
 import pico.erp.shared.event.Event;
@@ -29,7 +28,6 @@ import pico.erp.shared.event.Event;
 @EqualsAndHashCode(of = "id")
 @Builder(toBuilder = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Audit(alias = "process-preparation")
 public class ProcessPreparation implements Serializable {
 
   private static final long serialVersionUID = 1L;
@@ -51,13 +49,13 @@ public class ProcessPreparation implements Serializable {
 
   boolean deleted;
 
-  OffsetDateTime deletedDate;
+  LocalDateTime deletedDate;
 
-  OffsetDateTime canceledDate;
+  LocalDateTime canceledDate;
 
-  OffsetDateTime committedDate;
+  LocalDateTime committedDate;
 
-  OffsetDateTime completedDate;
+  LocalDateTime completedDate;
 
   public ProcessPreparation() {
     deleted = false;
@@ -91,7 +89,7 @@ public class ProcessPreparation implements Serializable {
   public ProcessPreparationMessages.DeleteResponse apply(
     ProcessPreparationMessages.DeleteRequest request) {
     deleted = true;
-    deletedDate = OffsetDateTime.now();
+    deletedDate = LocalDateTime.now();
     return new ProcessPreparationMessages.DeleteResponse(
       Arrays.asList(new ProcessPreparationEvents.DeletedEvent(this.id, this.type.getId()))
     );
@@ -103,7 +101,7 @@ public class ProcessPreparation implements Serializable {
       throw new ProcessPreparationExceptions.CannotCommitException();
     }
     status = ProcessPreparationStatusKind.COMMITTED;
-    committedDate = OffsetDateTime.now();
+    committedDate = LocalDateTime.now();
     return new ProcessPreparationMessages.CommitResponse(
       Arrays.asList(new ProcessPreparationEvents.CommittedEvent(this.id, this.type.getId()))
     );
@@ -115,7 +113,7 @@ public class ProcessPreparation implements Serializable {
       throw new ProcessPreparationExceptions.CannotCompleteException();
     }
     status = ProcessPreparationStatusKind.COMPLETED;
-    completedDate = OffsetDateTime.now();
+    completedDate = LocalDateTime.now();
     return new ProcessPreparationMessages.CompleteResponse(
       Arrays.asList(new ProcessPreparationEvents.CompletedEvent(this.id, this.type.getId()))
     );
@@ -127,7 +125,7 @@ public class ProcessPreparation implements Serializable {
       throw new ProcessPreparationExceptions.CannotCancelException();
     }
     status = ProcessPreparationStatusKind.CANCELED;
-    canceledDate = OffsetDateTime.now();
+    canceledDate = LocalDateTime.now();
     return new ProcessPreparationMessages.CancelResponse(
       Arrays.asList(new ProcessPreparationEvents.CanceledEvent(this.id, this.type.getId()))
     );

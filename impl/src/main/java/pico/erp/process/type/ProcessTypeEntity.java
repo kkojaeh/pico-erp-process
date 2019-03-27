@@ -3,7 +3,7 @@ package pico.erp.process.type;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.AttributeOverride;
@@ -79,7 +79,7 @@ public class ProcessTypeEntity implements Serializable {
 
   @CreatedDate
   @Column(updatable = false)
-  OffsetDateTime createdDate;
+  LocalDateTime createdDate;
 
   @Embedded
   @AttributeOverrides({
@@ -90,7 +90,7 @@ public class ProcessTypeEntity implements Serializable {
   Auditor lastModifiedBy;
 
   @LastModifiedDate
-  OffsetDateTime lastModifiedDate;
+  LocalDateTime lastModifiedDate;
 
   @AttributeOverrides({
     @AttributeOverride(name = "value", column = @Column(name = "INFO_TYPE_ID", length = TypeDefinitions.CLASS_NAME_LENGTH))

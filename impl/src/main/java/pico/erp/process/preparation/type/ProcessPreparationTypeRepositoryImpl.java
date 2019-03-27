@@ -3,15 +3,13 @@ package pico.erp.process.preparation.type;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Stream;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
+import kkojaeh.spring.boot.component.Take;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class ProcessPreparationTypeRepositoryImpl implements ProcessPreparationTypeRepository {
 
-  @Lazy
-  @Autowired(required = false)
+  @Take(required = false)
   private Set<ProcessPreparationType> types;
 
   @Override
