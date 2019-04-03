@@ -6,8 +6,6 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.annotation.Rollback
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.transaction.annotation.Transactional
-import pico.erp.company.CompanyApplication
-import pico.erp.item.ItemApplication
 import pico.erp.process.cost.ProcessCostRatesData
 import pico.erp.process.difficulty.ProcessDifficultyData
 import pico.erp.process.difficulty.ProcessDifficultyKind
@@ -16,11 +14,12 @@ import pico.erp.process.type.ProcessTypeExceptions
 import pico.erp.process.type.ProcessTypeId
 import pico.erp.process.type.ProcessTypeRequests
 import pico.erp.process.type.ProcessTypeService
+import pico.erp.shared.ComponentDefinitionServiceLoaderTestComponentSiblingsSupplier
 import pico.erp.shared.TestParentApplication
 import spock.lang.Specification
 
 @SpringBootTest(classes = [ProcessApplication, TestConfig])
-@SpringBootTestComponent(parent = TestParentApplication, siblings = [ItemApplication, CompanyApplication])
+@SpringBootTestComponent(parent = TestParentApplication, siblingsSupplier = ComponentDefinitionServiceLoaderTestComponentSiblingsSupplier.class)
 @Transactional
 @Rollback
 @ActiveProfiles("test")

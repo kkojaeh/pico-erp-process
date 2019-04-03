@@ -1,7 +1,7 @@
 package pico.erp.process;
 
 import java.util.Optional;
-import kkojaeh.spring.boot.component.Take;
+import kkojaeh.spring.boot.component.ComponentAutowired;
 import org.mapstruct.AfterMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -62,7 +62,7 @@ public abstract class ProcessMapper {
   @Autowired
   private ProcessInfoTypeMapper processInfoTypeMapper;
 
-  @Take
+  @ComponentAutowired
   protected ItemService itemService;
 
 

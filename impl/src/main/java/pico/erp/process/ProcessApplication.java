@@ -1,6 +1,6 @@
 package pico.erp.process;
 
-import kkojaeh.spring.boot.component.Give;
+import kkojaeh.spring.boot.component.ComponentBean;
 import kkojaeh.spring.boot.component.SpringBootComponent;
 import kkojaeh.spring.boot.component.SpringBootComponentBuilder;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import pico.erp.ComponentDefinition;
 import pico.erp.process.ProcessApi.Roles;
 import pico.erp.shared.SharedConfiguration;
 import pico.erp.shared.data.Role;
@@ -27,27 +28,33 @@ import pico.erp.shared.data.Role;
 @Import(value = {
   SharedConfiguration.class
 })
-public class ProcessApplication {
+public class ProcessApplication implements ComponentDefinition {
 
   public static void main(String[] args) {
     new SpringBootComponentBuilder()
       .component(ProcessApplication.class)
       .run(args);
   }
+
+  @Override
+  public Class<?> getComponentClass() {
+    return ProcessApplication.class;
+  }
+
   @Bean
-  @Give
+  @ComponentBean(host = false)
   public Role processAccessorRole() {
     return Roles.PROCESS_ACCESSOR;
   }
 
   @Bean
-  @Give
+  @ComponentBean(host = false)
   public Role processManagerRole() {
     return Roles.PROCESS_MANAGER;
   }
 
   @Bean
-  @Give
+  @ComponentBean(host = false)
   public Role processTypeManagerRole() {
     return Roles.PROCESS_TYPE_MANAGER;
   }

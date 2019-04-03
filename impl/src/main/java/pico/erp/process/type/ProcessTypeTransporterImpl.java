@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import kkojaeh.spring.boot.component.Give;
+import kkojaeh.spring.boot.component.ComponentBean;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.SneakyThrows;
@@ -35,7 +35,7 @@ import pico.erp.shared.data.ContentInputStream;
 import pico.erp.shared.event.EventPublisher;
 
 @Component
-@Give
+@ComponentBean
 @Validated
 @Transactional
 public class ProcessTypeTransporterImpl implements ProcessTypeTransporter {
