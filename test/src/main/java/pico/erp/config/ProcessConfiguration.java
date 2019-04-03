@@ -1,5 +1,6 @@
 package pico.erp.config;
 
+import kkojaeh.spring.boot.component.ComponentBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import pico.erp.config.process.info.BondingProcessInfo;
@@ -17,87 +18,86 @@ import pico.erp.config.process.info.PrintingProcessInfo;
 import pico.erp.config.process.info.ThomsonProcessInfo;
 import pico.erp.process.info.type.ClassBasedProcessInfoType;
 import pico.erp.process.info.type.ProcessInfoType;
-import pico.erp.shared.Public;
 
 @Configuration
 public class ProcessConfiguration {
 
-  @Public
+  @ComponentBean(host = false)
   @Bean
   public ProcessInfoType bondingProcessInfo() {
     return new ClassBasedProcessInfoType("bonding", BondingProcessInfo.class);
   }
 
-  @Public
+  @ComponentBean(host = false)
   @Bean
   public ProcessInfoType coatingProcessInfo() {
     return new ClassBasedProcessInfoType("coating", CoatingProcessInfo.class);
   }
 
-  @Public
-  @Bean
-  public ProcessInfoType designingProcessInfo() {
-    return new ClassBasedProcessInfoType("designing", DesigningProcessInfo.class);
-  }
-
-  @Public
-  @Bean
-  public ProcessInfoType embossingProcessInfo() {
-    return new ClassBasedProcessInfoType("embossing", EmbossingProcessInfo.class);
-  }
-
-  @Public
-  @Bean
-  public ProcessInfoType foilingProcessInfo() {
-    return new ClassBasedProcessInfoType("foiling", FoilingProcessInfo.class);
-  }
-
-  @Public
-  @Bean
-  public ProcessInfoType outputProcessInfo() {
-    return new ClassBasedProcessInfoType("output", OutputProcessInfo.class);
-  }
-
-  @Public
-  @Bean
-  public ProcessInfoType packagingProcessInfo() {
-    return new ClassBasedProcessInfoType("packaging", PackagingProcessInfo.class);
-  }
-
-  @Public
-  @Bean
-  public ProcessInfoType moldingProcessInfo() {
-    return new ClassBasedProcessInfoType("molding", MoldingProcessInfo.class);
-  }
-
-  @Public
-  @Bean
-  public ProcessInfoType printCoatingProcessInfo() {
-    return new ClassBasedProcessInfoType("print-coating", PrintCoatingProcessInfo.class);
-  }
-
-  @Public
-  @Bean
-  public ProcessInfoType printProcessInfo() {
-    return new ClassBasedProcessInfoType("printing", PrintingProcessInfo.class);
-  }
-
-  @Public
-  @Bean
-  public ProcessInfoType thomsonProcessInfo() {
-    return new ClassBasedProcessInfoType("thomson", ThomsonProcessInfo.class);
-  }
-
-  @Public
+  @ComponentBean(host = false)
   @Bean
   public ProcessInfoType cuttingProcessInfo() {
     return new ClassBasedProcessInfoType("cutting", CuttingProcessInfo.class);
   }
 
-  @Public
+  @ComponentBean(host = false)
+  @Bean
+  public ProcessInfoType designingProcessInfo() {
+    return new ClassBasedProcessInfoType("designing", DesigningProcessInfo.class);
+  }
+
+  @ComponentBean(host = false)
+  @Bean
+  public ProcessInfoType embossingProcessInfo() {
+    return new ClassBasedProcessInfoType("embossing", EmbossingProcessInfo.class);
+  }
+
+  @ComponentBean(host = false)
+  @Bean
+  public ProcessInfoType foilingProcessInfo() {
+    return new ClassBasedProcessInfoType("foiling", FoilingProcessInfo.class);
+  }
+
+  @ComponentBean(host = false)
   @Bean
   public ProcessInfoType laminatingProcessInfo() {
     return new ClassBasedProcessInfoType("laminating", LaminatingProcessInfo.class);
+  }
+
+  @ComponentBean(host = false)
+  @Bean
+  public ProcessInfoType moldingProcessInfo() {
+    return new ClassBasedProcessInfoType("molding", MoldingProcessInfo.class);
+  }
+
+  @ComponentBean(host = false)
+  @Bean
+  public ProcessInfoType outputProcessInfo() {
+    return new ClassBasedProcessInfoType("output", OutputProcessInfo.class);
+  }
+
+  @ComponentBean(host = false)
+  @Bean
+  public ProcessInfoType packagingProcessInfo() {
+    return new ClassBasedProcessInfoType("packaging", PackagingProcessInfo.class);
+  }
+
+  @ComponentBean(host = false)
+  @Bean
+  public ProcessInfoType printCoatingProcessInfo() {
+    return new ClassBasedProcessInfoType("print-coating", PrintCoatingProcessInfo.class);
+  }
+
+  @ComponentBean(host = false)
+  @Bean
+  public ProcessInfoType printProcessInfo() {
+    return new ClassBasedProcessInfoType("printing", PrintingProcessInfo.class);
+  }
+
+  @ComponentBean(host = false)
+  @Bean
+  public ProcessInfoType thomsonProcessInfo() {
+    return new ClassBasedProcessInfoType("thomson", ThomsonProcessInfo.class);
   }
 
 

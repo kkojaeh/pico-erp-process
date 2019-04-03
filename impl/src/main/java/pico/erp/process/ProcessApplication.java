@@ -1,95 +1,62 @@
 package pico.erp.process;
 
-import java.util.Properties;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import kkojaeh.spring.boot.component.ComponentBean;
+import kkojaeh.spring.boot.component.SpringBootComponent;
+import kkojaeh.spring.boot.component.SpringBootComponentBuilder;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
-import pico.erp.audit.AuditApi;
-import pico.erp.audit.AuditConfiguration;
-import pico.erp.item.ItemApi;
-import pico.erp.process.cost.ProcessCostRatesData;
-import pico.erp.shared.ApplicationId;
-import pico.erp.shared.ApplicationStarter;
-import pico.erp.shared.Public;
-import pico.erp.shared.SpringBootConfigs;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.Import;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+import pico.erp.ComponentDefinition;
+import pico.erp.process.ProcessApi.Roles;
+import pico.erp.shared.SharedConfiguration;
 import pico.erp.shared.data.Role;
-import pico.erp.shared.impl.ApplicationImpl;
 
 @Slf4j
-@SpringBootConfigs
-public class ProcessApplication implements ApplicationStarter {
-
-  public static final String CONFIG_NAME = "process/application";
-
-  public static final String CONFIG_NAME_PROPERTY = "spring.config.name=process/application";
-
-  public static final Properties DEFAULT_PROPERTIES = new Properties();
-
-  static {
-    DEFAULT_PROPERTIES.put("spring.config.name", CONFIG_NAME);
-  }
-
-  public static SpringApplication application() {
-    return new SpringApplicationBuilder(ProcessApplication.class)
-      .properties(DEFAULT_PROPERTIES)
-      .web(false)
-      .build();
-  }
+@SpringBootComponent("process")
+@EntityScan
+@EnableAspectJAutoProxy
+@EnableTransactionManagement
+@EnableJpaRepositories
+@EnableJpaAuditing(auditorAwareRef = "auditorAware", dateTimeProviderRef = "dateTimeProvider")
+@SpringBootApplication
+@Import(value = {
+  SharedConfiguration.class
+})
+public class ProcessApplication implements ComponentDefinition {
 
   public static void main(String[] args) {
-    application().run(args);
+    new SpringBootComponentBuilder()
+      .component(ProcessApplication.class)
+      .run(args);
+  }
+
+  @Override
+  public Class<?> getComponentClass() {
+    return ProcessApplication.class;
   }
 
   @Bean
-  @Public
-  public AuditConfiguration auditConfiguration() {
-    return AuditConfiguration.builder()
-      .packageToScan("pico.erp.process")
-      .entity(ROLE.class)
-      .valueObject(ProcessCostRatesData.class)
-      .build();
-  }
-
-  @Override
-  public Set<ApplicationId> getDependencies() {
-    return Stream.of(AuditApi.ID, ItemApi.ID).collect(Collectors.toSet());
-  }
-
-  @Override
-  public ApplicationId getId() {
-    return ProcessApi.ID;
-  }
-
-  @Override
-  public boolean isWeb() {
-    return false;
-  }
-
-  @Bean
-  @Public
+  @ComponentBean(host = false)
   public Role processAccessorRole() {
-    return ROLE.PROCESS_ACCESSOR;
+    return Roles.PROCESS_ACCESSOR;
   }
 
   @Bean
-  @Public
+  @ComponentBean(host = false)
   public Role processManagerRole() {
-    return ROLE.PROCESS_MANAGER;
+    return Roles.PROCESS_MANAGER;
   }
 
   @Bean
-  @Public
+  @ComponentBean(host = false)
   public Role processTypeManagerRole() {
-    return ROLE.PROCESS_TYPE_MANAGER;
-  }
-
-  @Override
-  public pico.erp.shared.Application start(String... args) {
-    return new ApplicationImpl(application().run(args));
+    return Roles.PROCESS_TYPE_MANAGER;
   }
 
 }

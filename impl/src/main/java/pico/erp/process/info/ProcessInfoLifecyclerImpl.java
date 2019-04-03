@@ -3,6 +3,7 @@ package pico.erp.process.info;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import kkojaeh.spring.boot.component.ComponentBean;
 import lombok.SneakyThrows;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,8 @@ import org.springframework.stereotype.Component;
 import pico.erp.process.info.type.ProcessInfoTypExceptions;
 import pico.erp.process.info.type.ProcessInfoTypeId;
 import pico.erp.process.info.type.ProcessInfoTypeRepository;
-import pico.erp.shared.Public;
 
-@Public
+@ComponentBean
 @Component
 public class ProcessInfoLifecyclerImpl implements ProcessInfoLifecycler {
 

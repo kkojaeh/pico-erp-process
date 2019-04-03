@@ -17,7 +17,6 @@ import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 import lombok.val;
-import pico.erp.audit.annotation.Audit;
 import pico.erp.process.Process;
 import pico.erp.process.cost.ProcessCost;
 import pico.erp.process.cost.ProcessCostRates;
@@ -44,7 +43,6 @@ import pico.erp.shared.event.Event;
 @EqualsAndHashCode(of = "id")
 @Builder(toBuilder = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Audit(alias = "process-type")
 public class ProcessType implements Serializable {
 
   private static final long serialVersionUID = 1L;

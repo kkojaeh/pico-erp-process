@@ -7,11 +7,12 @@ import com.coreoz.windmill.files.FileSource;
 import com.coreoz.windmill.imports.Parsers;
 import java.io.ByteArrayInputStream;
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import kkojaeh.spring.boot.component.ComponentBean;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.SneakyThrows;
@@ -30,12 +31,11 @@ import pico.erp.process.info.type.ProcessInfoTypeId;
 import pico.erp.process.preparation.type.ProcessPreparationType;
 import pico.erp.process.preparation.type.ProcessPreparationTypeId;
 import pico.erp.process.preparation.type.ProcessPreparationTypeMapper;
-import pico.erp.shared.Public;
 import pico.erp.shared.data.ContentInputStream;
 import pico.erp.shared.event.EventPublisher;
 
 @Component
-@Public
+@ComponentBean
 @Validated
 @Transactional
 public class ProcessTypeTransporterImpl implements ProcessTypeTransporter {
@@ -103,7 +103,7 @@ public class ProcessTypeTransporterImpl implements ProcessTypeTransporter {
     return ContentInputStream.builder()
       .name(
         String.format("process-types-%s.%s",
-          DateTimeFormatter.ofPattern("yyyyMMddHHmmss").format(OffsetDateTime.now()),
+          DateTimeFormatter.ofPattern("yyyyMMddHHmmss").format(LocalDateTime.now()),
           ContentInputStream.XLSX_CONTENT_EXTENSION
         )
       )

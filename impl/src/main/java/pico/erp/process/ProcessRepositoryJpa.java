@@ -46,12 +46,12 @@ public class ProcessRepositoryJpa implements ProcessRepository {
 
   @Override
   public void deleteBy(ProcessId id) {
-    repository.delete(id);
+    repository.deleteById(id);
   }
 
   @Override
   public boolean exists(ProcessId id) {
-    return repository.exists(id);
+    return repository.existsById(id);
   }
 
 
@@ -68,13 +68,13 @@ public class ProcessRepositoryJpa implements ProcessRepository {
 
   @Override
   public Optional<Process> findBy(ProcessId id) {
-    return Optional.ofNullable(repository.findOne(id))
+    return repository.findById(id)
       .map(mapper::jpa);
   }
 
   @Override
   public void update(Process process) {
-    ProcessEntity entity = repository.findOne(process.getId());
+    ProcessEntity entity = repository.findById(process.getId()).get();
     mapper.pass(mapper.jpa(process), entity);
     repository.save(entity);
   }

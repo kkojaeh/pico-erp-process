@@ -1,8 +1,8 @@
 package pico.erp.process
 
+import kkojaeh.spring.boot.component.SpringBootTestComponent
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 import org.springframework.test.annotation.Rollback
 import org.springframework.test.context.ActiveProfiles
@@ -16,15 +16,16 @@ import pico.erp.process.info.type.ProcessInfoTypeId
 import pico.erp.process.type.ProcessTypeId
 import pico.erp.process.type.ProcessTypeRequests
 import pico.erp.process.type.ProcessTypeService
-import pico.erp.shared.IntegrationConfiguration
+import pico.erp.shared.ComponentDefinitionServiceLoaderTestComponentSiblingsSupplier
+import pico.erp.shared.TestParentApplication
 import spock.lang.Specification
 
-@SpringBootTest(classes = [IntegrationConfiguration])
+@SpringBootTest(classes = [ProcessApplication, TestConfig])
+@SpringBootTestComponent(parent = TestParentApplication, siblingsSupplier = ComponentDefinitionServiceLoaderTestComponentSiblingsSupplier.class)
 @Transactional
 @Rollback
 @ActiveProfiles("test")
 @Configuration
-@ComponentScan("pico.erp.config")
 class ProcessServiceSpec extends Specification {
 
 

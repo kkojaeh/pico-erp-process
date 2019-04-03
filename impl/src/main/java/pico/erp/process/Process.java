@@ -2,7 +2,7 @@ package pico.erp.process;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -16,7 +16,6 @@ import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 import lombok.val;
-import pico.erp.audit.annotation.Audit;
 import pico.erp.item.ItemData;
 import pico.erp.item.spec.ItemSpecCode;
 import pico.erp.process.ProcessEvents.DeletedEvent;
@@ -37,7 +36,6 @@ import pico.erp.shared.event.Event;
 @EqualsAndHashCode(of = "id")
 @Builder(toBuilder = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Audit(alias = "process")
 public class Process implements Serializable {
 
   private static final long serialVersionUID = 1L;
@@ -69,7 +67,7 @@ public class Process implements Serializable {
 
   boolean deleted;
 
-  OffsetDateTime deletedDate;
+  LocalDateTime deletedDate;
 
   ItemData item;
 
@@ -136,7 +134,7 @@ public class Process implements Serializable {
 
   public ProcessMessages.Delete.Response apply(ProcessMessages.Delete.Request request) {
     deleted = true;
-    deletedDate = OffsetDateTime.now();
+    deletedDate = LocalDateTime.now();
     return new ProcessMessages.Delete.Response(
       Arrays.asList(new DeletedEvent(this.id))
     );
