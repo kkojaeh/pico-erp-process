@@ -2,7 +2,7 @@ package pico.erp.process;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -67,7 +67,7 @@ public class Process implements Serializable {
 
   boolean deleted;
 
-  LocalDateTime deletedDate;
+  OffsetDateTime deletedDate;
 
   ItemData item;
 
@@ -134,7 +134,7 @@ public class Process implements Serializable {
 
   public ProcessMessages.Delete.Response apply(ProcessMessages.Delete.Request request) {
     deleted = true;
-    deletedDate = LocalDateTime.now();
+    deletedDate = OffsetDateTime.now();
     return new ProcessMessages.Delete.Response(
       Arrays.asList(new DeletedEvent(this.id))
     );

@@ -3,7 +3,7 @@ package pico.erp.process.type;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.AttributeOverride;
@@ -20,6 +20,8 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapKeyColumn;
 import javax.persistence.MapKeyEnumerated;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import lombok.AccessLevel;
@@ -31,9 +33,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import pico.erp.process.cost.ProcessCostRatesEmbeddable;
 import pico.erp.process.difficulty.ProcessDifficultyEmbeddable;
@@ -77,9 +77,8 @@ public class ProcessTypeEntity implements Serializable {
   @CreatedBy
   Auditor createdBy;
 
-  @CreatedDate
   @Column(updatable = false)
-  LocalDateTime createdDate;
+  OffsetDateTime createdDate;
 
   @Embedded
   @AttributeOverrides({
@@ -89,8 +88,7 @@ public class ProcessTypeEntity implements Serializable {
   @LastModifiedBy
   Auditor lastModifiedBy;
 
-  @LastModifiedDate
-  LocalDateTime lastModifiedDate;
+  OffsetDateTime lastModifiedDate;
 
   @AttributeOverrides({
     @AttributeOverride(name = "value", column = @Column(name = "INFO_TYPE_ID", length = TypeDefinitions.CLASS_NAME_LENGTH))
@@ -133,5 +131,16 @@ public class ProcessTypeEntity implements Serializable {
     @UniqueConstraint(columnNames = {"PROCESS_TYPE_ID", "PROCESS_PREPARATION_TYPE_ID"})
   })
   private List<ProcessPreparationTypeId> preparationTypes;
+
+  @PrePersist
+  private void onCreate() {
+    createdDate = OffsetDateTime.now();
+    lastModifiedDate = OffsetDateTime.now();
+  }
+
+  @PreUpdate
+  private void onUpdate() {
+    lastModifiedDate = OffsetDateTime.now();
+  }
 
 }

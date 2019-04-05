@@ -7,7 +7,7 @@ import com.coreoz.windmill.files.FileSource;
 import com.coreoz.windmill.imports.Parsers;
 import java.io.ByteArrayInputStream;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -103,7 +103,7 @@ public class ProcessTypeTransporterImpl implements ProcessTypeTransporter {
     return ContentInputStream.builder()
       .name(
         String.format("process-types-%s.%s",
-          DateTimeFormatter.ofPattern("yyyyMMddHHmmss").format(LocalDateTime.now()),
+          DateTimeFormatter.ofPattern("yyyyMMddHHmmss").format(OffsetDateTime.now()),
           ContentInputStream.XLSX_CONTENT_EXTENSION
         )
       )

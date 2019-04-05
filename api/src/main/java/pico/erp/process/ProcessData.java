@@ -2,7 +2,7 @@ package pico.erp.process;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.Map;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -38,7 +38,7 @@ public class ProcessData implements Serializable {
 
   boolean deleted;
 
-  LocalDateTime deletedDate;
+  OffsetDateTime deletedDate;
 
   boolean planned;
 

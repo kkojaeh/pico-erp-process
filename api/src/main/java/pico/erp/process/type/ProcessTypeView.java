@@ -1,7 +1,7 @@
 package pico.erp.process.type;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,11 +27,11 @@ public class ProcessTypeView {
 
   Auditor createdBy;
 
-  LocalDateTime createdDate;
+  OffsetDateTime createdDate;
 
   Auditor lastModifiedBy;
 
-  LocalDateTime lastModifiedDate;
+  OffsetDateTime lastModifiedDate;
 
   @Data
   @NoArgsConstructor
